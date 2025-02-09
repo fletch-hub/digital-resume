@@ -23,10 +23,10 @@
         <div class="label">
             <p>URL:</p>
         </div>
-        <div class="content {{#if (isDefined pw)}}flex flex-row{{/if}}">
-            <a href="{{url}}" target="_blank">{{url}}</a>
+        <div class="content {{#if (isDefined pw)}}flex flex-row flex-wrap justify-start{{/if}}">
+            <a {{#if (isDefined pw)}}class="pr-4" {{/if}} href="{{url}}" target="_blank">{{url}}</a>
             {{#if (isDefined pw)}}
-            <div class="px-4">
+            <div class="pr-4">
                 <p>Password:</p>
             </div>
             <div class="">

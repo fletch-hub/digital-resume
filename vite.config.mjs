@@ -21,19 +21,18 @@ export default defineConfig({
         entryFileNames: "assets/[name]_[hash].js",
         assetFileNames: "assets/[name]_[hash][extname]",
       },
-      plugins: [
-        terser({
-          compress: { passes: 2 },
-          mangle: {
-            keep_fnames: false,
-          },
-          output: { comments: false },
-        }),
-      ],
+      // plugins: [
+      //   terser({
+      //     compress: { passes: 2 },
+      //     mangle: {
+      //       keep_fnames: false,
+      //     },
+      //     output: { comments: false },
+      //   }),
+      // ],
     },
   },
   plugins: [
-    tailwindcss(),
     handlebars({
       partialDirectory: resolve(__dirname, "src/partials"),
       context(pagePath) {
@@ -43,6 +42,7 @@ export default defineConfig({
         isDefined: (value) => value !== undefined,
       },
     }),
+    tailwindcss(),
     //optional for emails
     //viteMjml(),
   ],

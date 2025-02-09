@@ -2,7 +2,7 @@
 @import "./fonts.css";
 @plugin 'tailwind-scrollbar';
 @plugin '@tailwindcss/container-queries';
-
+@config "../../tailwind.config.mjs";
 @theme {
   --font-avenir-regular: "AvenirNextLTPro-Regular", sans-serif;
   --font-avenir-demi: "AvenirNextLTPro-Demi", sans-serif;
