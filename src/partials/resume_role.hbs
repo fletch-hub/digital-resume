@@ -1,0 +1,7 @@
+<div class="flex flex-row flex-wrap w-full text-left gap-2 items-baseline justify-between mt-6 first:mt-0">
+    <h4>{{{job}}}</h4>
+    <h4>{{{info}}}</h4>
+    {{#if (isDefined role_description)}}
+    <p class="text-sm">{{{role_description}}}</p>
+    {{/if}}
+</div>

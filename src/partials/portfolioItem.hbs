@@ -1,0 +1,47 @@
+<div
+    class="max-w-screen-md flex flex-col text-left [&>div:nth-child(even)]:bg-neutral-100 border border-[#6dcff6] divide-y divide-[#6dcff6]">
+
+    <div class="flex flex-row">
+        <div class="label">
+            <p>Project:</p>
+        </div>
+        <div class="content">
+            <p>{{project}}</p>
+        </div>
+    </div>
+
+    <div class="flex flex-row ">
+        <div class="label">
+            <p>Role:</p>
+        </div>
+        <div class="content">
+            <p>{{role}}</p>
+        </div>
+    </div>
+
+    <div class="flex flex-row">
+        <div class="label">
+            <p>URL:</p>
+        </div>
+        <div class="content {{#if (isDefined pw)}}flex flex-row{{/if}}">
+            <a href="{{url}}" target="_blank">{{url}}</a>
+            {{#if (isDefined pw)}}
+            <div class="px-4">
+                <p>Password:</p>
+            </div>
+            <div class="">
+                <p>{{pw}}</p>
+            </div>
+            {{/if}}
+        </div>
+    </div>
+
+    <div class="flex flex-row ">
+        <div class="label">
+            <p>Notes:</p>
+        </div>
+        <div class="content">
+            <p>{{notes}}</p>
+        </div>
+    </div>
+</div>

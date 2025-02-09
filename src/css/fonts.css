@@ -1,0 +1,20 @@
+@font-face {
+	font-family: "AvenirNextLTPro-Regular";
+	src: url("/fonts/AvenirNextLTPro-Regular.woff2") format("woff2");
+	font-display: swap;
+}
+@font-face {
+	font-family: "AvenirNextLTPro-Demi";
+	src: url("/fonts/AvenirNextLTPro-Demi.woff2") format("woff2");
+	font-display: swap;
+}
+@font-face {
+	font-family: "AvenirNextLTPro-Bold";
+	src: url("/fonts/AvenirNextLTPro-Bold.woff2") format("woff2");
+	font-display: swap;
+}
+@font-face {
+	font-family: "Bayon-Regular";
+	src: url("/fonts/Bayon-Regular.woff2") format("woff2");
+	font-display: swap;
+}
