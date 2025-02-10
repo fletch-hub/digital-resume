@@ -1,20 +1,26 @@
-<div class="container w-full mx-auto max-w-screen-md text-left flex flex-col gap-6">
-    <h2>Work Samples</h2>
-    {{> portfolioItem
+<div id="portfolio" data-collapsed="true"
+    class="container w-full mx-auto max-w-screen-md text-left flex flex-col gap-6 overflow-hidden">
+    <div id="portfolioToggle" class="toggler">
+        <h2>Work Samples <img id="portfolioCaret" class="inline h-5 w-5 ml-2 " src="/icons/caret_down_k.svg"
+                alt="Expand" />
+        </h2>
+    </div>
+
+    {{> portfolio_item
     project="The BirdDog Interactive Website (2021)"
     role="Designer, Developer"
     url="https://birddoginteractive.com"
     notes="All concepting, design, and development work done individually (with the exception of some copywriting and a
     wireframe produced by a talented colleague). Site is built in vanilla HTML/CSS and hosted on a PHP/Apache server."
     }}
-    {{> portfolioItem
-    project="My Website (2024)"
+    {{> portfolio_item
+    project="The FLETCH website (2024)"
     role="Designer, Developer"
     url="https://fletch.ooo"
     notes="All concepting, design, and development work done individually. Site is created using ReactJS and styled with
     Tailwind; Lottie animations created in After Effects and exported using the Bodymovin extension."
     }}
-    {{> portfolioItem
+    {{> portfolio_item
     project="Windows Intel Fully-Responsive Banners (2023)"
     role="Developer, Designer"
     url="https://677ee5b4b818b800a237d108-raf-demo.netlify.app/"
@@ -23,7 +29,7 @@
     shape, so long as the logo size is brand-compliant. Layouts meticulously matched to provided creative where
     possible."
     }}
-    {{> portfolioItem
+    {{> portfolio_item
     project="Surface Best Buy Refresh / Visual Merchandising (2021)"
     role="Creative Director, Designer, 3D Modeling / Rendering"
     url="https://gofile.me/729ww/8orrpg6E0"

@@ -1,5 +1,10 @@
-<div class="container w-full mx-auto max-w-screen-md text-left p-4 flex flex-col gap-6">
-    <h2>Experience</h2>
+<div id="experience" data-collapsed="true"
+    class="container w-full mx-auto max-w-screen-md text-left  flex flex-col gap-6 overflow-hidden">
+    <div id="experienceToggle" class="toggler">
+        <h2>Experience <img id="experienceCaret" class="inline h-5 w-5 ml-2 " src="/icons/caret_down_k.svg"
+                alt="Expand" />
+    </div>
+    </h2>
     <div class="flex flex-col w-full max-w-screen-md">
         {{> resume_job job="Microsoft" info="BirdDog Interactive, Scottsdale, AZ"}}
         <div class="nested-col mb-6">
@@ -26,10 +31,11 @@
                 API. Deliverables were built with a custom static site generator using Vite and Handlebars in NodeJS,
                 including a custom script for ingesting translated copy strings from a provided XLSX document. Liaised
                 with 3 separate international dev teams, and successfully completed project on-time and on-budget."}}
-                <p class="italic text-xs">Some skills I learned or improved upon:</p>
-                <div class="nested-col text-xs">
+
+                <div class="nested-col blurb text-xs">
+                    <p class="italic text-xs">Some skills I learned or improved upon:</p>
                     <ul>
-                        <li>OOP / Project Scaffolding</li>
+                        <li>OOP / Advanced Programming</li>
                         <li>ReactJS / ElectronJS</li>
                         <li>Backend Engineering / SQL / TypeScript</li>
                         <li>Advanced Git Workflows</li>
@@ -52,13 +58,14 @@
                 and seamlessly adapted the team to a novel WFH process. In addition to a long list of existing
                 responsibilities, served as IT support and managed migration to a cloud-based data solution that kept
                 the team connected and collaborating successfully."}}
-                <p class="italic text-xs">Some skills I learned or improved upon:</p>
-                <div class="nested-col text-xs">
+
+                <div class="nested-col blurb text-xs">
+                    <p class="italic text-xs">Some skills I learned or improved upon:</p>
                     <ul>
                         <li>Presentation and Client Communication</li>
-                        <li>People Management and Conflict Resolution</li>
+                        <li>People Management / Conflict Resolution</li>
                         <li>Complex Project Management &amp; Organization / Agile Workflows</li>
-                        <li>Tailwind/Bootstrap, SASS/SCSS, Advanced Programming</li>
+                        <li>Tailwind/Bootstrap / SASS / Project Scaffolding</li>
                         <li>Figma</li>
                     </ul>
                 </div>
@@ -68,8 +75,9 @@
             role_description="2D and 3D design, photo retouching & compositing, dieline
             engineering,
             presentation design, video editing and animation, visual merchandising, digital asset toolkits, et al."}}
-            <p class="italic text-xs">Some skills I learned or improved upon:</p>
-            <div class="nested-col text-xs">
+
+            <div class="nested-col blurb text-xs">
+                <p class="italic text-xs">Some skills I learned or improved upon:</p>
                 <ul>
                     <li>3D Modeling and Rendering</li>
                     <li>Advanced Print Production / Dieline Engineering</li>
@@ -89,8 +97,9 @@
             and ads, oversaw print production, designed
             social
             media content and sales materials, managed and directed a team of editorial photographers."}}
-            <p class="italic text-xs">Some skills I learned or improved upon:</p>
-            <div class="nested-col text-xs">
+
+            <div class="nested-col blurb text-xs">
+                <p class="italic text-xs">Some skills I learned or improved upon:</p>
                 <ul>
                     <li>Project Management / Delegation</li>
                     <li>Print Production</li>

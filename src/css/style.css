@@ -1,7 +1,7 @@
 @import "tailwindcss";
 @import "./fonts.css";
 @plugin 'tailwind-scrollbar';
-@plugin '@tailwindcss/container-queries';
+
 @config "../../tailwind.config.mjs";
 @theme {
   --font-avenir-regular: "AvenirNextLTPro-Regular", sans-serif;
@@ -10,7 +10,7 @@
   --font-bayon: "Bayon-Regular", sans-serif;
   --color-ms-blue: #0078d4;
 
-  --text-9xl: 9rem;
+  --text-9xl: 8rem;
   --text-7xl: 5.25rem;
   --text-5xl: 3rem;
   --text-4xl: 2.25rem;
@@ -21,6 +21,12 @@
   --text-base: 1rem;
   --text-sm: 0.875rem;
   --text-xs: 0.75rem;
+
+  --breakpoint-sm: 492px;
+  --breakpoint-md: 680px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
 }
 
 html {
@@ -30,7 +36,7 @@ html {
 
 #mainWrap {
   @apply absolute inset-0 bg-neutral-50 text-neutral-600 text-center overflow-y-scroll scrollbar-none;
-  @apply flex flex-col justify-start items-center gap-8;
+  @apply [&>div:not(:first-of-type)]:mb-10;
   @apply p-8 sm:p-16;
 }
 
@@ -66,7 +72,7 @@ a {
 .griddy {
   @apply text-left;
   div {
-    @apply divide-y divide-[#6dcff6];
+    @apply divide-y divide-neutral-300;
     div {
       @apply flex flex-col justify-center;
       @apply p-4;
@@ -77,28 +83,12 @@ a {
 
 .griddy.toolset {
   @apply w-full max-w-screen-md grid grid-cols-1 sm:grid-cols-2
-  text-left divide-y sm:divide-y-0 border border-[#6dcff6] sm:divide-x divide-[#6dcff6] text-sm;
+  text-left divide-y sm:divide-y-0 border border-neutral-300 sm:divide-x divide-neutral-300 text-sm;
 
   div {
     @apply min-h-20;
   }
 }
-
-/* .griddy.work {
-  @apply grid w-full max-w-screen-md border border-[#6dcff6] 
-  grid-cols-7;
-
-  > div {
-    @apply p-4;
-  }
-
-  .label {
-    @apply col-span-2 sm:col-span-2 text-xs;
-  }
-  .content {
-    @apply col-span-5 sm:col-span-5 text-sm;
-  }
-} */
 
 .label {
   @apply p-4;
@@ -108,7 +98,7 @@ a {
 }
 
 .label {
-  @apply basis-1/6 min-w-[75px] border-r border-r-[#6dcff6];
+  @apply basis-1/6 min-w-[75px] border-r border-r-neutral-300;
   p {
     @apply text-xs;
   }
@@ -121,5 +111,12 @@ a {
 }
 
 .nested-col {
-  @apply flex flex-col items-start text-left border-l border-l-[#6dcff6] pl-4 gap-3;
+  @apply flex flex-col items-start text-left border-l border-l-neutral-300 pl-4 gap-3;
+  &.blurb {
+    @apply border bg-neutral-100 rounded-2xl p-4 gap-3 border-neutral-300 w-full;
+  }
+}
+
+.toggler {
+  @apply w-full cursor-pointer pb-3 border-b border-b-neutral-300;
 }
