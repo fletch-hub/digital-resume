@@ -6,96 +6,55 @@ export default async (titleId = "", titleArr = [""], delay = 1) => {
 
   if (!title) return console.error("Title element not found");
 
-  const populateSingleTitle = async () => {
-    return (title.innerHTML = titleArr[0]);
-  };
-
   const populateHorizTitles = async () => {
     //create a new <p> element for each titleStr and append it to the title element
     for (let i = 0; i < titleArr.length; i++) {
       const newTitleEl = document.createElement("p");
       newTitleEl.innerHTML = titleArr[i];
+      newTitleEl.classList.add("title");
       title.appendChild(newTitleEl);
       titleElsArr.push(newTitleEl);
-      if (i > 0) {
-        newTitleEl.classList.add("inactive");
+      if (i === 0) {
+        newTitleEl.classList.add("active");
       }
     }
   };
 
-  const handleCycleVert = () => {
-    for (let i = 0; i < titleArr.length; i++) {
-      const titleStr = titleArr[i + 1] || titleArr[0];
-      if (title.innerHTML === titleArr[i] || title.innerHTML === "") {
-        title.innerHTML = titleStr;
-        break;
-      }
-    }
+  const getWidthOfFirstEl = (firstEl) => {
+    return firstEl.getBoundingClientRect().width;
   };
 
-  const handleCycleHoriz = () => {
-    //reorder the titles - move the first title to the end
-    const firstEl = titleElsArr.shift();
-    firstEl.classList.add("inactive");
-    titleElsArr.push(firstEl);
-    title.appendChild(firstEl);
-    animateHoriz(titleElsArr);
-  };
-
-  const animateHoriz = () => {
-    const distance =
-      parseFloat(
-        window.getComputedStyle(titleElsArr[titleElsArr.length - 1]).width,
-      ) * -1;
-    const tl = gsap.timeline({
-      onComplete: handleCycleHoriz,
-    });
-    tl.to(titleElsArr[0], {
-      opacity: 0,
-      x: distance,
-      duration: 0.5,
-      ease: "power4.inOut",
-      onComplete: () => {
-        titleElsArr[0].remove();
-      },
-    });
-    tl.to(
-      ".inactive",
-      {
-        opacity: 1,
-        x: distance,
-        duration: 0.5,
-        ease: "power4.inOut",
-      },
-      "<",
-    );
-  };
-
-  const animateVert = () => {
+  const animateTitles = () => {
+    let firstEl = title.querySelector("p");
+    firstEl.classList.add("active");
+    let firstElWidth = getWidthOfFirstEl(firstEl);
     const tl = gsap.timeline({
       repeat: -1,
-      repeatDelay: 0,
-      onRepeat: handleCycleVert,
-    });
-    tl.fromTo(
-      title,
-      {
-        opacity: 0,
-        y: "20px",
+      onRepeat: () => {
+        tl.invalidate();
+        firstEl = title.querySelector("p");
+        firstElWidth = getWidthOfFirstEl(firstEl);
       },
+    });
+    //tl.set(firstEl, { width: firstElWidth });
+    tl.fromTo(
+      titleElsArr,
+      { x: 0 },
       {
-        opacity: 1,
-        y: 0,
-        duration: 0.5,
+        x: () => (firstElWidth + 15) * -1,
+        duration: 1,
         ease: "power4.inOut",
+        onComplete: () => {
+          const firstEl = title.querySelector("p");
+          firstEl.classList.remove("active");
+          firstEl.classList.add("inactive");
+          firstEl.remove();
+          title.appendChild(firstEl);
+        },
       },
     );
-    tl.to(title, { y: "-20px", opacity: 0, duration: 0.25, delay });
   };
 
-  //   await populateHorizTitles();
-  //   animateHoriz(titleElsArr);
-
-  await populateSingleTitle();
-  animateVert();
+  await populateHorizTitles();
+  animateTitles();
 };

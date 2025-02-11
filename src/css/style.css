@@ -120,3 +120,7 @@ a {
 .toggler {
   @apply w-full cursor-pointer pb-3 border-b border-b-neutral-300;
 }
+
+.title {
+  @apply mr-[15px];
+}
