@@ -12,7 +12,7 @@ export default (accordionArr = []) => {
     if (collapsed === "false") {
       caret.style.transform = "rotate(180deg)";
     } else {
-      tray.style.height = "50px";
+      tray.style.height = "60px";
     }
 
     const handleToggle = () => {
@@ -29,7 +29,7 @@ export default (accordionArr = []) => {
         tray.setAttribute("data-collapsed", false);
       } else {
         tl.to(tray, {
-          height: 50,
+          height: "60px",
           duration: 0.5,
           ease: "power2.inOut",
         });

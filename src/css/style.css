@@ -8,6 +8,7 @@
   --font-avenir-demi: "AvenirNextLTPro-Demi", sans-serif;
   --font-avenir-bold: "AvenirNextLTPro-Bold", sans-serif;
   --font-bayon: "Bayon-Regular", sans-serif;
+  --font-icons: "mwf-icons", sans-serif;
   --color-ms-blue: #0078d4;
 
   --text-9xl: 8rem;
@@ -94,7 +95,7 @@ a {
 
 .flexGriddy {
   @apply max-w-screen-md flex flex-col text-left [&>div:nth-child(even)]:bg-neutral-100  border border-neutral-300 divide-y divide-neutral-300;
-  @apply dark:[&>div:nth-child(even)]:bg-neutral-800;
+  @apply dark:[&>div:nth-child(even)]:bg-neutral-800 dark:border-neutral-600 dark:divide-neutral-600;
 }
 .label {
   @apply p-4;
@@ -105,6 +106,7 @@ a {
 
 .label {
   @apply basis-1/6 min-w-[75px] border-r border-r-neutral-300;
+  @apply dark:border-r-neutral-600;
   p {
     @apply text-xs;
   }
@@ -126,8 +128,13 @@ a {
 
 .toggler {
   @apply w-full cursor-pointer pb-3 border-b border-b-neutral-300;
+  @apply dark:border-b-neutral-600;
 }
 
 .title {
   @apply mr-[15px] font-avenir-bold;
+}
+
+.shade {
+  @apply absolute inset-0 block bg-linear-to-t from-neutral-800 dark:from-neutral-900 to-transparent z-100 opacity-50;
 }
