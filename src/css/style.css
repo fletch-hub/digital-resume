@@ -36,6 +36,7 @@ html {
 
 #mainWrap {
   @apply absolute inset-0 bg-neutral-50 text-neutral-600 text-center overflow-y-scroll scrollbar-none;
+  @apply dark:bg-neutral-900 dark:text-neutral-200;
   @apply [&>div:not(:first-of-type)]:mb-10;
   @apply p-8 sm:p-16;
 }
@@ -77,6 +78,7 @@ a {
       @apply flex flex-col justify-center;
       @apply p-4;
       @apply even:bg-neutral-100;
+      @apply dark:even:bg-neutral-800;
     }
   }
 }
@@ -90,6 +92,10 @@ a {
   }
 }
 
+.flexGriddy {
+  @apply max-w-screen-md flex flex-col text-left [&>div:nth-child(even)]:bg-neutral-100  border border-neutral-300 divide-y divide-neutral-300;
+  @apply dark:[&>div:nth-child(even)]:bg-neutral-800;
+}
 .label {
   @apply p-4;
 }
@@ -114,6 +120,7 @@ a {
   @apply flex flex-col items-start text-left border-l border-l-neutral-300 pl-4 gap-3;
   &.blurb {
     @apply border bg-neutral-100 rounded-2xl p-4 gap-3 border-neutral-300 w-full;
+    @apply dark:bg-neutral-800;
   }
 }
 
@@ -122,5 +129,5 @@ a {
 }
 
 .title {
-  @apply mr-[15px];
+  @apply mr-[15px] font-avenir-bold;
 }

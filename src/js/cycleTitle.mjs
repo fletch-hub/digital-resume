@@ -7,7 +7,6 @@ export default async (titleId = "", titleArr = [""], delay = 1) => {
   if (!title) return console.error("Title element not found");
 
   const populateHorizTitles = async () => {
-    //create a new <p> element for each titleStr and append it to the title element
     for (let i = 0; i < titleArr.length; i++) {
       const newTitleEl = document.createElement("p");
       newTitleEl.innerHTML = titleArr[i];
@@ -16,8 +15,28 @@ export default async (titleId = "", titleArr = [""], delay = 1) => {
       titleElsArr.push(newTitleEl);
       if (i === 0) {
         newTitleEl.classList.add("active");
+      } else {
+        newTitleEl.classList.add("inactive");
       }
     }
+  };
+
+  const exitDown = (el) => {
+    const tl = gsap.timeline();
+    tl.to(el, {
+      y: 20,
+      opacity: 0,
+      delay,
+      duration: 0.5,
+      ease: "power4.out",
+    });
+    tl.to(
+      el.nextElementSibling,
+      {
+        opacity: 1,
+      },
+      "<",
+    );
   };
 
   const getWidthOfFirstEl = (firstEl) => {
@@ -26,29 +45,41 @@ export default async (titleId = "", titleArr = [""], delay = 1) => {
 
   const animateTitles = () => {
     let firstEl = title.querySelector("p");
-    firstEl.classList.add("active");
     let firstElWidth = getWidthOfFirstEl(firstEl);
+    const rebind = () => {
+      firstEl = title.querySelector("p");
+      firstEl.classList.add("active");
+      firstEl.classList.remove("inactive");
+      firstElWidth = getWidthOfFirstEl(firstEl);
+    };
+
     const tl = gsap.timeline({
       repeat: -1,
+      onStart: () => {
+        gsap.set(titleElsArr, { opacity: 0.25 });
+        gsap.set(firstEl, { opacity: 1 });
+        exitDown(firstEl);
+      },
       onRepeat: () => {
         tl.invalidate();
-        firstEl = title.querySelector("p");
-        firstElWidth = getWidthOfFirstEl(firstEl);
+        rebind();
+        exitDown(firstEl);
       },
     });
-    //tl.set(firstEl, { width: firstElWidth });
     tl.fromTo(
       titleElsArr,
-      { x: 0 },
+      { x: 0, y: 0 },
       {
         x: () => (firstElWidth + 15) * -1,
-        duration: 1,
+        duration: 1.5,
+        delay: delay - 0.25,
         ease: "power4.inOut",
         onComplete: () => {
-          const firstEl = title.querySelector("p");
+          firstEl = title.querySelector("p");
           firstEl.classList.remove("active");
           firstEl.classList.add("inactive");
           firstEl.remove();
+          gsap.set(firstEl, { opacity: 0.25 });
           title.appendChild(firstEl);
         },
       },

@@ -33,15 +33,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     "#headerTitle",
     [
       "Digital Maker",
+      "Multimedia Producer",
       "Creative Director",
       "Frontend Developer",
       "Sr. Art Director",
-      "UX/UI Designer",
       "Print / CPG Designer",
+      "UX / UI Designer",
       "Motion Designer",
       "Video Editor",
       "3D Modeler",
     ],
-    1.5,
+    2,
   );
 });
