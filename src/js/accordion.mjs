@@ -1,5 +1,39 @@
 import gsap from "gsap";
 export default (accordionArr = []) => {
+  const togglerLinks = document.querySelectorAll("[data-toggle]");
+
+  togglerLinks.forEach((link) => {
+    const idToClick = link.getAttribute("data-toggle");
+    const toggleEl = document.querySelector(idToClick);
+    const idToScrollTo = link.getAttribute("data-scroll-to");
+    const scrollToEl = document.querySelector(idToScrollTo);
+
+    if (!toggleEl) {
+      console.warn(`Element not found for selector: ${toggleToClick}`);
+      return;
+    }
+    link.addEventListener("click", (e) => {
+      if (e.target === link) {
+        //toggleEl.click();
+        const mainWrap = document.querySelector("#mainWrap");
+        const linkY = link.getBoundingClientRect().top;
+        const scrollToElY = scrollToEl.getBoundingClientRect().top;
+        const deltaY = scrollToElY - linkY;
+
+        scrollToEl.classList.add("highlight");
+        setTimeout(() => {
+          scrollToEl.classList.remove("highlight");
+        }, 20000);
+
+        mainWrap.scrollBy({
+          top: deltaY + 200,
+          left: 0,
+          behavior: "smooth",
+        });
+      }
+    });
+  });
+
   accordionArr.map((accordion) => {
     const { trayId, toggleId, caretId } = accordion;
 

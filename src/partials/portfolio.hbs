@@ -1,12 +1,13 @@
-<div id="portfolio" data-collapsed="true"
-    class="container w-full mx-auto max-w-screen-md text-left flex flex-col gap-6 overflow-hidden">
+<div id="portfolio" data-collapsed="false"
+    class="container w-full mx-auto max-w-screen-md text-left flex flex-col gap-6 overflow-visible">
     <div id="portfolioToggle" class="toggler">
         <h2>Work Samples <span id="portfolioCaret" class="inline-block font-icons ml-2">&#59758;</span>
         </h2>
     </div>
 
     {{> portfolio_item
-    img="/portfolio/thumbs/birddoginteractive.png"
+    id="portfolio_bd"
+    img="/portfolio/thumbs/birddoginteractive.jpg"
     project="The BirdDog Interactive Website (2021)"
     role="Designer, Developer"
     url="https://birddoginteractive.com"
@@ -14,7 +15,8 @@
     wireframe produced by a talented colleague). Site is built in vanilla HTML/CSS and hosted on a PHP/Apache server."
     }}
     {{> portfolio_item
-    img="/portfolio/thumbs/fletch.png"
+    id="portfolio_fletch"
+    img="/portfolio/thumbs/fletch.jpg"
     project="The FLETCH website (2024)"
     role="Designer, Developer"
     url="https://fletch.ooo"
@@ -22,7 +24,8 @@
     Tailwind; Lottie animations created in After Effects and exported using the Bodymovin extension."
     }}
     {{> portfolio_item
-    img="/portfolio/thumbs/wintel.png"
+    id="portfolio_wintel"
+    img="/portfolio/thumbs/wintel.jpg"
     project="Windows Intel Fully-Responsive Banners (2023)"
     role="Developer, Designer"
     url="https://677ee5b4b818b800a237d108-raf-demo.netlify.app/"
@@ -32,7 +35,8 @@
     possible."
     }}
     {{> portfolio_item
-    img="/portfolio/thumbs/vm_surf.png"
+    id="portfolio_vm_surf"
+    img="/portfolio/thumbs/vm_surf.jpg"
     project="Surface Best Buy Refresh / Visual Merchandising (2021)"
     role="Creative Director, Designer, 3D Modeling / Rendering"
     url="https://gofile.me/729ww/8orrpg6E0"
