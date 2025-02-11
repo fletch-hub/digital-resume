@@ -1,7 +1,8 @@
 <div class="flexGriddy" id={{id}}>
+    <img class="snipe" src={{snipe}} alt="" />
     {{#if (isDefined img)}}
     <div
-        class="relative  h-[100px] hover:h-[200px] md:hover:h-[300px] transition-all ease-in-out duration-500 overflow-hidden">
+        class="relative h-[100px] hover:h-[200px] md:hover:h-[300px] transition-all motion-reduce:transition-none ease-in-out duration-500 overflow-hidden">
         <div class="shade">
         </div>
         <img src="{{img}}" alt="{{project}}" class="object-cover object-top w-full h-full overflow-hidden ">

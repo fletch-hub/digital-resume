@@ -2,6 +2,8 @@ import gsap from "gsap";
 export default (accordionArr = []) => {
   const togglerLinks = document.querySelectorAll("[data-toggle]");
 
+  const reducedMotion = window.reducedMotion || false;
+
   togglerLinks.forEach((link) => {
     const idToClick = link.getAttribute("data-toggle");
     const toggleEl = document.querySelector(idToClick);
@@ -26,9 +28,9 @@ export default (accordionArr = []) => {
         }, 20000);
 
         mainWrap.scrollBy({
-          top: deltaY + 200,
+          top: deltaY,
           left: 0,
-          behavior: "smooth",
+          behavior: reducedMotion ? "instant" : "smooth",
         });
       }
     });
@@ -53,21 +55,25 @@ export default (accordionArr = []) => {
       console.log("clicked");
       const tl = gsap.timeline();
 
+      const duration = reducedMotion ? 0 : 0.5;
+
       if (tray.getAttribute("data-collapsed") === "true") {
         tl.to(tray, {
           height: "auto",
-          duration: 0.5,
+          duration,
           ease: "power2.inOut",
         });
-        tl.to(caret, { rotate: 180, duration: 0.5 }, "<");
+        tl.to(caret, { rotate: 180, duration }, "<");
+        tl.set(tray, { overflow: "visible" });
         tray.setAttribute("data-collapsed", false);
       } else {
+        tl.set(tray, { overflow: "hidden" });
         tl.to(tray, {
           height: "60px",
-          duration: 0.5,
+          duration,
           ease: "power2.inOut",
         });
-        tl.to(caret, { rotate: 0, duration: 0.5 }, "<");
+        tl.to(caret, { rotate: 0, duration }, "<");
         tray.setAttribute("data-collapsed", true);
       }
     };

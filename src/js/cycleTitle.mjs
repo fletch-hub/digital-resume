@@ -1,5 +1,7 @@
 import gsap from "gsap";
 export default async (titleId = "", titleArr = [""], delay = 1) => {
+  const reducedMotion = window.reducedMotion || false;
+
   const title = document.querySelector(titleId);
 
   const titleElsArr = [];
@@ -24,7 +26,7 @@ export default async (titleId = "", titleArr = [""], delay = 1) => {
   const exitDown = (el) => {
     const tl = gsap.timeline();
     tl.to(el, {
-      y: 20,
+      y: reducedMotion ? 0 : 20,
       opacity: 0,
       delay,
       duration: 0.5,
@@ -71,7 +73,7 @@ export default async (titleId = "", titleArr = [""], delay = 1) => {
       { x: 0, y: 0 },
       {
         x: () => (firstElWidth + 15) * -1,
-        duration: 1.5,
+        duration: reducedMotion ? 2.5 : 1.5,
         delay: delay - 0.25,
         ease: "power4.inOut",
         onComplete: () => {

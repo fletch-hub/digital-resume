@@ -42,6 +42,12 @@ const titlesArr = [
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  window.reducedMotion = reducedMotion.matches;
+  reducedMotion.addEventListener("change", () => {
+    window.reducedMotion = reducedMotion.matches;
+  });
+
   accordions(accordionsArr);
-  cycleTitle("#headerTitle", titlesArr, 2);
+  cycleTitle("#headerTitle", titlesArr, 1);
 });
