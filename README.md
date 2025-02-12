@@ -1,3 +1,9 @@
-# Important
+# Info
 
-There are redirects set up in the toml file for the purposes of url-shortening and analytics tracking. Manually hashed these routes. TODO: Write a script to do this automatically
+I built this site using Vite, Handlebars, and vanilla JavaScript.
+
+### Todos
+
+- There are redirects set up in the toml file for the purposes of url-shortening and analytics tracking. Manually hashed these routes. TODO: Write a script to do this automatically
+
+- The

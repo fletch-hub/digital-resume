@@ -14,6 +14,8 @@ export default async () => {
   const innerContactModal = contactModal.querySelector(".modalInner");
   const formSubmitBtn = contactModal.querySelector("button[type='submit']");
 
+  const closeModalButtons = document.querySelectorAll(".closeModalBtn");
+
   const infoBtn = document.querySelector("#infoBtn");
   const infoModal = document.querySelector("#infoModal");
 
@@ -83,6 +85,9 @@ export default async () => {
   shareBtn.addEventListener("click", () => {
     handleToggleModal(shareModal);
   });
+  infoBtn.addEventListener("click", () => {
+    handleToggleModal(infoModal);
+  });
   copyBtn.addEventListener("click", () =>
     copyToClipboard(shareModal, innerShareModal, urlInput, handleToggleModal),
   );
@@ -90,6 +95,13 @@ export default async () => {
   formSubmitBtn.addEventListener("click", (e) => {
     e.preventDefault();
     submitForm(contactModal, innerContactModal, handleToggleModal);
+  });
+
+  closeModalButtons.forEach((btn) => {
+    btn.addEventListener("click", async () => {
+      const modalEl = btn.closest(".modalWrap");
+      await handleToggleModal(modalEl);
+    });
   });
 };
 

@@ -20,6 +20,6 @@
 }
 @font-face {
   font-family: "mwf-icons";
-  src: url("/fonts/subset_arrows_share_MWFFluentIcons.woff2") format("woff2");
+  src: url("/fonts/subset_MWFFluentIcons.woff2") format("woff2");
   font-display: swap;
 }

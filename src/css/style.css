@@ -5,186 +5,185 @@
 
 @config "../../tailwind.config.mjs";
 @theme {
-  --font-avenir-regular: "AvenirNextLTPro-Regular", sans-serif;
-  --font-avenir-demi: "AvenirNextLTPro-Demi", sans-serif;
-  --font-avenir-bold: "AvenirNextLTPro-Bold", sans-serif;
-  --font-bayon: "Bayon-Regular", sans-serif;
-  --font-icons: "mwf-icons", sans-serif;
-  --color-ms-blue: #0078d4;
+	--font-avenir-regular: "AvenirNextLTPro-Regular", sans-serif;
+	--font-avenir-demi: "AvenirNextLTPro-Demi", sans-serif;
+	--font-avenir-bold: "AvenirNextLTPro-Bold", sans-serif;
+	--font-bayon: "Bayon-Regular", sans-serif;
+	--font-icons: "mwf-icons", sans-serif;
+	--color-ms-blue: #0078d4;
 
-  --text-9xl: 8rem;
-  --text-7xl: 5.25rem;
-  --text-5xl: 3rem;
-  --text-4xl: 2.25rem;
-  --text-3xl: 1.875rem;
-  --text-2xl: 1.5rem;
-  --text-xl: 1.25rem;
-  --text-lg: 1.125rem;
-  --text-base: 1rem;
-  --text-xs: 0.875rem;
-  --text-xxs: 0.75rem;
+	--text-9xl: 8rem;
+	--text-7xl: 5.25rem;
+	--text-5xl: 3rem;
+	--text-4xl: 2.25rem;
+	--text-3xl: 1.875rem;
+	--text-2xl: 1.5rem;
+	--text-xl: 1.25rem;
+	--text-lg: 1.125rem;
+	--text-base: 1rem;
+	--text-xs: 0.875rem;
+	--text-xxs: 0.75rem;
 
-  --breakpoint-xxs: 300px;
-  --breakpoint-xs: 492px;
-  --breakpoint-sm: 576px;
-  --breakpoint-md: 680px;
-  --breakpoint-lg: 992px;
-  --breakpoint-xl: 1280px;
-  --breakpoint-2xl: 1536px;
+	--breakpoint-xxs: 300px;
+	--breakpoint-xs: 492px;
+	--breakpoint-sm: 576px;
+	--breakpoint-md: 680px;
+	--breakpoint-lg: 992px;
+	--breakpoint-xl: 1280px;
+	--breakpoint-2xl: 1536px;
 }
 @import "./nav.css";
 @import "./modals.css";
 
 html {
-  @apply font-avenir-regular;
-  text-wrap: pretty;
+	@apply font-avenir-regular;
+	text-wrap: pretty;
 }
 
 #mainWrap {
-  @apply absolute inset-0 bg-neutral-50 text-neutral-600 text-center h-full w-full overflow-y-scroll scrollbar-none;
-  @apply dark:bg-neutral-900 dark:text-neutral-200;
-  /* @apply [&>div:not(:first-of-type)]:mb-10; */
+	@apply absolute inset-0 scrollbar-none h-full w-full overflow-y-scroll bg-neutral-50 text-center text-neutral-600;
+	@apply dark:bg-neutral-900 dark:text-neutral-200;
+	/* @apply [&>div:not(:first-of-type)]:mb-10; */
 }
 
 section {
-  @apply relative container w-full mx-auto max-w-screen-md text-left flex flex-col gap-6 rounded-2xl p-6 mb-8;
+	@apply relative container mx-auto mb-8 flex w-full max-w-screen-md flex-col gap-6 rounded-2xl p-6 text-left;
 }
 
 h1 {
-  @apply text-5xl xs:text-6xl font-bayon;
+	@apply font-bayon text-5xl xs:text-6xl;
 }
 
 h2 {
-  @apply text-xl xs:text-2xl font-avenir-bold;
+	@apply font-avenir-bold text-xl xs:text-2xl;
 }
 
 h3 {
-  @apply text-lg xs:text-xl font-avenir-demi;
+	@apply font-avenir-demi text-lg xs:text-xl;
 }
 
 h4 {
-  @apply text-sm font-avenir-bold;
+	@apply font-avenir-bold text-sm;
 }
 
 p {
-  @apply font-avenir-regular leading-relaxed;
+	@apply font-avenir-regular leading-relaxed;
 }
 
 a {
-  @apply underline;
+	@apply underline;
 }
 
 button {
-  @apply cursor-pointer;
+	@apply cursor-pointer;
 }
 
 .dropcap {
-  @apply first-letter:float-left first-letter:text-9xl first-letter:pr-3 first-letter:font-bayon;
-  @apply first-line:uppercase first-line:font-avenir-demi;
+	@apply first-letter:float-left first-letter:pr-3 first-letter:font-bayon first-letter:text-9xl;
+	@apply first-line:font-avenir-demi first-line:uppercase;
 }
 
 .griddy {
-  @apply text-left;
-  div {
-    @apply divide-y divide-neutral-300 dark:divide-neutral-600;
-    div {
-      @apply flex flex-row flex-wrap justify-start items-center gap-1;
-      @apply p-4;
-      @apply even:bg-neutral-100;
-      @apply dark:even:bg-neutral-800;
-    }
-  }
+	@apply text-left;
+	div {
+		@apply divide-y divide-neutral-300 dark:divide-neutral-600;
+		div {
+			@apply flex flex-row flex-wrap items-center justify-start gap-1;
+			@apply p-4;
+			@apply even:bg-neutral-100;
+			@apply dark:even:bg-neutral-800;
+		}
+	}
 }
 
 .griddy.toolset {
-  @apply w-full max-w-screen-md grid grid-cols-1 sm:grid-cols-2
-  text-left divide-y sm:divide-y-0 border border-neutral-300 dark:border-neutral-600 sm:divide-x divide-neutral-300 dark:divide-neutral-600 text-sm;
+	@apply grid w-full max-w-screen-md grid-cols-1 divide-y divide-neutral-300 border border-neutral-300 text-left text-sm sm:grid-cols-2 sm:divide-x sm:divide-y-0 dark:divide-neutral-600 dark:border-neutral-600;
 
-  div {
-    @apply min-h-20;
-  }
+	div {
+		@apply min-h-20;
+	}
 }
 
 .flexGriddy {
-  @apply relative max-w-screen-md flex flex-col text-left [&>div:nth-child(even)]:bg-neutral-100  border border-neutral-300 divide-y divide-neutral-300;
-  @apply dark:[&>div:nth-child(even)]:bg-neutral-800 dark:border-neutral-600 dark:divide-neutral-600;
+	@apply relative flex max-w-screen-md flex-col divide-y divide-neutral-300 border border-neutral-300 text-left [&>div:nth-child(even)]:bg-neutral-100;
+	@apply dark:divide-neutral-600 dark:border-neutral-600 dark:[&>div:nth-child(even)]:bg-neutral-800;
 }
 .label {
-  @apply p-4;
+	@apply p-4;
 }
 .content {
-  @apply p-4;
+	@apply p-4;
 }
 
 .label {
-  @apply basis-1/6 min-w-[75px] border-r border-r-neutral-300;
-  @apply dark:border-r-neutral-600;
-  p {
-    @apply text-xs;
-  }
+	@apply min-w-[75px] basis-1/6 border-r border-r-neutral-300;
+	@apply dark:border-r-neutral-600;
+	p {
+		@apply text-xs;
+	}
 }
 .content {
-  @apply text-xs basis-5/6;
-  p {
-    @apply text-xs;
-  }
+	@apply basis-5/6 text-xs;
+	p {
+		@apply text-xs;
+	}
 }
 
 .nested-col {
-  @apply flex flex-col items-start text-left border-l border-l-neutral-300 pl-4 gap-3;
-  &.blurb {
-    @apply border bg-neutral-100 rounded-2xl p-4 gap-3 border-neutral-300 w-full;
-    @apply dark:bg-neutral-800;
-  }
+	@apply flex flex-col items-start gap-3 border-l border-l-neutral-300 pl-4 text-left;
+	&.blurb {
+		@apply w-full gap-3 rounded-2xl border border-neutral-300 bg-neutral-100 p-4;
+		@apply dark:bg-neutral-800;
+	}
 }
 
 .toggler {
-  @apply w-full cursor-pointer pb-3 border-b border-b-neutral-300;
-  @apply dark:border-b-neutral-600;
-  :hover {
-    [id$="Caret"] {
-      @apply opacity-20;
-      @apply opacity-100 transition-opacity;
-    }
-  }
+	@apply w-full cursor-pointer border-b border-b-neutral-300 pb-3;
+	@apply dark:border-b-neutral-600;
+	:hover {
+		[id$="Caret"] {
+			@apply opacity-20;
+			@apply opacity-100 transition-opacity;
+		}
+	}
 }
 
 .app-icon {
-  @apply w-8 h-8 border-0;
+	@apply h-8 w-8 border-0;
 }
 
 .title {
-  @apply mr-[15px] font-avenir-bold;
+	@apply mr-[15px] font-avenir-bold;
 }
 
 .shade {
-  @apply absolute inset-0 block bg-linear-to-t from-neutral-800 dark:from-neutral-900 to-transparent z-40 opacity-50 h-auto;
+	@apply absolute inset-0 z-40 block h-auto bg-linear-to-t from-neutral-800 to-transparent opacity-50 dark:from-neutral-900;
 }
 
 .snipe {
-  @apply absolute top-0 left-0 w-[150px] h-auto z-[41] border-0 drop-shadow-lg;
+	@apply absolute top-0 left-0 z-[41] h-auto w-[150px] border-0 drop-shadow-lg;
 }
 
 .inactive {
-  @apply opacity-25;
+	@apply opacity-25;
 }
 
 .highlight {
-  animation: highlight 15s ease-out;
+	animation: highlight 15s ease-out;
 }
 
 [id$="Caret"] {
-  @apply opacity-20 z-50;
-  @apply hover:opacity-100 transition-opacity;
+	@apply z-50 opacity-20;
+	@apply transition-opacity hover:opacity-100;
 }
 
 @keyframes highlight {
-  0% {
-    --color-ms-blue: #53b4ff50;
-    box-shadow: 0 0 5px 3px var(--color-ms-blue);
-  }
-  100% {
-    --color-ms-blue: #53b4ff15;
-    box-shadow: 0 0 0 0 var(--color-ms-blue);
-  }
+	0% {
+		--color-ms-blue: #53b4ff50;
+		box-shadow: 0 0 5px 3px var(--color-ms-blue);
+	}
+	100% {
+		--color-ms-blue: #53b4ff15;
+		box-shadow: 0 0 0 0 var(--color-ms-blue);
+	}
 }
