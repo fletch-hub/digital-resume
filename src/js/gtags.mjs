@@ -1,5 +1,5 @@
 export const navigated = (navSelector) => {
-  gtag("event", navSelector, {
+  gtag("event", `navMenu_${navSelector}`, {
     event_category: "User Interaction",
     event_label: "Page Navigation",
   });
@@ -13,7 +13,7 @@ export const shared = () => {
 };
 
 export const tabOpened = (tabSelector) => {
-  gtag("event", tabSelector, {
+  gtag("event", `tabOpened_${tabSelector}`, {
     event_category: "User Interaction",
     event_label: "Tab Opened",
   });
