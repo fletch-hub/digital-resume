@@ -16,7 +16,6 @@ export default (accordionArr = []) => {
     }
     link.addEventListener("click", (e) => {
       if (e.target === link) {
-        //toggleEl.click();
         const mainWrap = document.querySelector("#mainWrap");
         const linkY = link.getBoundingClientRect().top;
         const scrollToElY = scrollToEl.getBoundingClientRect().top;
@@ -28,7 +27,7 @@ export default (accordionArr = []) => {
         }, 20000);
 
         mainWrap.scrollBy({
-          top: deltaY,
+          top: deltaY + 200,
           left: 0,
           behavior: reducedMotion ? "instant" : "smooth",
         });
