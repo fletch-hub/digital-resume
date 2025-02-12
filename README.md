@@ -1,6 +1,6 @@
 # Info
 
-I built this site using Vite, Handlebars, and vanilla JavaScript.
+I built this site using Vite, Tailwind, Handlebars, and vanilla JavaScript.
 
 ### Todos
 
