@@ -12,8 +12,15 @@
       <div id="mainWrap">
         {{> nav}}
         <div id="navShade" style="display: none; opacity: 0"></div>
-        {{> shareModal}} {{> contactModal}} {{> privacyModal}} {{> header}} {{>
+        {{> shareModal}} {{> contactModal}} {{> infoModal}} {{> header}} {{>
         summary}} {{> coverLetter}} {{> toolset}} {{> resume}} {{> portfolio}}
+        <div
+          class="absolute bottom-0 right-0 grid place-items-center m-4 w-12 h-12 rounded-full bg-neutral-100 dark:bg-neutral-800 cursor-pointer border z-[500]"
+        >
+          <button type="button" id="infoBtn" class="font-icons text-2xl">
+            &#59718;
+          </button>
+        </div>
       </div>
     </main>
     <script type="module" src="./src/main.js"></script>

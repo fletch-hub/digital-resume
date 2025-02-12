@@ -1,0 +1,9 @@
+{
+  "tabWidth": 1,
+  "useTabs": true,
+  "htmlWhitespaceSensitivity": "ignore",
+  "printWidth": 100,
+  "plugins": ["prettier-plugin-tailwindcss"],
+  "tailwindStylesheet": "./src/css/style.css",
+  "tailwindConfig": "./tailwind.config.mjs"
+}

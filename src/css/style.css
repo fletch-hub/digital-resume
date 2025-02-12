@@ -41,9 +41,13 @@ html {
 }
 
 #mainWrap {
-  @apply absolute inset-0 bg-neutral-50 text-neutral-600 text-center overflow-y-scroll scrollbar-none;
+  @apply absolute inset-0 bg-neutral-50 text-neutral-600 text-center h-full w-full overflow-y-scroll scrollbar-none;
   @apply dark:bg-neutral-900 dark:text-neutral-200;
-  @apply [&>div:not(:first-of-type)]:mb-10;
+  /* @apply [&>div:not(:first-of-type)]:mb-10; */
+}
+
+section {
+  @apply relative container w-full mx-auto max-w-screen-md text-left flex flex-col gap-6 rounded-2xl p-6 mb-8;
 }
 
 h1 {

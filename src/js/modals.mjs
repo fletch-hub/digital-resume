@@ -2,17 +2,20 @@ import gsap from "gsap";
 import * as gtags from "./gtags.mjs";
 export default async () => {
   const navShade = document.querySelector("#navShade");
+
   const shareBtn = document.querySelector("#shareBtn");
-  const contactBtn = document.querySelector("#contactBtn");
   const shareModal = document.querySelector("#shareModal");
   const innerShareModal = shareModal.querySelector(".modalInner");
-
   const copyBtn = shareModal.querySelector("#copyLink");
   const urlInput = shareModal.querySelector("#shareLink");
 
+  const contactBtn = document.querySelector("#contactBtn");
   const contactModal = document.querySelector("#contactModal");
   const innerContactModal = contactModal.querySelector(".modalInner");
   const formSubmitBtn = contactModal.querySelector("button[type='submit']");
+
+  const infoBtn = document.querySelector("#infoBtn");
+  const infoModal = document.querySelector("#infoModal");
 
   const reducedMotion = window.reducedMotion || false;
 
