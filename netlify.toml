@@ -1,4 +1,30 @@
 [[redirects]]
+  from = "/crm_k0J2A0h"
+  to = "https://sjv52.mjt.lu/nl3/LaRyI16eN4bJycGfUxRV4g?hl=en"
+  status = 302
+
+[[redirects]]
+from = "/raf_9W11dw9"
+to = "https://677ee5b4b818b800a237d108-raf-demo.netlify.app/"
+status = 302
+
+[[redirects]]
+from = "/fle_1L6dr4J"
+to = "https://fletch.ooo"
+status = 302
+
+[[redirects]]
+from = "/bd_SIJsD38a"
+to = "https://fletch.ooo"
+status = 302
+
+[[redirects]]
+from = "/svm_d0jXpsV5"
+to = "https://gofile.me/729ww/8orrpg6E0"
+status = 302
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+

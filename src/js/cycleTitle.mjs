@@ -17,6 +17,7 @@ export default async (titleId = "", titleArr = [""], delay = 1) => {
       titleElsArr.push(newTitleEl);
       if (i === 0) {
         newTitleEl.classList.add("active");
+        newTitleEl.style.marginRight = "15px";
       } else {
         newTitleEl.classList.add("inactive");
       }

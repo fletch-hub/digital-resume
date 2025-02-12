@@ -1,7 +1,7 @@
 <div class="flex flex-col items-start gap-2">
     {{#if (isDefined url)}}
     <button data-toggle="#portfolioToggle" data-scroll-to={{id}}
-        class="underline text-sm hover:text-ms-blue dark:hover:text-[#62bbff] cursor-pointer">{{project}}</button>
+        class="underline text-sm text-left hover:text-ms-blue dark:hover:text-[#62bbff] cursor-pointer">{{project}}</button>
     {{else}}
     <p class="underline text-sm">{{project}}</p>{{/if}}
     <p class="text-sm">{{text}}</p>
