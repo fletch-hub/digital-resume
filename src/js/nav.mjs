@@ -15,11 +15,16 @@ export default async () => {
     if (navMenu.getAttribute("data-collapsed") === "true") {
       tl.set(navMenu, { display: "block" });
       tl.set(navShade, { display: "block", opacity: 0 }, "<");
-      tl.to(navMenu, {
-        height: "auto",
-        duration,
-        ease: "power4.out",
-      });
+      tl.to("#navBtnWrap", { opacity: 0.5, pointerEvents: "none" }, "<");
+      tl.to(
+        navMenu,
+        {
+          height: "auto",
+          duration,
+          ease: "power4.out",
+        },
+        "<",
+      );
       tl.to(
         navShade,
         {
@@ -45,6 +50,7 @@ export default async () => {
         },
         "<",
       );
+      tl.to("#navBtnWrap", { opacity: 1, pointerEvents: "all" }, "<");
       tl.set(navMenu, { display: "none", delay: -0.3 });
       tl.set(navShade, { display: "none" }, "<");
       navMenu.setAttribute("data-collapsed", "true");

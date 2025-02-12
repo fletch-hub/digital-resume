@@ -1,7 +1,6 @@
 @import "tailwindcss";
 @import "./fonts.css";
-@import "./_nav.css";
-@import "./_modals.css";
+
 @plugin 'tailwind-scrollbar';
 
 @config "../../tailwind.config.mjs";
@@ -33,6 +32,8 @@
   --breakpoint-xl: 1280px;
   --breakpoint-2xl: 1536px;
 }
+@import "./nav.css";
+@import "./modals.css";
 
 html {
   @apply font-avenir-regular;
@@ -43,7 +44,6 @@ html {
   @apply absolute inset-0 bg-neutral-50 text-neutral-600 text-center overflow-y-scroll scrollbar-none;
   @apply dark:bg-neutral-900 dark:text-neutral-200;
   @apply [&>div:not(:first-of-type)]:mb-10;
-  /* @apply px-2; */
 }
 
 h1 {
