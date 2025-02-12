@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     {{> tags}}
-    <title>Eric Fletcher | Digital Maker</title>
+    <title>{{title}}</title>
     <link rel="stylesheet" href="./src/css/style.css" />
   </head>
   <body>
@@ -12,8 +12,8 @@
       <div id="mainWrap">
         {{> nav}}
         <div id="navShade" style="display: none; opacity: 0"></div>
-        {{> shareModal}} {{> contactModal}} {{> header}} {{> summary}} {{>
-        coverLetter}} {{> toolset}} {{> resume}} {{> portfolio}}
+        {{> shareModal}} {{> contactModal}} {{> privacyModal}} {{> header}} {{>
+        summary}} {{> coverLetter}} {{> toolset}} {{> resume}} {{> portfolio}}
       </div>
     </main>
     <script type="module" src="./src/main.js"></script>
