@@ -1,0 +1,33 @@
+nav {
+  @apply sticky top-0 z-[501] bg-[#fafafaf0] dark:bg-neutral-900;
+}
+.navWrap {
+  @apply relative container flex flex-row items-start justify-between w-full mx-auto text-neutral-600 dark:text-neutral-200  max-w-screen-md  p-0;
+  #navBtnWrap {
+    @apply relative flex flex-row items-center justify-end text-left gap-0 p-0;
+    a,
+    button {
+      @apply cursor-pointer py-6 px-3 last:pr-6;
+    }
+  }
+}
+
+#navMenu {
+  @apply absolute mt-14 top-0 left-0 w-full md:w-[300px] bg-white dark:bg-black text-neutral-600 dark:text-neutral-200 z-[1000];
+  @apply p-0 rounded-2xl border border-neutral-300 dark:border-neutral-600 overflow-hidden;
+  ul {
+    @apply flex flex-col divide-y divide-neutral-300 dark:divide-neutral-600;
+    li {
+      @apply p-4 first:pt-4 last:pb-4;
+      @apply hover:bg-ms-blue hover:text-white cursor-pointer;
+    }
+  }
+}
+
+#hamburgerBtn {
+  @apply p-6;
+}
+
+#navShade {
+  @apply fixed inset-0 bg-white dark:bg-black z-[500];
+}

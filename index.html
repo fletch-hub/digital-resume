@@ -22,8 +22,10 @@
   <body>
     <main>
       <div id="mainWrap">
-        {{> header}} {{> summary}} {{> coverLetter}} {{> toolset}} {{> resume}}
-        {{> portfolio}}
+        {{> nav}}
+        <div id="navShade" style="display: none; opacity: 0"></div>
+        {{> shareModal}} {{> contactModal}} {{> header}} {{> summary}} {{>
+        coverLetter}} {{> toolset}} {{> resume}} {{> portfolio}}
       </div>
     </main>
     <script type="module" src="./src/main.js"></script>

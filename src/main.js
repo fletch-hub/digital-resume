@@ -1,5 +1,7 @@
 import accordions from "./js/accordion.mjs";
 import cycleTitle from "./js/cycleTitle.mjs";
+import nav from "./js/nav.mjs";
+import modals from "./js/modals.mjs";
 
 const accordionsArr = [
   {
@@ -50,4 +52,6 @@ document.addEventListener("DOMContentLoaded", async () => {
 
   accordions(accordionsArr);
   cycleTitle("#headerTitle", titlesArr, 1);
+  nav();
+  modals();
 });

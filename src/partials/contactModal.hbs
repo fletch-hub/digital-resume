@@ -1,0 +1,18 @@
+<div id="contactModal" data-collapsed="true" class="modalWrap" style="display: none;">
+    <div class="modalInner">
+        <h3 class="self-start">Get in touch</h3>
+        <form id="contactForm" name="contact" netlify>
+            <div class="flex flex-col gap-3">
+                <input type="hidden" name="form-name" value="contact" />
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Jane Doe" required />
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" placeholder="janeDoe@email.com" required />
+                <label for="message">Message</label>
+                <textarea id="message" name="message" placeholder="Write your message here" required></textarea>
+                <button type="submit"
+                    class="px-3 py-2 bg-ms-blue text-white rounded-lg font-avenir-bold mt-6">Send</button>
+            </div>
+        </form>
+    </div>
+</div>

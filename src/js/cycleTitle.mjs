@@ -17,7 +17,7 @@ export default async (titleId = "", titleArr = [""], delay = 1) => {
       titleElsArr.push(newTitleEl);
       if (i === 0) {
         newTitleEl.classList.add("active");
-        newTitleEl.style.marginRight = "15px";
+        //newTitleEl.style.marginRight = "15px";
       } else {
         newTitleEl.classList.add("inactive");
       }
@@ -43,7 +43,10 @@ export default async (titleId = "", titleArr = [""], delay = 1) => {
   };
 
   const getWidthOfFirstEl = (firstEl) => {
-    return firstEl.getBoundingClientRect().width;
+    const firstElMargin = parseInt(
+      window.getComputedStyle(firstEl).marginRight,
+    );
+    return firstEl.getBoundingClientRect().width + firstElMargin;
   };
 
   const animateTitles = () => {
@@ -59,8 +62,10 @@ export default async (titleId = "", titleArr = [""], delay = 1) => {
     const tl = gsap.timeline({
       repeat: -1,
       onStart: () => {
-        gsap.set(titleElsArr, { opacity: 0.25 });
+        gsap.to(titleElsArr.slice(1), { opacity: 0.25 });
         gsap.set(firstEl, { opacity: 1 });
+
+        firstElWidth = getWidthOfFirstEl(firstEl);
         exitDown(firstEl);
       },
       onRepeat: () => {
@@ -73,7 +78,7 @@ export default async (titleId = "", titleArr = [""], delay = 1) => {
       titleElsArr,
       { x: 0, y: 0 },
       {
-        x: () => (firstElWidth + 15) * -1,
+        x: () => firstElWidth * -1,
         duration: reducedMotion ? 2.5 : 1.5,
         delay: delay - 0.25,
         ease: "power4.inOut",
@@ -90,5 +95,5 @@ export default async (titleId = "", titleArr = [""], delay = 1) => {
   };
 
   await populateHorizTitles();
-  animateTitles();
+  setTimeout(() => animateTitles(), 1000);
 };

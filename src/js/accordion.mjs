@@ -1,4 +1,5 @@
 import gsap from "gsap";
+import * as gtags from "./gtags.mjs";
 export default (accordionArr = []) => {
   const togglerLinks = document.querySelectorAll("[data-toggle]");
 
@@ -24,7 +25,7 @@ export default (accordionArr = []) => {
         scrollToEl.classList.add("highlight");
         setTimeout(() => {
           scrollToEl.classList.remove("highlight");
-        }, 20000);
+        }, 10000);
 
         mainWrap.scrollBy({
           top: deltaY + 200,
@@ -47,36 +48,37 @@ export default (accordionArr = []) => {
     if (collapsed === "false") {
       caret.style.transform = "rotate(180deg)";
     } else {
-      tray.style.height = "60px";
+      tray.style.height = "80px";
     }
 
-    const handleToggle = () => {
-      console.log("clicked");
-      const tl = gsap.timeline();
-
-      const duration = reducedMotion ? 0 : 0.5;
-
-      if (tray.getAttribute("data-collapsed") === "true") {
-        tl.to(tray, {
-          height: "auto",
-          duration,
-          ease: "power2.inOut",
-        });
-        tl.to(caret, { rotate: 180, duration }, "<");
-        tl.set(tray, { overflow: "visible" });
-        tray.setAttribute("data-collapsed", false);
-      } else {
-        tl.set(tray, { overflow: "hidden" });
-        tl.to(tray, {
-          height: "60px",
-          duration,
-          ease: "power2.inOut",
-        });
-        tl.to(caret, { rotate: 0, duration }, "<");
-        tray.setAttribute("data-collapsed", true);
-      }
-    };
-
-    toggler.addEventListener("click", () => handleToggle());
+    toggler.addEventListener("click", () => handleToggle(tray, caret));
   });
+};
+
+export const handleToggle = (tray, caret) => {
+  console.log("clicked");
+  const tl = gsap.timeline();
+
+  const duration = reducedMotion ? 0 : 0.5;
+
+  if (tray.getAttribute("data-collapsed") === "true") {
+    tl.to(tray, {
+      height: "auto",
+      duration,
+      ease: "power2.inOut",
+    });
+    tl.to(caret, { rotate: 180, duration }, "<");
+    tl.set(tray, { overflow: "visible" });
+    tray.setAttribute("data-collapsed", false);
+    gtags.tabOpened(tray.id.toString());
+  } else {
+    tl.set(tray, { overflow: "hidden" });
+    tl.to(tray, {
+      height: "80px",
+      duration,
+      ease: "power2.inOut",
+    });
+    tl.to(caret, { rotate: 0, duration }, "<");
+    tray.setAttribute("data-collapsed", true);
+  }
 };

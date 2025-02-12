@@ -1,5 +1,7 @@
 @import "tailwindcss";
 @import "./fonts.css";
+@import "./_nav.css";
+@import "./_modals.css";
 @plugin 'tailwind-scrollbar';
 
 @config "../../tailwind.config.mjs";
@@ -20,11 +22,12 @@
   --text-xl: 1.25rem;
   --text-lg: 1.125rem;
   --text-base: 1rem;
-  --text-sm: 0.875rem;
-  --text-xs: 0.75rem;
+  --text-xs: 0.875rem;
+  --text-xxs: 0.75rem;
 
-  --breakpoint-xs: 350px;
-  --breakpoint-sm: 492px;
+  --breakpoint-xxs: 350px;
+  --breakpoint-xs: 492px;
+  --breakpoint-sm: 576px;
   --breakpoint-md: 680px;
   --breakpoint-lg: 992px;
   --breakpoint-xl: 1280px;
@@ -40,19 +43,19 @@ html {
   @apply absolute inset-0 bg-neutral-50 text-neutral-600 text-center overflow-y-scroll scrollbar-none;
   @apply dark:bg-neutral-900 dark:text-neutral-200;
   @apply [&>div:not(:first-of-type)]:mb-10;
-  @apply p-8 sm:p-16;
+  /* @apply px-2; */
 }
 
 h1 {
-  @apply text-5xl sm:text-6xl font-bayon;
+  @apply text-5xl xs:text-6xl font-bayon;
 }
 
 h2 {
-  @apply text-xl sm:text-2xl font-avenir-bold;
+  @apply text-xl xs:text-2xl font-avenir-bold;
 }
 
 h3 {
-  @apply text-lg sm:text-xl font-avenir-demi;
+  @apply text-lg xs:text-xl font-avenir-demi;
 }
 
 h4 {
@@ -67,6 +70,10 @@ a {
   @apply underline;
 }
 
+button {
+  @apply cursor-pointer;
+}
+
 .dropcap {
   @apply first-letter:float-left first-letter:text-9xl first-letter:pr-3 first-letter:font-bayon;
   @apply first-line:uppercase first-line:font-avenir-demi;
@@ -77,7 +84,7 @@ a {
   div {
     @apply divide-y divide-neutral-300 dark:divide-neutral-600;
     div {
-      @apply flex flex-row justify-start items-center gap-3;
+      @apply flex flex-row flex-wrap justify-start items-center gap-1;
       @apply p-4;
       @apply even:bg-neutral-100;
       @apply dark:even:bg-neutral-800;
@@ -147,28 +154,33 @@ a {
 }
 
 .shade {
-  @apply absolute inset-0 block bg-linear-to-t from-neutral-800 dark:from-neutral-900 to-transparent z-100 opacity-50;
+  @apply absolute inset-0 block bg-linear-to-t from-neutral-800 dark:from-neutral-900 to-transparent z-40 opacity-50 h-auto;
 }
 
 .snipe {
-  @apply absolute top-0 left-0 w-[150px] h-auto z-[1000] border-0 drop-shadow-lg;
+  @apply absolute top-0 left-0 w-[150px] h-auto z-[41] border-0 drop-shadow-lg;
+}
+
+.inactive {
+  @apply opacity-25;
 }
 
 .highlight {
-  animation: highlight 10s;
+  animation: highlight 15s ease-out;
 }
 
 [id$="Caret"] {
-  @apply opacity-20;
+  @apply opacity-20 z-50;
   @apply hover:opacity-100 transition-opacity;
 }
 
 @keyframes highlight {
   0% {
-    --color-ms-blue: #53b4ff;
-    box-shadow: 0 0 0.5rem 0.125rem var(--color-ms-blue);
+    --color-ms-blue: #53b4ff50;
+    box-shadow: 0 0 5px 3px var(--color-ms-blue);
   }
   100% {
+    --color-ms-blue: #53b4ff15;
     box-shadow: 0 0 0 0 var(--color-ms-blue);
   }
 }
