@@ -18,6 +18,7 @@ export default async () => {
 
   const infoBtn = document.querySelector("#infoBtn");
   const infoModal = document.querySelector("#infoModal");
+  const githubLink = infoModal.querySelector("#githubLink");
 
   const reducedMotion = window.reducedMotion || false;
 
@@ -87,6 +88,9 @@ export default async () => {
   });
   infoBtn.addEventListener("click", () => {
     handleToggleModal(infoModal);
+  });
+  githubLink.addEventListener("click", () => {
+    gtags.github();
   });
   copyBtn.addEventListener("click", () =>
     copyToClipboard(shareModal, innerShareModal, urlInput, handleToggleModal),
