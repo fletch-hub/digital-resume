@@ -1,0 +1,45 @@
+.griddy {
+  @apply text-left;
+  div {
+    @apply divide-y divide-neutral-300 dark:divide-neutral-600;
+    div {
+      @apply flex flex-row flex-wrap items-center justify-start gap-1;
+      @apply p-4;
+      @apply even:bg-neutral-100;
+      @apply dark:even:bg-neutral-800;
+    }
+  }
+}
+
+.griddy.toolset {
+  @apply grid w-full max-w-screen-md grid-cols-1 divide-y divide-neutral-300 border border-neutral-300 text-left text-sm sm:grid-cols-2 sm:divide-x sm:divide-y-0 dark:divide-neutral-600 dark:border-neutral-600;
+
+  div {
+    @apply min-h-20;
+  }
+}
+
+.flexGriddy {
+  @apply relative flex max-w-screen-md flex-col divide-y divide-neutral-300 border border-neutral-300 text-left [&>div:nth-child(even)]:bg-neutral-100;
+  @apply dark:divide-neutral-600 dark:border-neutral-600 dark:[&>div:nth-child(even)]:bg-neutral-800;
+}
+.label {
+  @apply p-4;
+}
+.content {
+  @apply p-4;
+}
+
+.label {
+  @apply min-w-[75px] basis-1/6 border-r border-r-neutral-300;
+  @apply dark:border-r-neutral-600;
+  p {
+    @apply text-xs;
+  }
+}
+.content {
+  @apply basis-5/6 text-xs;
+  p {
+    @apply text-xs;
+  }
+}
