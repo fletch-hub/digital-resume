@@ -20,7 +20,7 @@ export const tabOpened = (tabSelector) => {
 };
 
 export const linkedIn = () => {
-  gtag("event", "Clicked", {
+  gtag("event", "linkedin_clicked", {
     event_category: "User Interaction",
     event_label: "LinkedIn Clicked",
   });

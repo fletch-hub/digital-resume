@@ -1,0 +1,28 @@
+@theme {
+  --font-avenir-regular: "AvenirNextLTPro-Regular", sans-serif;
+  --font-avenir-demi: "AvenirNextLTPro-Demi", sans-serif;
+  --font-avenir-bold: "AvenirNextLTPro-Bold", sans-serif;
+  --font-bayon: "Bayon-Regular", sans-serif;
+  --font-icons: "mwf-icons", sans-serif;
+  --color-ms-blue: #0078d4;
+
+  --text-9xl: 8rem;
+  --text-7xl: 5.25rem;
+  --text-5xl: 3rem;
+  --text-4xl: 2.25rem;
+  --text-3xl: 1.875rem;
+  --text-2xl: 1.5rem;
+  --text-xl: 1.25rem;
+  --text-lg: 1.125rem;
+  --text-base: 1rem;
+  --text-xs: 0.875rem;
+  --text-xxs: 0.75rem;
+
+  --breakpoint-xxs: 300px;
+  --breakpoint-xs: 492px;
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 680px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+}
