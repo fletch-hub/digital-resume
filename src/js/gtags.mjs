@@ -32,3 +32,29 @@ export const github = () => {
     event_label: "GitHub Clicked",
   });
 };
+
+export const detectScheme = () => {
+  const prefersDark =
+    window.matchMedia &&
+    window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+  gtag("set", {
+    user_properties: {
+      color_scheme: prefersDark ? "dark" : "light",
+    },
+  });
+};
+
+export const detectMotion = () => {
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  window.reducedMotion = reducedMotion.matches;
+  reducedMotion.addEventListener("change", () => {
+    window.reducedMotion = reducedMotion.matches;
+  });
+
+  gtag("set", {
+    user_properties: {
+      reduced_motion: window.reducedMotion ? "true" : "false",
+    },
+  });
+};
