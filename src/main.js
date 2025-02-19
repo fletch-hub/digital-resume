@@ -2,6 +2,7 @@ import accordions from "./js/accordion.mjs";
 import cycleTitle from "./js/cycleTitle.mjs";
 import nav from "./js/nav.mjs";
 import modals from "./js/modals.mjs";
+import darkMode from "./js/darkMode.mjs";
 import * as gtags from "./js/gtags.mjs";
 
 const accordionsArr = [
@@ -48,6 +49,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   gtags.detectMotion();
   gtags.detectScheme();
 
+  darkMode();
   accordions(accordionsArr);
   cycleTitle("#headerTitle", titlesArr, 1);
   nav();

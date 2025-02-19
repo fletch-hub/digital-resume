@@ -33,6 +33,15 @@ export const github = () => {
   });
 };
 
+export const toggledTheme = () => {
+  if (window.themeToggled === "true") return;
+  window.themeToggled = "true";
+  gtag("event", "theme_toggled", {
+    event_category: "User Interaction",
+    event_label: "Theme Toggled",
+  });
+};
+
 export const detectScheme = () => {
   const prefersDark =
     window.matchMedia &&

@@ -1,0 +1,27 @@
+.icon-input {
+  @apply hidden;
+}
+
+.icon-label {
+  @apply cursor-pointer absolute inset-0;
+}
+
+.themeIconWrap {
+  @apply relative overflow-hidden rounded-full h-12 w-12 bg-white dark:bg-neutral-950 drop-shadow-xl;
+}
+
+.themeIcon {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: 55px;
+  fill: #111;
+  transition:
+    left 0.3s ease-in-out,
+    fill 0.3s;
+}
+
+.icon-input:checked + .themeIcon {
+  left: -22px;
+  fill: #fff;
+}

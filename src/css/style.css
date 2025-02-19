@@ -10,6 +10,7 @@
 @import "./nav.css";
 @import "./modals.css";
 @import "./animations.css";
+@import "./toggle.css";
 
 html {
   @apply font-avenir-regular;
@@ -26,7 +27,7 @@ button {
 
 #mainWrap {
   @apply absolute inset-0 scrollbar-none h-full w-full overflow-y-scroll bg-neutral-50 text-center text-neutral-600;
-  @apply dark:bg-neutral-900 dark:text-neutral-200;
+  @apply dark:bg-neutral-900 dark:text-neutral-200 transition-colors duration-500;
 }
 
 .shade {
@@ -34,7 +35,7 @@ button {
 }
 
 .nested-col {
-  @apply flex flex-col items-start gap-3 border-l border-l-neutral-300 pl-4 text-left;
+  @apply flex flex-col items-start gap-3 border-l border-l-neutral-300 dark:border-l-neutral-600 pl-4 text-left;
   &.blurb {
     @apply w-full gap-3 rounded-2xl border border-neutral-300 bg-neutral-100 p-4;
     @apply dark:bg-neutral-800;
