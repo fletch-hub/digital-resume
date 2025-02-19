@@ -7,6 +7,7 @@ import terser from "@rollup/plugin-terser";
 const pageData = {
   "/index.html": {
     title: "Eric Fletcher | Digital Maker",
+    isDev: process.env.NODE_ENV === "development",
   },
 };
 
