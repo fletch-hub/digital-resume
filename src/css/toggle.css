@@ -7,7 +7,7 @@
 }
 
 .themeIconWrap {
-  @apply relative overflow-hidden rounded-full h-12 w-12 bg-white dark:bg-neutral-950 drop-shadow-xl;
+  @apply relative overflow-hidden rounded-full h-12 w-12 bg-white dark:bg-neutral-950;
 }
 
 .themeIcon {
