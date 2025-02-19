@@ -38,10 +38,8 @@ export const detectScheme = () => {
     window.matchMedia &&
     window.matchMedia("(prefers-color-scheme: dark)").matches;
 
-  gtag("set", {
-    user_properties: {
-      color_scheme: prefersDark ? "dark" : "light",
-    },
+  gtag("set", "user_properties", {
+    color_scheme: prefersDark ? "dark" : "light",
   });
 };
 
@@ -52,9 +50,7 @@ export const detectMotion = () => {
     window.reducedMotion = reducedMotion.matches;
   });
 
-  gtag("set", {
-    user_properties: {
-      reduced_motion: window.reducedMotion ? "true" : "false",
-    },
+  gtag("set", "user_properties", {
+    reduced_motion: window.reducedMotion ? "true" : "false",
   });
 };
