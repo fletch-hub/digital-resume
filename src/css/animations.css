@@ -1,14 +1,16 @@
-.highlight {
-  animation: highlight 15s ease-out;
+@media (min-width: 768px) {
+	.highlight {
+		animation: highlight 15s ease-out;
+	}
 }
 
 @keyframes highlight {
-  0% {
-    --color-ms-blue: #53b4ff50;
-    box-shadow: 0 0 5px 3px var(--color-ms-blue);
-  }
-  100% {
-    --color-ms-blue: #53b4ff15;
-    box-shadow: 0 0 0 0 var(--color-ms-blue);
-  }
+	0% {
+		--color-ms-blue: #53b4ff50;
+		box-shadow: 0 0 5px 3px var(--color-ms-blue);
+	}
+	100% {
+		--color-ms-blue: #53b4ff15;
+		box-shadow: 0 0 0 0 var(--color-ms-blue);
+	}
 }

@@ -1,29 +1,29 @@
 {
-  "name": "eric-fletcher-resume",
-  "version": "1.0.0",
-  "license": "UNLICENSED",
-  "scripts": {
-    "dev": "NODE_ENV=development vite",
-    "build": "NODE_ENV=production vite build",
-    "preview": "NODE_ENV=production vite preview"
-  },
-  "devDependencies": {
-    "@prettier/plugin-xml": "^3.4.1",
-    "@rollup/plugin-terser": "^0.4.4",
-    "@tailwindcss/container-queries": "^0.1.1",
-    "@tailwindcss/postcss": "^4.0.7",
-    "@tailwindcss/vite": "^4.0.5",
-    "autoprefixer": "^10.4.20",
-    "postcss": "^8.5.1",
-    "prettier": "^3.4.2",
-    "prettier-plugin-tailwindcss": "^0.6.11",
-    "sass-embedded": "^1.83.4",
-    "tailwind-scrollbar": "^4.0.0",
-    "tailwindcss": "^4.0.3",
-    "vite": "^6.0.11",
-    "vite-plugin-handlebars": "^2.0.0"
-  },
-  "dependencies": {
-    "gsap": "^3.12.7"
-  }
+	"name": "eric-fletcher-resume",
+	"version": "1.0.0",
+	"license": "UNLICENSED",
+	"scripts": {
+		"dev": "NODE_ENV=development vite",
+		"build": "NODE_ENV=production vite build",
+		"preview": "NODE_ENV=production vite preview"
+	},
+	"devDependencies": {
+		"@prettier/plugin-xml": "^3.4.1",
+		"@rollup/plugin-terser": "^0.4.4",
+		"@tailwindcss/container-queries": "^0.1.1",
+		"@tailwindcss/postcss": "^4.0.7",
+		"@tailwindcss/vite": "^4.0.5",
+		"autoprefixer": "^10.4.20",
+		"postcss": "^8.5.1",
+		"prettier": "^3.4.2",
+		"prettier-plugin-tailwindcss": "^0.6.11",
+		"sass-embedded": "^1.83.4",
+		"tailwind-scrollbar": "^4.0.0",
+		"tailwindcss": "^4.0.3",
+		"vite": "^6.0.11",
+		"vite-plugin-handlebars": "^2.0.0"
+	},
+	"dependencies": {
+		"gsap": "^3.12.7"
+	}
 }

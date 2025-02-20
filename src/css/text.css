@@ -1,32 +1,32 @@
 h1 {
-  @apply font-bayon text-5xl xs:text-6xl;
+	@apply font-bayon text-5xl xs:text-6xl;
 }
 
 h2 {
-  @apply font-avenir-bold text-xl xs:text-2xl;
+	@apply font-avenir-bold text-xl xs:text-2xl;
 }
 
 h3 {
-  @apply font-avenir-demi text-lg xs:text-xl;
+	@apply font-avenir-demi text-lg xs:text-xl;
 }
 
 h4 {
-  @apply font-avenir-bold text-sm;
+	@apply font-avenir-bold text-sm;
 }
 
 p {
-  @apply font-avenir-regular leading-relaxed;
+	@apply font-avenir-regular leading-relaxed;
 }
 
 a {
-  @apply underline;
+	@apply underline;
 }
 
 .dropcap {
-  @apply first-letter:float-left first-letter:pr-3 first-letter:font-bayon first-letter:text-9xl;
-  @apply first-line:font-avenir-demi first-line:uppercase;
+	@apply first-letter:float-left first-letter:pr-3 first-letter:font-bayon first-letter:text-9xl;
+	@apply first-line:font-avenir-demi first-line:uppercase;
 }
 
 .title {
-  @apply mr-[15px] font-avenir-bold;
+	@apply mr-[15px] font-avenir-bold;
 }

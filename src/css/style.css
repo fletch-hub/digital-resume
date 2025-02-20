@@ -13,58 +13,58 @@
 @import "./toggle.css";
 
 html {
-  @apply font-avenir-regular;
-  text-wrap: pretty;
+	@apply font-avenir-regular;
+	text-wrap: pretty;
 }
 
 section {
-  @apply relative mx-auto mb-8 flex w-full max-w-screen-md flex-col gap-6 rounded-2xl p-6 text-left;
+	@apply relative mx-auto mb-8 flex w-full max-w-screen-md flex-col gap-6 rounded-2xl p-6 text-left;
 }
 
 button {
-  @apply cursor-pointer;
+	@apply cursor-pointer;
 }
 
 #mainWrap {
-  @apply absolute inset-0 scrollbar-none h-full w-full overflow-y-scroll bg-neutral-50 text-center text-neutral-600;
-  @apply dark:bg-neutral-900 dark:text-neutral-200 transition-colors duration-500;
+	@apply absolute inset-0 scrollbar-none h-full w-full overflow-y-scroll bg-neutral-50 text-center text-neutral-600;
+	@apply transition-colors duration-500 dark:bg-neutral-900 dark:text-neutral-200;
 }
 
 .shade {
-  @apply absolute inset-0 z-40 block h-auto bg-linear-to-t from-neutral-800 to-transparent opacity-50 dark:from-neutral-900;
+	@apply absolute inset-0 z-40 block h-auto bg-linear-to-t from-neutral-800 to-transparent opacity-50 dark:from-neutral-900;
 }
 
 .nested-col {
-  @apply flex flex-col items-start gap-3 border-l border-l-neutral-300 dark:border-l-neutral-600 pl-4 text-left;
-  &.blurb {
-    @apply w-full gap-3 rounded-2xl border border-neutral-300 bg-neutral-100 p-4;
-    @apply dark:bg-neutral-800;
-  }
+	@apply flex flex-col items-start gap-3 border-l border-l-neutral-300 pl-4 text-left dark:border-l-neutral-600;
+	&.blurb {
+		@apply w-full gap-3 rounded-2xl border border-neutral-300 bg-neutral-100 p-4;
+		@apply dark:bg-neutral-800;
+	}
 }
 
 .toggler {
-  @apply w-full cursor-pointer border-b border-b-neutral-300 pb-3;
-  @apply dark:border-b-neutral-600;
-  :hover {
-    [id$="Caret"] {
-      @apply opacity-20;
-      @apply opacity-100 transition-opacity;
-    }
-  }
+	@apply w-full cursor-pointer border-b border-b-neutral-300 pb-3;
+	@apply dark:border-b-neutral-600;
+	:hover {
+		[id$="Caret"] {
+			@apply opacity-20;
+			@apply opacity-100 transition-opacity;
+		}
+	}
 }
 
 [id$="Caret"] {
-  @apply z-50 opacity-20;
+	@apply z-50 opacity-20;
 }
 
 .app-icon {
-  @apply h-8 w-8 border-0;
+	@apply h-8 w-8 border-0;
 }
 
 .snipe {
-  @apply absolute top-0 left-0 z-[41] h-auto w-[150px] border-0 drop-shadow-lg;
+	@apply absolute top-0 left-0 z-[41] h-auto w-[150px] border-0 drop-shadow-lg;
 }
 
 .inactive {
-  @apply opacity-25;
+	@apply opacity-25;
 }

@@ -1,6 +1,7 @@
 import gsap from "gsap";
 import { handleToggle } from "./accordion.mjs";
 import * as gtags from "./gtags.mjs";
+
 export default async () => {
 	const navMenuToggler = document.querySelector("#hamburgerBtn");
 	const navMenu = document.querySelector("#navMenu");
@@ -68,7 +69,6 @@ export default async () => {
 			}
 		}
 	});
-
 	////
 
 	const navLinks = document.querySelectorAll("[data-nav-link]");
