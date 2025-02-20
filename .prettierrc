@@ -5,5 +5,14 @@
 	"printWidth": 100,
 	"plugins": ["prettier-plugin-tailwindcss"],
 	"tailwindStylesheet": "./src/css/style.css",
-	"tailwindConfig": "./tailwind.config.mjs"
+	"tailwindConfig": "./tailwind.config.mjs",
+	"overrides": [
+		{
+			"files": "*.hbs",
+			"options": {
+				"singleQuote": false,
+				"parser": "glimmer"
+			}
+		}
+	]
 }

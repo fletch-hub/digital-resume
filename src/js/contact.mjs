@@ -21,7 +21,7 @@ const handleSubmit = async (e) => {
 		showSuccess();
 		contactForm.reset();
 	} catch (err) {
-		showError();
+		showError(err);
 	}
 };
 
@@ -41,7 +41,7 @@ const showSuccess = () => {
 	}, 3000);
 };
 
-const showError = () => {
+const showError = (err) => {
 	gtags.error(err, "Contact form failed to submit");
 	const contactModal = document.querySelector("#contactModal");
 	const innerContactModal = contactModal.querySelector(".modalInner");

@@ -16,7 +16,7 @@ export default async (shareModal, innerShareModal, inputEl) => {
 		}, 3000);
 	};
 
-	const showError = () => {
+	const showError = (err) => {
 		gtags.error(err, "Clipboard failed to copy");
 		const copiedAlertEl = document.createElement("div");
 		copiedAlertEl.classList.add("modalAlert");
@@ -37,6 +37,6 @@ export default async (shareModal, innerShareModal, inputEl) => {
 		await navigator.clipboard.writeText(inputEl.value);
 		showSuccess();
 	} catch (err) {
-		showError();
+		showError(err);
 	}
 };

@@ -1,3 +1,5 @@
+/* global gtag */
+
 export const navigated = (navSelector) => {
 	gtag("event", `navMenu_${navSelector}`, {
 		event_category: "User Interaction",

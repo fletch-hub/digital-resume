@@ -17,7 +17,7 @@ export default () => {
 	}
 
 	const toggleTheme = () => {
-		let isChecked = toggle.checked;
+		const isChecked = toggle.checked;
 
 		if (isChecked) {
 			body.classList.add("dark");

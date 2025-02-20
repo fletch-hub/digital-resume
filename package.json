@@ -5,15 +5,23 @@
 	"scripts": {
 		"dev": "NODE_ENV=development vite",
 		"build": "NODE_ENV=production vite build",
-		"preview": "NODE_ENV=production vite preview"
+		"preview": "NODE_ENV=production vite preview",
+		"lint": "eslint . -c eslint.config.mjs -f node_modules/eslint-formatter-html/index.js -o lint-report.html",
+		"lint:fix": "yarn lint --fix"
 	},
 	"devDependencies": {
+		"@eslint/js": "^9.20.0",
 		"@prettier/plugin-xml": "^3.4.1",
 		"@rollup/plugin-terser": "^0.4.4",
 		"@tailwindcss/container-queries": "^0.1.1",
 		"@tailwindcss/postcss": "^4.0.7",
 		"@tailwindcss/vite": "^4.0.5",
 		"autoprefixer": "^10.4.20",
+		"eslint": "^9.20.1",
+		"eslint-config-prettier": "^10.0.1",
+		"eslint-formatter-html": "^2.7.2",
+		"eslint-plugin-prettier": "^5.2.3",
+		"globals": "^16.0.0",
 		"postcss": "^8.5.1",
 		"prettier": "^3.4.2",
 		"prettier-plugin-tailwindcss": "^0.6.11",

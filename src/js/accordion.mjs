@@ -9,7 +9,7 @@ export default (accordionArr = []) => {
 		const toggler = document.querySelector(toggleId);
 		const caret = document.querySelector(caretId);
 
-		let collapsed = tray.getAttribute("data-collapsed");
+		const collapsed = tray.getAttribute("data-collapsed");
 
 		if (collapsed === "false") {
 			caret.style.transform = "rotate(180deg)";
