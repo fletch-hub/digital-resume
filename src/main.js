@@ -39,7 +39,7 @@ const titlesArr = [
 	"Creative Director",
 	"Frontend Developer",
 	"Sr. Art Director",
-	"Print / CPG Designer",
+	"Print / Packaging Designer",
 	"UX / UI Designer",
 	"Motion Designer",
 	"Presentation Designer",
