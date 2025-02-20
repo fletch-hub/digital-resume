@@ -42,7 +42,7 @@ const titlesArr = [
 	"Print / CPG Designer",
 	"UX / UI Designer",
 	"Motion Designer",
-	"Video Editor",
+	"Presentation Designer",
 	"3D Modeler",
 ];
 
