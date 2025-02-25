@@ -10,18 +10,20 @@
 	@apply relative h-12 w-12 overflow-hidden rounded-full bg-white dark:bg-neutral-950;
 }
 
+.svgFill {
+	@apply fill-[#111];
+	@apply dark:fill-[#fff];
+	transition: fill 0.3s;
+}
+
 .themeIcon {
 	position: absolute;
 	top: 14px;
 	left: 14px;
 	width: 55px;
-	fill: #111;
-	transition:
-		left 0.3s ease-in-out,
-		fill 0.3s;
+	transition: left 0.3s ease-in-out;
 }
 
 .icon-input:checked + .themeIcon {
 	left: -22px;
-	fill: #fff;
 }
