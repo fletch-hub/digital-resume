@@ -4,6 +4,7 @@ import nav from "./js/nav.mjs";
 import modals from "./js/modals.mjs";
 import darkMode from "./js/darkMode.mjs";
 import contact from "./js/contact.mjs";
+import scrollEffects from "./js/scrollEffects.mjs";
 import * as gtags from "./js/gtags.mjs";
 
 const accordionsArr = [
@@ -56,4 +57,5 @@ document.addEventListener("DOMContentLoaded", async () => {
 	cycleTitle("#headerTitle", titlesArr, 1);
 	nav();
 	modals();
+	scrollEffects();
 });

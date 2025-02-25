@@ -99,7 +99,7 @@ export default async () => {
 			}, 10000);
 
 			mainWrap.scrollBy({
-				top: scrollUp ? deltaY - 40 : deltaY,
+				top: scrollUp ? deltaY - 70 : deltaY,
 				left: 0,
 				behavior: reducedMotion ? "instant" : "smooth",
 			});

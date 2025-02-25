@@ -23,6 +23,7 @@ export default (accordionArr = []) => {
 
 export const handleToggle = (tray, caret) => {
 	const reducedMotion = window.reducedMotion || false;
+
 	const tl = gsap.timeline();
 
 	const duration = reducedMotion ? 0 : 0.5;
