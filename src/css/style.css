@@ -11,6 +11,7 @@
 @import "./modals.css";
 @import "./animations.css";
 @import "./toggle.css";
+@import "./toolset.css";
 
 html {
 	@apply font-avenir-regular;

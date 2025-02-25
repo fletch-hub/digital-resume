@@ -3,6 +3,7 @@
 	--font-avenir-demi: "AvenirNextLTPro-Demi", sans-serif;
 	--font-avenir-bold: "AvenirNextLTPro-Bold", sans-serif;
 	--font-bayon: "Bayon-Regular", sans-serif;
+	--font-italic: "Playfair-Italic", serif;
 	--font-icons: "mwf-icons", sans-serif;
 	--color-ms-blue: #0078d4;
 
@@ -16,7 +17,8 @@
 	--text-lg: 1.125rem;
 	--text-base: 1rem;
 	--text-xs: 0.875rem;
-	--text-xxs: 0.75rem;
+	--text-2xs: 0.75rem;
+	--text-3xs: 0.575rem;
 
 	--breakpoint-xxs: 300px;
 	--breakpoint-xs: 492px;

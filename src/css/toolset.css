@@ -1,0 +1,27 @@
+.toolsetWrap {
+	/* @apply flex flex-row justify-between flex-wrap gap-6; */
+	/* @apply grid grid-cols-1 md:grid-cols-2 gap-6; */
+	@apply columns-1 md:columns-2 gap-6 space-y-6;
+}
+
+.toolsetBox {
+	@apply flex flex-col gap-3 p-8 rounded-2xl bg-neutral-100 dark:bg-neutral-800;
+	/* @apply md:w-48/100; */
+	@apply break-inside-avoid;
+}
+
+.toolBlurb {
+	@apply text-2xs leading-snug;
+}
+
+.pillWrap {
+	@apply flex flex-row gap-2 flex-wrap;
+	p {
+		@apply text-3xs font-bold text-neutral-800 bg-neutral-200 rounded-full py-1 px-2 grid place-items-center text-center;
+		@apply dark:text-neutral-300 dark:bg-neutral-700;
+	}
+}
+
+.secondarySkill {
+	@apply opacity-50;
+}
