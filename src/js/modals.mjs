@@ -64,7 +64,7 @@ export default async () => {
 
 	const infoBtn = document.querySelector("#infoBtn");
 	const infoModal = document.querySelector("#infoModal");
-	const githubLink = infoModal.querySelector("#githubLink");
+	const githubLinks = infoModal.querySelectorAll(".githubLink");
 
 	const modalWraps = document.querySelectorAll(".modalWrap");
 
@@ -88,11 +88,13 @@ export default async () => {
 	infoBtn.addEventListener("click", () => {
 		handleToggleModal(infoModal);
 	});
-	githubLink.addEventListener("click", () => {
-		gtags.github();
-	});
+
 	copyBtn.addEventListener("click", () => copyToClipboard(shareModal, innerShareModal, urlInput));
 	contactBtn.addEventListener("click", () => handleToggleModal(contactModal));
+
+	githubLinks.forEach((link) => {
+		link.addEventListener("click", () => gtags.github());
+	});
 
 	closeModalButtons.forEach((btn) => {
 		btn.addEventListener("click", () => {
