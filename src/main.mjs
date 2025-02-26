@@ -1,3 +1,6 @@
+import gsap from "gsap";
+import ScrollTrigger from "gsap/ScrollTrigger";
+
 import accordions from "./js/accordion.mjs";
 import cycleTitle from "./js/cycleTitle.mjs";
 import nav from "./js/nav.mjs";
@@ -48,12 +51,14 @@ const titlesArr = [
 ];
 
 document.addEventListener("DOMContentLoaded", async () => {
+	gsap.registerPlugin(ScrollTrigger);
+
 	gtags.detectMotion();
 	gtags.detectScheme();
 
 	darkMode();
 	contact();
-	accordions(accordionsArr);
+	accordions(ScrollTrigger, accordionsArr);
 	cycleTitle("#headerTitle", titlesArr, 1);
 	nav();
 	modals();

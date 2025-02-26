@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import * as gtags from "./gtags.mjs";
 
-export default (accordionArr = []) => {
+export default (ScrollTrigger, accordionArr = []) => {
 	accordionArr.map((accordion) => {
 		const { trayId, toggleId, caretId } = accordion;
 
@@ -18,6 +18,11 @@ export default (accordionArr = []) => {
 		}
 
 		toggler.addEventListener("click", () => handleToggle(tray, caret));
+		const resizeObserver = new ResizeObserver(() => {
+			ScrollTrigger.refresh();
+		});
+
+		resizeObserver.observe(tray);
 	});
 };
 

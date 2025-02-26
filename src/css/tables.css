@@ -17,7 +17,7 @@
 	}
 }
 .content {
-	@apply basis-5/6 text-xs;
+	@apply basis-5/6 text-xs overflow-x-scroll scrollbar-none;
 	p {
 		@apply text-xs;
 	}

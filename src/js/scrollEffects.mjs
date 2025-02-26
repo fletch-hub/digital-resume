@@ -1,10 +1,7 @@
 import gsap from "gsap";
-import ScrollTrigger from "gsap/ScrollTrigger";
 
 export default () => {
 	const reducedMotion = window.reducedMotion || false;
-
-	gsap.registerPlugin(ScrollTrigger);
 
 	const summarySection = document.querySelector("#summaryToggle");
 	setTimeout(() => summarySection.click(), 100);
@@ -25,15 +22,15 @@ export default () => {
 			{
 				y: 0,
 				opacity: 1,
-				stagger: 0.2,
+				stagger: 0.3,
 				duration: 3,
-				ease: "power4.inOut",
+				ease: "power2.inOut",
 				scrollTrigger: {
 					scroller: "#mainWrap",
 					trigger: el,
-					start: "top center",
-					end: "bottom 90%",
-					scrub: 3,
+					start: "top 90%",
+					end: "bottom 110%",
+					scrub: 1,
 					...opts,
 				},
 			},

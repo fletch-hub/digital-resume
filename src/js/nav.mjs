@@ -98,6 +98,8 @@ export default async () => {
 				scrollToEl.classList.remove("highlight");
 			}, 10000);
 
+			console.log("deltaY", deltaY);
+
 			mainWrap.scrollBy({
 				top: scrollUp ? deltaY - 70 : deltaY,
 				left: 0,
