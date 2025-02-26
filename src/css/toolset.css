@@ -11,13 +11,13 @@
 }
 
 .toolBlurb {
-	@apply text-2xs leading-snug;
+	@apply text-xs;
 }
 
 .pillWrap {
 	@apply flex flex-row gap-2 flex-wrap;
 	p {
-		@apply text-3xs font-bold text-neutral-800 bg-neutral-200 rounded-full py-1 px-2 grid place-items-center text-center;
+		@apply text-2xs font-bold text-neutral-800 bg-neutral-200 rounded-full py-1 px-2 grid place-items-center text-center;
 		@apply dark:text-neutral-300 dark:bg-neutral-700;
 	}
 }
