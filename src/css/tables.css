@@ -1,4 +1,4 @@
-.flexGriddy {
+.portfolioItem {
 	@apply relative flex max-w-screen-md flex-col divide-y divide-neutral-300 border border-neutral-300 text-left [&>div:nth-child(even)]:bg-neutral-100;
 	@apply dark:divide-neutral-600 dark:border-neutral-600 dark:[&>div:nth-child(even)]:bg-neutral-800;
 }
@@ -17,8 +17,7 @@
 	}
 }
 .content {
-	@apply basis-5/6 text-xs overflow-hidden;
-
+	@apply basis-5/6 text-xs overflow-x-scroll scrollbar-none;
 	p {
 		@apply text-xs;
 	}

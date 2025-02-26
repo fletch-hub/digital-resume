@@ -1,7 +1,7 @@
 import gsap from "gsap";
 import * as gtags from "./gtags.mjs";
 
-export default (accordionArr = []) => {
+export default (ScrollTrigger, accordionArr = []) => {
 	accordionArr.map((accordion) => {
 		const { trayId, toggleId, caretId } = accordion;
 
@@ -18,11 +18,23 @@ export default (accordionArr = []) => {
 		}
 
 		toggler.addEventListener("click", () => handleToggle(tray, caret));
+
+		//debounce ScrollTrigger refresh so it doesn't interfere with the scrollBy calculations during navigation from the nav menu
+		let resizeTimeout;
+		const resizeObserver = new ResizeObserver(() => {
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(() => {
+				ScrollTrigger.refresh();
+			}, 300);
+		});
+
+		resizeObserver.observe(tray);
 	});
 };
 
 export const handleToggle = (tray, caret) => {
 	const reducedMotion = window.reducedMotion || false;
+
 	const tl = gsap.timeline();
 
 	const duration = reducedMotion ? 0 : 0.5;

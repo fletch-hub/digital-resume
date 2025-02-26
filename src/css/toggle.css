@@ -18,12 +18,12 @@
 
 .themeIcon {
 	position: absolute;
-	top: 14px;
-	left: 14px;
+	top: 17px;
+	left: 17px;
 	width: 55px;
 	transition: left 0.3s ease-in-out;
 }
 
 .icon-input:checked + .themeIcon {
-	left: -22px;
+	left: -20px;
 }
