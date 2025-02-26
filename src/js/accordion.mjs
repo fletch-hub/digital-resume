@@ -18,8 +18,14 @@ export default (ScrollTrigger, accordionArr = []) => {
 		}
 
 		toggler.addEventListener("click", () => handleToggle(tray, caret));
+
+		//debounce ScrollTrigger refresh so it doesn't interfere with the scrollBy calculations during navigation from the nav menu
+		let resizeTimeout;
 		const resizeObserver = new ResizeObserver(() => {
-			ScrollTrigger.refresh();
+			clearTimeout(resizeTimeout);
+			resizeTimeout = setTimeout(() => {
+				ScrollTrigger.refresh();
+			}, 300);
 		});
 
 		resizeObserver.observe(tray);

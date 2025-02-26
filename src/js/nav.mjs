@@ -91,17 +91,13 @@ export default async () => {
 			const scrollToElY = scrollToEl.getBoundingClientRect().top;
 			const deltaY = scrollToElY - linkY;
 
-			const scrollUp = deltaY < 0;
-
 			scrollToEl.classList.add("highlight");
 			setTimeout(() => {
 				scrollToEl.classList.remove("highlight");
 			}, 10000);
 
-			console.log("deltaY", deltaY);
-
 			mainWrap.scrollBy({
-				top: scrollUp ? deltaY - 70 : deltaY,
+				top: deltaY - window.innerHeight * 0.05,
 				left: 0,
 				behavior: reducedMotion ? "instant" : "smooth",
 			});
