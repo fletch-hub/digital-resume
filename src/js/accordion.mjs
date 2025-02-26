@@ -14,7 +14,7 @@ export default (accordionArr = []) => {
 		if (collapsed === "false") {
 			caret.style.transform = "rotate(180deg)";
 		} else {
-			tray.style.height = "80px";
+			tray.style.height = "90px";
 		}
 
 		toggler.addEventListener("click", () => handleToggle(tray, caret));
@@ -40,7 +40,7 @@ export const handleToggle = (tray, caret) => {
 	} else {
 		tl.set(tray, { overflow: "hidden" });
 		tl.to(tray, {
-			height: "80px",
+			height: "90px",
 			duration,
 			ease: "power2.inOut",
 		});

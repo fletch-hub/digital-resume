@@ -14,6 +14,7 @@
 @import "./toolset.css";
 
 html {
+	font-size: 18px;
 	@apply font-avenir-regular;
 	text-wrap: pretty;
 }
@@ -48,7 +49,6 @@ button {
 	@apply dark:border-b-neutral-600;
 	:hover {
 		[id$="Caret"] {
-			@apply opacity-20;
 			@apply opacity-100 transition-opacity;
 		}
 	}

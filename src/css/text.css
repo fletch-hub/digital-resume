@@ -11,7 +11,7 @@ h3 {
 }
 
 h4 {
-	@apply font-avenir-bold text-sm;
+	@apply font-avenir-bold text-base;
 }
 
 p {
