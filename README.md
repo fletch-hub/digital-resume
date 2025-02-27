@@ -1,6 +1,8 @@
 # Info
 
-I built this site using Vite, Tailwind, Handlebars, and vanilla JavaScript.
+[https://ericfletcher.io](https://ericfletcher.io)
+
+I built this site using Vite, Tailwind, Handlebars, GSAP, and vanilla JavaScript.
 
 ### Todos
 

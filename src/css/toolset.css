@@ -16,12 +16,13 @@
 
 .pillWrap {
 	@apply flex flex-row gap-2 flex-wrap;
-	p {
-		@apply text-2xs font-avenir-demi text-neutral-800 bg-neutral-200 rounded-full py-1 px-2 grid place-items-center text-center;
-		@apply dark:text-neutral-300 dark:bg-neutral-700;
-	}
 }
 
-.secondarySkill {
-	@apply opacity-50;
+.pillWrap p {
+	@apply text-2xs font-avenir-demi text-neutral-600 bg-neutral-200 rounded-full py-1 px-2 grid place-items-center text-center;
+	@apply dark:text-neutral-300 dark:bg-neutral-700;
+	&.secondarySkill {
+		@apply text-neutral-400 bg-neutral-200;
+		@apply dark:text-neutral-400 dark:bg-neutral-700;
+	}
 }
