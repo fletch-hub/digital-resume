@@ -14,6 +14,9 @@ const pageData = {
 export default defineConfig({
 	build: {
 		rollupOptions: {
+			input: {
+				index: resolve(__dirname, "index.html"),
+			},
 			output: {
 				entryFileNames: "assets/[name]_[hash].js",
 				assetFileNames: "assets/[name]_[hash][extname]",
