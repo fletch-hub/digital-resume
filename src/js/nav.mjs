@@ -83,7 +83,7 @@ export default async () => {
 
 		if (scrollToEl) {
 			if (!scrollToElIsVisible) {
-				handleToggle(scrollToEl, caret);
+				handleToggle(scrollToEl, caret, { tracking: false });
 			}
 
 			const mainWrap = document.querySelector("#mainWrap");

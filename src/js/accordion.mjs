@@ -1,7 +1,14 @@
 import gsap from "gsap";
 import * as gtags from "./gtags.mjs";
 
+const collapsedTogglerHeight = "90px";
+
 export default (ScrollTrigger, accordionArr = []) => {
+	// animate the summary section on load, don't tag it
+	const summarySection = document.querySelector("#summary");
+	const summarySectionCaret = document.querySelector("#summaryCaret");
+	setTimeout(() => handleToggle(summarySection, summarySectionCaret, { tracking: false }), 100);
+
 	accordionArr.map((accordion) => {
 		const { trayId, toggleId, caretId } = accordion;
 
@@ -14,12 +21,15 @@ export default (ScrollTrigger, accordionArr = []) => {
 		if (collapsed === "false") {
 			caret.style.transform = "rotate(180deg)";
 		} else {
-			tray.style.height = "90px";
+			tray.style.height = collapsedTogglerHeight;
 		}
 
 		toggler.addEventListener("click", () => handleToggle(tray, caret));
 
-		//debounce ScrollTrigger refresh so it doesn't interfere with the scrollBy calculations during navigation from the nav menu
+		// refresh the ScrollTrigger when the tray is resized so the heights get recalculated
+
+		// debounce it so it doesn't interfere with the scrollBy calculations during navigation from the nav menu
+
 		let resizeTimeout;
 		const resizeObserver = new ResizeObserver(() => {
 			clearTimeout(resizeTimeout);
@@ -32,8 +42,10 @@ export default (ScrollTrigger, accordionArr = []) => {
 	});
 };
 
-export const handleToggle = (tray, caret) => {
+export const handleToggle = (tray, caret, opts = {}) => {
 	const reducedMotion = window.reducedMotion || false;
+
+	const tracking = opts.tracking || true;
 
 	const tl = gsap.timeline();
 
@@ -48,11 +60,13 @@ export const handleToggle = (tray, caret) => {
 		tl.to(caret, { rotate: 180, duration }, "<");
 		tl.set(tray, { overflow: "visible" });
 		tray.setAttribute("data-collapsed", false);
-		gtags.tabOpened(tray.id.toString());
+		if (tracking) {
+			gtags.tabOpened(tray.id.toString());
+		}
 	} else {
 		tl.set(tray, { overflow: "hidden" });
 		tl.to(tray, {
-			height: "90px",
+			height: collapsedTogglerHeight,
 			duration,
 			ease: "power2.inOut",
 		});

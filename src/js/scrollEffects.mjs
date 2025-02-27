@@ -3,9 +3,6 @@ import gsap from "gsap";
 export default () => {
 	const reducedMotion = window.reducedMotion || false;
 
-	const summarySection = document.querySelector("#summaryToggle");
-	setTimeout(() => summarySection.click(), 100);
-
 	const scrollEls = gsap.utils.toArray(
 		".toggler, .job, .role, .highlight, .nested-col p, .portfolioItem, #coverLetter p",
 	);
