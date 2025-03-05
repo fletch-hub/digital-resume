@@ -45,7 +45,7 @@ export default (ScrollTrigger, accordionArr = []) => {
 export const handleToggle = (tray, caret, opts = {}) => {
 	const reducedMotion = window.reducedMotion || false;
 
-	const tracking = opts.tracking || true;
+	const tracking = opts.tracking ?? true;
 
 	const tl = gsap.timeline();
 
