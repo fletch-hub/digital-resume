@@ -1,6 +1,6 @@
 import gsap from "gsap";
 export default async (titleId = "", titleArr = [""], delay = 1) => {
-	const reducedMotion = window.reducedMotion || false;
+	const reducedMotion = window.reducedMotion ?? false;
 
 	const title = document.querySelector(titleId);
 

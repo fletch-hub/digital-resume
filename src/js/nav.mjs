@@ -7,7 +7,7 @@ export default async () => {
 	const navMenu = document.querySelector("#navMenu");
 	const navShade = document.querySelector("#navShade");
 	const linkedInBtn = document.querySelector("#linkedInBtn");
-	const reducedMotion = window.reducedMotion || false;
+	const reducedMotion = window.reducedMotion ?? false;
 
 	const handleToggleMenu = () => {
 		const tl = gsap.timeline();

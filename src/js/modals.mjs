@@ -5,7 +5,7 @@ import copyToClipboard from "./clipboard.mjs";
 
 export const handleToggleModal = async (modalEl) => {
 	const navShade = document.querySelector("#navShade");
-	const reducedMotion = window.reducedMotion || false;
+	const reducedMotion = window.reducedMotion ?? false;
 	const tl = gsap.timeline();
 	const duration = reducedMotion ? 0 : 0.5;
 

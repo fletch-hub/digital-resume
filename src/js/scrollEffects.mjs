@@ -1,7 +1,7 @@
 import gsap from "gsap";
 
 export default () => {
-	const reducedMotion = window.reducedMotion || false;
+	const reducedMotion = window.reducedMotion ?? false;
 
 	const scrollEls = gsap.utils.toArray(
 		".toggler, .job, .role, .highlight, .nested-col p, .portfolioItem, #coverLetter p",
