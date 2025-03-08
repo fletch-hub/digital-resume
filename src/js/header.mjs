@@ -29,6 +29,7 @@ export default () => {
 			y: 30,
 		},
 		{
+			delay: 0.5,
 			duration: 1.5,
 			opacity: 1,
 			y: 0,

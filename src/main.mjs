@@ -52,6 +52,9 @@ const accordionsArr = [
 // ];
 
 document.addEventListener("DOMContentLoaded", async () => {
+	const loadShade = document.querySelector("#loadShade");
+	loadShade.style.display = "none";
+
 	gsap.registerPlugin(ScrollTrigger);
 
 	gtags.detectMotion();

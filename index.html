@@ -6,10 +6,32 @@
 		{{> tags}}
 		<title>{{title}}</title>
 		<link rel="stylesheet" href="./src/css/style.css" />
+		<style>
+			#loadShade {
+				position: fixed;
+				inset: 0;
+				display: grid;
+				place-items: center;
+				z-index: 1000;
+				background-color: white;
+			}
+
+			#loadShade img {
+				width: 30px;
+				height: 30px;
+			}
+
+			@media (prefers-color-scheme: dark) {
+				#loadShade {
+					background-color: black;
+				}
+			}
+		</style>
 	</head>
 	<body class="">
 		<main>
 			<div id="mainWrap">
+				<div id="loadShade"><img src="/icons/loader.gif" alt="loading..." /></div>
 				{{> nav}} {{> header}}
 				<div id="navShade" style="display: none; opacity: 0"></div>
 				{{> shareModal}} {{> contactModal}} {{> infoModal}} {{> summary}} {{> toolset}} {{>
