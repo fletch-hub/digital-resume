@@ -7,18 +7,17 @@ export class Animations {
 	}
 
 	animateHeader() {
-		const reducedMotion = window.reducedMotion ?? false;
-
 		const headerEl = document.querySelector("#headerBg");
 		const headShot = document.querySelector("#headshot");
 
 		const tl = gsap.timeline();
-		const duration = reducedMotion ? 0 : 2;
+		const duration = this.reducedMotion ? 0 : 2;
 		tl.fromTo(
 			headerEl,
 			{
 				scaleX: 0,
 				opacity: 1,
+
 				transformOrigin: "left",
 			},
 			{
@@ -60,13 +59,20 @@ export class Animations {
 			},
 			"<",
 		);
+		tl.to(
+			headerEl,
+			{
+				borderRadius: "1rem",
+				duration: 1,
+				ease: "power2.out",
+			},
+			"<",
+		);
 	}
 
 	toggleNavMenu(navMenu, navShade, isClosed) {
-		const reducedMotion = window.reducedMotion ?? false;
-
 		const tl = gsap.timeline();
-		const duration = reducedMotion ? 0 : 0.5;
+		const duration = this.reducedMotion ? 0 : 0.5;
 
 		if (isClosed) {
 			tl.set(navMenu, { display: "block" });
