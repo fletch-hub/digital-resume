@@ -19,7 +19,7 @@ export class UX {
 		this.setupModals();
 		this.setupClipboard();
 		this.setupContactForm();
-		this.setupExternalLinks(); // Add this line
+		this.setupExternalLinks();
 
 		//open the summary tab on load
 		const summarySection = document.querySelector("#summary");
@@ -38,14 +38,12 @@ export class UX {
 		const toggle = document.querySelector("#toggleIcon");
 		const body = document.querySelector("body");
 
-		// Check localStorage or system preference:
 		let theme = localStorage.getItem("theme");
 		if (!theme) {
 			theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
 			localStorage.setItem("theme", theme);
 		}
 
-		// Reflect theme choice in the UI:
 		if (theme === "dark") {
 			toggle.checked = true;
 			body.classList.add("dark");
@@ -54,7 +52,6 @@ export class UX {
 			body.classList.remove("dark");
 		}
 
-		// Add event listener:
 		toggle.addEventListener("change", () => {
 			const isDark = toggle.checked;
 			if (isDark) {
@@ -65,19 +62,16 @@ export class UX {
 				localStorage.setItem("theme", "light");
 			}
 
-			// Fire analytics event the FIRST time user toggles theme
 			this.analytics.toggledTheme();
 		});
 	}
 
 	setupAccordions() {
-		// Loop each accordion
 		this.accordionsArr.forEach((acc) => {
 			const tray = document.querySelector(acc.trayId);
 			const toggler = document.querySelector(acc.toggleId);
 			const caret = document.querySelector(acc.caretId);
 
-			// If needed, handle initial “collapsed” vs. “open”:
 			const collapsed = tray.getAttribute("data-collapsed");
 			if (collapsed === "false") {
 				caret.style.transform = "rotate(180deg)";
@@ -85,18 +79,15 @@ export class UX {
 				tray.style.height = this.animations.collapsedAccordionHeight;
 			}
 
-			// When user clicks, call the Animations class:
 			toggler.addEventListener("click", () => {
 				const isCollapsed = tray.getAttribute("data-collapsed") === "true";
 				this.animations.toggleAccordion(tray, caret, isCollapsed, {
 					onTabOpened: (trayId) => {
-						// If you need analytics for opening:
 						this.analytics.tabOpened(trayId);
 					},
 				});
 			});
 
-			// Also set up a ResizeObserver so we can refresh scroll triggers
 			let resizeTimeout;
 			const resizeObserver = new ResizeObserver(() => {
 				clearTimeout(resizeTimeout);
@@ -158,15 +149,12 @@ export class UX {
 					scrollToEl.classList.remove("highlighted");
 				}, 10000);
 
-				// Get the current position of the element relative to the viewport
 				const scrollToElY = scrollToEl.getBoundingClientRect().top;
 				const nav = document.querySelector("nav");
 				const headerHeight = nav.clientHeight + 20;
 
-				// Calculate the scroll position to place the element at the desired position
 				const scrollPosition = mainWrap.scrollTop + scrollToElY - headerHeight;
 
-				// Scroll to the calculated position
 				mainWrap.scrollTo({
 					top: scrollPosition,
 					left: 0,
@@ -251,7 +239,7 @@ export class UX {
 	async copyToClipboard(shareModal, innerShareModal, inputEl) {
 		const url = inputEl.value;
 		inputEl.select();
-		inputEl.setSelectionRange(0, 99999); /* For mobile devices */
+		inputEl.setSelectionRange(0, 99999);
 
 		try {
 			await navigator.clipboard.writeText(url);
