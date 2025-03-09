@@ -1,6 +1,6 @@
-import { Analytics } from "./_analytics.mjs";
-import { Animations } from "./_animations.mjs";
-import { UX } from "./_ux.mjs";
+import { Analytics } from "./analytics.mjs";
+import { Animations } from "./animations.mjs";
+import { UX } from "./ux.mjs";
 
 export class App {
 	constructor() {

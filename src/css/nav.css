@@ -18,15 +18,19 @@ nav {
 		}
 	}
 }
+#menuWrap {
+	@apply fixed inset-0 z-1000 grid place-items-center bg-transparent;
 
-#navMenu {
-	@apply absolute top-0 right-4 left-4 z-[1000] mt-4 bg-white text-neutral-600 md:left-0 md:mx-4 md:w-[300px] dark:bg-black dark:text-neutral-200;
-	@apply overflow-hidden rounded-2xl border border-neutral-300 p-0 dark:border-neutral-600;
-	ul {
-		@apply flex flex-col divide-y divide-neutral-300 dark:divide-neutral-600;
-		li {
-			@apply p-4 first:pt-4 last:pb-4;
-			@apply cursor-pointer hover:bg-ms-blue hover:text-white;
+	#navMenu {
+		@apply bg-white text-neutral-600 md:left-0 md:mx-4 w-[300px] dark:bg-black dark:text-neutral-200;
+		@apply overflow-hidden rounded-2xl border border-neutral-300 p-0 dark:border-neutral-600;
+
+		ul {
+			@apply flex flex-col divide-y divide-neutral-300 dark:divide-neutral-600;
+			li {
+				@apply p-4 first:pt-4 last:pb-4;
+				@apply cursor-pointer hover:bg-ms-blue hover:text-white;
+			}
 		}
 	}
 }

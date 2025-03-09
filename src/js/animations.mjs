@@ -71,15 +71,16 @@ export class Animations {
 	}
 
 	toggleNavMenu(navMenu, navShade, isClosed) {
+		const innerMenu = navMenu.querySelector("#navMenu");
 		const tl = gsap.timeline();
 		const duration = this.reducedMotion ? 0 : 0.5;
 
 		if (isClosed) {
-			tl.set(navMenu, { display: "block" });
+			tl.set(navMenu, { display: "grid" });
 			tl.set(navShade, { display: "block", opacity: 0 }, "<");
 			tl.to("#navBtnWrap", { opacity: 0.5, pointerEvents: "none" }, "<");
 			tl.to(
-				navMenu,
+				innerMenu,
 				{
 					height: "auto",
 					duration,
@@ -98,7 +99,7 @@ export class Animations {
 			);
 			navMenu.setAttribute("data-collapsed", "false");
 		} else {
-			tl.to(navMenu, {
+			tl.to(innerMenu, {
 				height: 0,
 				duration,
 				ease: "power4.out",

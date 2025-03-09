@@ -14,7 +14,7 @@
 }
 
 .closeModalBtn {
-	@apply absolute top-0 right-0 z-[700] p-4 font-icons text-2xl text-neutral-600 dark:text-neutral-200;
+	@apply absolute top-0 right-0 m-4 md:m-2 z-[700] p-4 font-icons text-2xl text-neutral-600 dark:text-neutral-200;
 }
 
 form {

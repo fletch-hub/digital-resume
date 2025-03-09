@@ -6,6 +6,6 @@
 </script>
 {{else}}
 <script>
-    function gtag() { return null; }
+    function gtag(...args) { return console.log(args); }
 </script>
 {{/unless}}

@@ -31,13 +31,13 @@
 	<body class="">
 		<main>
 			<div id="mainWrap">
-				<div id="loadShade"><img src="/icons/loader.gif" alt="loading..." /></div>
+				<div id="loadShade" aria-hidden="true"><img src="/icons/loader.gif" alt="loading..." /></div>
 				{{> nav}} {{> header}}
-				<div id="navShade" style="display: none; opacity: 0"></div>
+				<div id="navShade" aria-hidden="true" style="display: none; opacity: 0"></div>
 				{{> shareModal}} {{> contactModal}} {{> infoModal}} {{> summary}} {{> toolset}} {{>
 				coverLetter}} {{> resume}} {{> portfolio}} {{> infoBtn}}
 			</div>
 		</main>
-		<script type="module" src="./src/_main.mjs"></script>
+		<script type="module" src="./src/main.mjs"></script>
 	</body>
 </html>

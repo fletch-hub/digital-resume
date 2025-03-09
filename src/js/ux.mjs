@@ -19,6 +19,7 @@ export class UX {
 		this.setupModals();
 		this.setupClipboard();
 		this.setupContactForm();
+		this.setupExternalLinks(); // Add this line
 
 		//open the summary tab on load
 		const summarySection = document.querySelector("#summary");
@@ -113,7 +114,7 @@ export class UX {
 
 	setupNav() {
 		const navMenuToggler = document.querySelector("#hamburgerBtn");
-		const navMenu = document.querySelector("#navMenu");
+		const navMenu = document.querySelector("#menuWrap");
 		const navShade = document.querySelector("#navShade");
 		const linkedInBtn = document.querySelector("#linkedInBtn");
 		const reducedMotion = window.reducedMotion ?? false;
@@ -128,7 +129,7 @@ export class UX {
 		});
 
 		document.addEventListener("click", (e) => {
-			if (e.target !== navMenuToggler && e.target !== navMenu) {
+			if (e.target !== navMenuToggler) {
 				const isClosed = navMenu.getAttribute("data-collapsed") === "true";
 				if (!isClosed) {
 					this.animations.toggleNavMenu(navMenu, navShade, isClosed);
@@ -144,28 +145,33 @@ export class UX {
 				const scrollToEl = document.querySelector(navSelector);
 
 				const mainWrap = document.querySelector("#mainWrap");
-				const linkY = link.getBoundingClientRect().top;
-				const scrollToElY = scrollToEl.getBoundingClientRect().top;
-				const deltaY = scrollToElY - linkY;
 
-				// Fire analytics if you want to track where user navigates
 				this.analytics.navigated(navSelector);
 
-				// If the target is an accordion, open it first (optionally)
 				const caret = scrollToEl.querySelector("[id$='Caret']");
-				const scrollToElIsVisible = scrollToEl.getAttribute("data-collapsed") === "false";
 
 				const isCollapsed = scrollToEl.getAttribute("data-collapsed") === "true";
-				if (!scrollToElIsVisible) {
+				if (isCollapsed) {
 					this.animations.toggleAccordion(scrollToEl, caret, isCollapsed);
 				}
+
+				// Add highlight to the target element
 				scrollToEl.classList.add("highlight");
 				setTimeout(() => {
 					scrollToEl.classList.remove("highlight");
 				}, 10000);
 
-				mainWrap.scrollBy({
-					top: deltaY - window.innerHeight * 0.05,
+				// Get the current position of the element relative to the viewport
+				const scrollToElY = scrollToEl.getBoundingClientRect().top;
+				const nav = document.querySelector("nav");
+				const headerHeight = nav.clientHeight + 20;
+
+				// Calculate the scroll position to place the element at the desired position
+				const scrollPosition = mainWrap.scrollTop + scrollToElY - headerHeight;
+
+				// Scroll to the calculated position
+				mainWrap.scrollTo({
+					top: scrollPosition,
 					left: 0,
 					behavior: reducedMotion ? "instant" : "smooth",
 				});
@@ -212,6 +218,7 @@ export class UX {
 
 		infoBtn.addEventListener("click", () => {
 			this.animations.toggleModal(infoModal);
+			this.analytics.infoOpened();
 		});
 
 		closeModalButtons.forEach((btn) => {
@@ -302,6 +309,16 @@ export class UX {
 					},
 				);
 			}
+		});
+	}
+
+	setupExternalLinks() {
+		const externalLinks = document.querySelectorAll("a[href^='http']");
+		externalLinks.forEach((link) => {
+			link.addEventListener("click", (e) => {
+				e.preventDefault();
+				this.analytics.navtag(e);
+			});
 		});
 	}
 }

@@ -1,21 +1,18 @@
 /* global gtag */
 
 export class Analytics {
-	navtag(e, callback, delay = 200) {
-		if (e && e.preventDefault) {
-			e.preventDefault();
-
-			if (typeof callback === "function") {
-				callback();
-			}
-
+	navtag(e, delay = 200) {
+		const tagLabel = e.currentTarget.getAttribute("data-track");
+		if (tagLabel) {
+			gtag("event", tagLabel, {
+				event_category: "User Interaction",
+				event_label: "External Link Clicked",
+			});
+		}
+		const href = e.currentTarget?.href || e.target?.href;
+		if (href) {
 			setTimeout(() => {
-				// Restore default behavior by directly following the link
-				if (e.target && e.target.href) {
-					window.location.href = e.target.href;
-				} else if (e.currentTarget && e.currentTarget.href) {
-					window.location.href = e.currentTarget.href;
-				}
+				window.open(href, "_blank");
 			}, delay);
 		}
 	}
@@ -34,37 +31,18 @@ export class Analytics {
 		});
 	}
 
+	infoOpened() {
+		gtag("event", "infoOpened", {
+			event_category: "User Interaction",
+			event_label: "Info Opened",
+		});
+	}
+
 	tabOpened(tabSelector) {
 		gtag("event", `tabOpened_${tabSelector}`, {
 			event_category: "User Interaction",
 			event_label: "Tab Opened",
 		});
-	}
-
-	linkedIn(e) {
-		this.navtag(
-			e,
-			() => {
-				gtag("event", "linkedin_clicked", {
-					event_category: "User Interaction",
-					event_label: "LinkedIn Clicked",
-				});
-			},
-			200,
-		);
-	}
-
-	github(e) {
-		this.navtag(
-			e,
-			() => {
-				gtag("event", "github_clicked", {
-					event_category: "User Interaction",
-					event_label: "GitHub Clicked",
-				});
-			},
-			200,
-		);
 	}
 
 	toggledTheme() {
