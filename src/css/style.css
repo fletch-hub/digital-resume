@@ -20,7 +20,7 @@ html {
 }
 
 section {
-	@apply relative mx-auto mb-8 flex w-full max-w-screen-md flex-col gap-6 rounded-2xl p-6 text-left;
+	@apply relative mx-auto mb-8 flex w-full max-w-screen-md flex-col gap-6 md:rounded-2xl p-6 text-left bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-200;
 }
 
 button {
@@ -46,17 +46,22 @@ button {
 }
 
 .toggler {
-	@apply w-full cursor-pointer border-b border-b-neutral-300 pb-3;
+	h2 {
+		@apply font-bayon text-4xl;
+		@apply text-neutral-200;
+		@apply dark:text-neutral-600;
+	}
+	@apply w-full cursor-pointer;
 	@apply dark:border-b-neutral-600;
 	:hover {
 		[id$="Caret"] {
-			@apply opacity-100 transition-opacity;
+			@apply opacity-100 transition-opacity duration-500;
 		}
 	}
 }
 
 [id$="Caret"] {
-	@apply z-50 opacity-20;
+	@apply z-50 opacity-0;
 }
 
 .app-icon {

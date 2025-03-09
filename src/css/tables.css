@@ -1,23 +1,20 @@
 .portfolioItem {
+	@apply rounded-2xl overflow-hidden;
 	@apply relative flex max-w-screen-md flex-col divide-y divide-neutral-300 border border-neutral-300 text-left [&>div:nth-child(even)]:bg-neutral-100;
 	@apply dark:divide-neutral-600 dark:border-neutral-600 dark:[&>div:nth-child(even)]:bg-neutral-800;
 }
-.label {
-	@apply p-4;
-}
-.content {
-	@apply p-4;
-}
 
 .label {
-	@apply min-w-[75px] basis-1/6 border-r border-r-neutral-300;
+	@apply p-3;
+	@apply min-w-[75px] basis-1/7 border-r border-r-neutral-300;
 	@apply dark:border-r-neutral-600;
 	p {
-		@apply text-xs;
+		@apply font-bayon text-xs opacity-40;
 	}
 }
 .content {
-	@apply basis-5/6 text-xs overflow-x-scroll scrollbar-none;
+	@apply p-3;
+	@apply basis-6/7 text-xs overflow-x-scroll scrollbar-none;
 	p {
 		@apply text-xs;
 	}

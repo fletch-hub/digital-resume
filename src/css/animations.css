@@ -1,5 +1,5 @@
 @media (min-width: 768px) {
-	.highlight {
+	.highlighted {
 		animation: highlight 15s ease-out;
 	}
 }

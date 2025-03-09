@@ -4,6 +4,26 @@ import ScrollTrigger from "gsap/ScrollTrigger";
 export class Animations {
 	constructor() {
 		this.reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches ?? false;
+
+		this.scrollEls = gsap.utils.toArray(
+			".toggler, .job, .role, .highlight, .nested-col p, .portfolioItem, #coverLetter p",
+		);
+
+		this.collapsedAccordionHeight = null;
+		this.setCollapsedAccordionHeight = this.setCollapsedAccordionHeight.bind(this);
+		this.setCollapsedAccordionHeight();
+		window.addEventListener("resize", this.setCollapsedAccordionHeight);
+
+		this.outOfViewElements = new Set();
+	}
+
+	setCollapsedAccordionHeight() {
+		const toggler = document.querySelector(".toggler");
+		const togglerParent = toggler.parentElement;
+		const togglerHeight = toggler.clientHeight;
+		const parentPadding = parseInt(window.getComputedStyle(togglerParent).paddingTop) * 2;
+		this.collapsedAccordionHeight = togglerHeight + parentPadding + "px";
+		return this.collapsedAccordionHeight;
 	}
 
 	animateHeader() {
@@ -123,8 +143,6 @@ export class Animations {
 	toggleAccordion(tray, caret, isClosed, opts = {}) {
 		const reducedMotion = window.reducedMotion ?? false;
 
-		const collapsedHeight = opts.collapsedHeight ?? "90px";
-
 		const onTabOpened = opts.onTabOpened ?? null;
 
 		const tl = gsap.timeline();
@@ -146,7 +164,7 @@ export class Animations {
 		} else {
 			tl.set(tray, { overflow: "hidden" });
 			tl.to(tray, {
-				height: collapsedHeight,
+				height: this.collapsedAccordionHeight,
 				duration,
 				ease: "power2.inOut",
 			});
@@ -265,15 +283,22 @@ export class Animations {
 		if (this.reducedMotion) {
 			return;
 		}
-		const scrollEls = gsap.utils.toArray(
-			".toggler, .job, .role, .highlight, .nested-col p, .portfolioItem, #coverLetter p",
-		);
 
 		const toolsetBoxes = gsap.utils.toArray(".toolsetBox");
 		toolsetBoxes.forEach((el) =>
 			this.mainScrollAnimation(el, { end: "+=300", scrub: 1, nestedAnimation: true }),
 		);
-		scrollEls.forEach((el) => this.mainScrollAnimation(el));
+		this.scrollEls.forEach((el) => this.mainScrollAnimation(el));
+	}
+
+	isElementInViewport(el) {
+		const rect = el.getBoundingClientRect();
+		return (
+			rect.top >= 0 &&
+			rect.left >= 0 &&
+			rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+			rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+		);
 	}
 
 	refreshScrollTrigger() {

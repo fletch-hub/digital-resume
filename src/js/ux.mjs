@@ -71,8 +71,6 @@ export class UX {
 	}
 
 	setupAccordions() {
-		const collapsedHeight = "90px";
-
 		// Loop each accordion
 		this.accordionsArr.forEach((acc) => {
 			const tray = document.querySelector(acc.trayId);
@@ -84,14 +82,13 @@ export class UX {
 			if (collapsed === "false") {
 				caret.style.transform = "rotate(180deg)";
 			} else {
-				tray.style.height = collapsedHeight;
+				tray.style.height = this.animations.collapsedAccordionHeight;
 			}
 
 			// When user clicks, call the Animations class:
 			toggler.addEventListener("click", () => {
 				const isCollapsed = tray.getAttribute("data-collapsed") === "true";
 				this.animations.toggleAccordion(tray, caret, isCollapsed, {
-					collapsedHeight,
 					onTabOpened: (trayId) => {
 						// If you need analytics for opening:
 						this.analytics.tabOpened(trayId);
@@ -156,9 +153,9 @@ export class UX {
 				}
 
 				// Add highlight to the target element
-				scrollToEl.classList.add("highlight");
+				scrollToEl.classList.add("highlighted");
 				setTimeout(() => {
-					scrollToEl.classList.remove("highlight");
+					scrollToEl.classList.remove("highlighted");
 				}, 10000);
 
 				// Get the current position of the element relative to the viewport

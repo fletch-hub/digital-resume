@@ -9,7 +9,7 @@
     </div>{{/if}}
     <div class="flex flex-row">
         <div class="label">
-            <p>Project:</p>
+            <p>Project</p>
         </div>
         <div class="content">
             <p>{{project}}</p>
@@ -18,7 +18,7 @@
 
     <div class="flex flex-row ">
         <div class="label">
-            <p>Role:</p>
+            <p>Role</p>
         </div>
         <div class="content">
             <p>{{role}}</p>
@@ -27,14 +27,14 @@
 
     <div class="flex flex-row">
         <div class="label">
-            <p>URL:</p>
+            <p>URL</p>
         </div>
         <div class="content {{#if (isDefined pw)}}flex flex-row flex-wrap justify-start{{/if}}">
             <a {{#if (isDefined pw)}}class="pr-4" {{/if}} href="{{url}}" target="_blank">{{#if (isDefined
                 text)}}{{text}}{{else}}{{url}}{{/if}}</a>
             {{#if (isDefined pw)}}
             <div class="pr-4">
-                <p>Password:</p>
+                <p class="opacity-40">PW:</p>
             </div>
             <div class="">
                 <p>{{pw}}</p>
@@ -45,7 +45,7 @@
 
     <div class="flex flex-row ">
         <div class="label">
-            <p>Notes:</p>
+            <p>Notes</p>
         </div>
         <div class="content">
             <p>{{notes}}</p>
