@@ -6,7 +6,7 @@ export class Animations {
 		this.reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches ?? false;
 
 		this.scrollEls = gsap.utils.toArray(
-			".toggler, .job, .role, .highlight, .nested-col p, .portfolioItem, #coverLetter p",
+			".job, .role, .highlight, .nested-col p, .portfolioItem, #coverLetter p",
 		);
 
 		this.collapsedAccordionHeight = null;
@@ -307,6 +307,7 @@ export class Animations {
 
 	init() {
 		gsap.registerPlugin(ScrollTrigger);
+
 		this.animateHeader();
 		this.animateOnScroll();
 	}
