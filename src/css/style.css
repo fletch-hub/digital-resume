@@ -70,6 +70,7 @@ button {
 
 .snipe {
 	@apply absolute top-0 left-0 z-[41] h-auto w-[150px] border-0 drop-shadow-lg;
+	transform: translate(-1px, -1px);
 }
 
 .inactive {
