@@ -30,7 +30,8 @@
             <p>URL</p>
         </div>
         <div class="content {{#if (isDefined pw)}}flex flex-row flex-wrap justify-start{{/if}}">
-            <a {{#if (isDefined pw)}}class="pr-4" {{/if}} href="{{url}}" target="_blank">{{#if (isDefined
+            <a {{#if (isDefined pw)}}class="pr-4" {{/if}} href="{{url}}" data-track="{{project}}" target="_blank">{{#if
+                (isDefined
                 text)}}{{text}}{{else}}{{url}}{{/if}}</a>
             {{#if (isDefined pw)}}
             <div class="pr-4">

@@ -1,6 +1,7 @@
 /* global gtag */
 
 export class Analytics {
+	// add a small delay to allow the event to be tracked before the link opens
 	navtag(e, delay = 200) {
 		const tagLabel = e.currentTarget.getAttribute("data-track");
 		if (tagLabel) {

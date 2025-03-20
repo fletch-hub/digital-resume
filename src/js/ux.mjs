@@ -180,6 +180,7 @@ export class UX {
 		const modalWraps = document.querySelectorAll(".modalWrap");
 
 		modalWraps.forEach((modalWrap) => {
+			// Close modal if clicked outside of the modal
 			modalWrap.addEventListener("click", (e) => {
 				if (
 					e.target.localName !== "input" &&
