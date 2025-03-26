@@ -76,6 +76,17 @@ export class Analytics {
 		});
 	}
 
+	urlParams() {
+		const params = new URLSearchParams(window.location.search);
+		const trafficSource = params.get("src");
+		if (trafficSource) {
+			gtag("event", "traffic_source", {
+				event_category: "User Interaction",
+				event_label: trafficSource,
+			});
+		}
+	}
+
 	error(err, description) {
 		gtag("event", description, {
 			event_category: "Error",
@@ -86,5 +97,6 @@ export class Analytics {
 	init() {
 		this.detectScheme();
 		this.detectMotion();
+		this.urlParams();
 	}
 }

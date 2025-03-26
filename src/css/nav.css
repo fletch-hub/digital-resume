@@ -6,7 +6,7 @@
 }
 
 nav {
-	@apply sticky top-0 z-[501] mx-auto max-w-screen-md bg-[#fafafaf0] transition-colors duration-500 dark:bg-neutral-900;
+	@apply sticky top-0 z-[501] mx-auto max-w-screen-md bg-white transition-colors duration-500 dark:bg-neutral-900;
 }
 .navWrap {
 	@apply relative flex w-full flex-row items-start justify-between p-0 text-neutral-600 dark:text-neutral-200;

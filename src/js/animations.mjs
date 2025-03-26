@@ -32,12 +32,12 @@ export class Animations {
 
 		const tl = gsap.timeline();
 		const duration = this.reducedMotion ? 0 : 2;
+
 		tl.fromTo(
 			headerEl,
 			{
 				scaleX: 0,
 				opacity: 1,
-
 				transformOrigin: "left",
 			},
 			{
@@ -48,7 +48,7 @@ export class Animations {
 			},
 		);
 		tl.fromTo(
-			"header h1, header h4",
+			"header h1, header h2",
 			{
 				opacity: 0,
 				y: 30,
@@ -88,6 +88,7 @@ export class Animations {
 			},
 			"<",
 		);
+		tl.set("header h1, header h2", { backgroundColor: "transparent" }); // WCAG fix
 	}
 
 	toggleNavMenu(navMenu, navShade, isClosed) {

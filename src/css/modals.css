@@ -20,7 +20,7 @@
 form {
 	@apply w-full min-w-[300px];
 	label {
-		@apply hidden;
+		@apply text-2xs text-neutral-500 dark:text-neutral-200 mb-0 mt-3 first:mt-0;
 	}
 	input[type="text"],
 	input[type="email"],

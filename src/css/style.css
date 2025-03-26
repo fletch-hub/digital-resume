@@ -20,7 +20,7 @@ html {
 }
 
 section {
-	@apply relative mx-auto mb-8 flex w-full max-w-screen-md flex-col gap-6 md:rounded-2xl p-6 text-left bg-neutral-100 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-200;
+	@apply relative mx-auto mb-8 flex w-full max-w-screen-md flex-col gap-6 md:rounded-2xl p-6 text-left bg-neutral-50 dark:bg-neutral-800 text-neutral-600 dark:text-neutral-200;
 }
 
 button {
@@ -29,7 +29,7 @@ button {
 
 #mainWrap {
 	min-width: 320px;
-	@apply absolute inset-0 scrollbar-none h-full w-full overflow-y-scroll bg-neutral-50 text-center text-neutral-600;
+	@apply absolute inset-0 scrollbar-none h-full w-full overflow-y-scroll bg-white text-center text-neutral-600;
 	@apply transition-colors duration-500 dark:bg-neutral-900 dark:text-neutral-200;
 }
 
@@ -48,8 +48,8 @@ button {
 .toggler {
 	h2 {
 		@apply font-bayon text-4xl;
-		@apply text-neutral-200;
-		@apply dark:text-neutral-600;
+		@apply text-neutral-400;
+		@apply dark:text-neutral-500;
 	}
 	@apply w-full cursor-pointer;
 	@apply dark:border-b-neutral-600;
