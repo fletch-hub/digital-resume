@@ -18,6 +18,9 @@ h4 {
 	&.font-italic {
 		@apply font-italic text-sm;
 	}
+	&.font-avenir-demi {
+		@apply font-avenir-demi;
+	}
 }
 
 p {
