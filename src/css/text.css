@@ -8,10 +8,16 @@ h2 {
 
 h3 {
 	@apply font-avenir-demi text-lg xs:text-xl;
+	&.text-base {
+		@apply font-avenir-bold text-base;
+	}
 }
 
 h4 {
 	@apply font-avenir-bold text-base;
+	&.font-italic {
+		@apply font-italic text-sm;
+	}
 }
 
 p {
