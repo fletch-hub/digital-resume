@@ -1,4 +1,9 @@
 [[redirects]]
+  from = "/gsa_0e9rsv1"
+  to = "https://genuine-beignet-11e35b.netlify.app/"
+  status = 302
+
+[[redirects]]
   from = "/crm_k0J2A0h"
   to = "https://sjv52.mjt.lu/nl3/LaRyI16eN4bJycGfUxRV4g?hl=en"
   status = 302
