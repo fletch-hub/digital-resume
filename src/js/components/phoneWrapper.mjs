@@ -5,11 +5,9 @@ export class PhoneWrapper extends HTMLElement {
 		super();
 		this.attachShadow({ mode: "open" });
 		this._onTogglePlay = this._onTogglePlay.bind(this);
-		this._onToggleMute = this._onToggleMute.bind(this);
 
-		this.muted = true;
-
-		this.gsap = null; // this will be set externally
+		this.muted = false;
+		this.gsap = null; // set externally
 		this.hammer = null;
 	}
 
@@ -49,43 +47,47 @@ export class PhoneWrapper extends HTMLElement {
 		}
 	}
 
+	setMuted(muted) {
+		this.muted = Boolean(muted);
+		if (this.video) {
+			this.video.muted = this.muted;
+		}
+	}
+
 	render() {
 		const src = this.getAttribute("src") || "";
 		this.shadowRoot.innerHTML = `
             <style>
                 :host { display: block; position: relative; }
                 .playBtn { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; cursor: pointer; font-size: 5rem;}
-				.muteBtn { position: absolute; bottom: 10px; right: 10px; display: flex; justify-content: center; align-items: center; cursor: pointer; font-size: 3rem;}
                 button { font-family: "mwf-icons", sans-serif; border: none; background: transparent; color: white; opacity: 0.8; transition: opacity 0.3s; font-size: inherit; }
                 button:hover { opacity: 1; }
                 video { width: 100%; height: auto; display: block; }
             </style>
 
-			<div class="phoneWrapper">
-				<div class="playBtn">
-					<button type="button">&#62896;</button>
-				</div>
-				<video muted playsinline>
-					<source src="${src}" type="video/mp4">
-					Your browser does not support the video tag.
-				</video>
-				<div class="muteBtn">
-					<button type="button">&#59215;</button>
-				</div>
-			</div>
+            <div class="phoneWrapper">
+                <div class="playBtn">
+                    <button type="button">&#62896;</button>
+                </div>
+                <video playsinline>
+                    <source src="${src}" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
         `;
 
 		this.video = this.shadowRoot.querySelector("video");
 		this.playBtn = this.shadowRoot.querySelector(".playBtn");
-		this.muteBtn = this.shadowRoot.querySelector(".muteBtn");
+
 		this.playBtn.addEventListener("click", this._onTogglePlay);
 		this.video.addEventListener("click", this._onTogglePlay);
-		this.muteBtn.addEventListener("click", this._onToggleMute);
+
+		// ensure the rendered video respects current mute state
+		this.setMuted(this.muted);
 	}
 
 	_cleanup() {
 		if (this.playBtn) this.playBtn.removeEventListener("click", this._onTogglePlay);
-		if (this.muteBtn) this.muteBtn.removeEventListener("click", this._onToggleMute);
 		if (this.video) this.video.removeEventListener("click", this._onTogglePlay);
 		if (this.hammer) {
 			this.hammer.off("swipeleft");
@@ -93,19 +95,10 @@ export class PhoneWrapper extends HTMLElement {
 		}
 	}
 
-	_onToggleMute(e) {
-		e.stopPropagation();
-		if (!this.video) return;
-		this.muted = !this.muted;
-		this.video.muted = this.muted;
-		this.muteBtn.querySelector("button").innerHTML = this.muted ? "&#59215;" : "&#59239;";
-	}
-
 	_onTogglePlay(e) {
 		e.stopPropagation();
 		if (!this.video) return;
 		if (!this.classList.contains("active")) {
-			// emit a custom event to notify parent components, dont prevent bubbling
 			this._dispatchRequestScroll(this.classList.contains("left") ? "left" : "right");
 		} else {
 			if (this.video.paused) {
@@ -126,6 +119,7 @@ export class PhoneWrapper extends HTMLElement {
 				detail: { direction },
 			}),
 		);
+		this._onTogglePlay(new Event("click")); // trigger play after scroll
 	}
 
 	pause() {

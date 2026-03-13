@@ -233,6 +233,12 @@ export class UX {
 			btn.addEventListener("click", () => {
 				const modal = btn.closest(".modalWrap");
 				this.animations.toggleModal(modal);
+				// pause any playing videos when a modal is closed
+				modal.querySelectorAll("phone-wrapper").forEach((wrapper) => {
+					if (typeof wrapper.pause === "function") {
+						wrapper.pause();
+					}
+				});
 			});
 		});
 
@@ -353,14 +359,35 @@ export class UX {
 		const carouselInnerWrapper = document.querySelector("#fomoCarouselInner");
 		const leftArrowBtn = document.querySelector("#fomoLeftArrow");
 		const rightArrowBtn = document.querySelector("#fomoRightArrow");
+		const muteBtn = document.querySelector("#fomoMuteBtn");
 
+		this.isMuted = false;
 		let isTransitioning = false;
+
+		const updateMuteIcon = () => {
+			muteBtn.innerHTML = this.isMuted ? "&#59215;" : "&#59239;";
+		};
+
+		const applyMuteToAll = () => {
+			document.querySelectorAll("phone-wrapper").forEach((wrapper) => {
+				if (typeof wrapper.setMuted === "function") {
+					wrapper.setMuted(this.isMuted);
+				}
+			});
+		};
+
+		muteBtn.addEventListener("click", () => {
+			this.isMuted = !this.isMuted;
+			updateMuteIcon();
+			applyMuteToAll();
+		});
 
 		const renderVideo = () => {
 			const wrapper = document.createElement("phone-wrapper");
 			wrapper.gsap = this.gsap;
 			wrapper.setAttribute("src", videos[this.activeCarouselIndex]);
 			wrapper.classList.add("active");
+			wrapper.setMuted(this.isMuted);
 			carouselInnerWrapper.appendChild(wrapper);
 			return wrapper;
 		};
@@ -370,12 +397,14 @@ export class UX {
 			wrapper.gsap = this.gsap;
 			wrapper.setAttribute("src", videos[index]);
 			wrapper.classList.add(direction, "entering");
+			wrapper.setMuted(this.isMuted);
 			carouselInnerWrapper.appendChild(wrapper);
 			await new Promise((resolve) => setTimeout(resolve, 20));
 			wrapper.classList.remove("entering");
 			return wrapper;
 		};
 
+		updateMuteIcon();
 		renderVideo();
 		renderOnDeckVideo(
 			this.activeCarouselIndex - 1 < 0 ? videos.length - 1 : this.activeCarouselIndex - 1,

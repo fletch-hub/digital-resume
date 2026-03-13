@@ -22,7 +22,7 @@
 }
 
 .closeModalBtn {
-	@apply absolute top-0 right-0 m-4 md:m-2 z-[700] p-4 font-icons text-2xl text-neutral-600 dark:text-neutral-200 cursor-pointer;
+	@apply absolute top-0 right-0 m-3 md:m-2 z-[700] p-4 font-icons text-2xl text-neutral-600 dark:text-neutral-200 cursor-pointer;
 }
 
 form {
@@ -35,4 +35,8 @@ form {
 	textarea {
 		@apply w-full rounded-2xl border border-neutral-300 bg-neutral-100 p-4 text-sm text-neutral-600 dark:border-neutral-600 dark:bg-neutral-900 dark:text-neutral-200;
 	}
+}
+
+.fomoMuteBtn {
+	@apply absolute bottom-3 md:bottom-6 left-1/2 -translate-x-1/2 text-white opacity-90 hover:opacity-100 z-[500];
 }
