@@ -1,3 +1,5 @@
+import "../hammer.min.js";
+
 export class PhoneWrapper extends HTMLElement {
 	constructor() {
 		super();
@@ -5,6 +7,7 @@ export class PhoneWrapper extends HTMLElement {
 		this._onTogglePlay = this._onTogglePlay.bind(this);
 
 		this.gsap = null; // this will be set externally
+		this.hammer = null;
 	}
 
 	static get observedAttributes() {
@@ -13,10 +16,28 @@ export class PhoneWrapper extends HTMLElement {
 
 	connectedCallback() {
 		this.render();
+		if (window.Hammer) {
+			const wrapper = this.shadowRoot.querySelector(".phoneWrapper");
+			if (wrapper) {
+				this.hammer = new window.Hammer(wrapper);
+				this.hammer.get("swipe").set({ direction: window.Hammer.DIRECTION_HORIZONTAL });
+
+				this.hammer.on("swipeleft", () => {
+					this._dispatchRequestScroll("right");
+				});
+				this.hammer.on("swiperight", () => {
+					this._dispatchRequestScroll("left");
+				});
+			}
+		}
 	}
 
 	disconnectedCallback() {
 		this._cleanup();
+		if (this.hammer) {
+			this.hammer.destroy();
+			this.hammer = null;
+		}
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
@@ -57,6 +78,10 @@ export class PhoneWrapper extends HTMLElement {
 	_cleanup() {
 		if (this.playBtn) this.playBtn.removeEventListener("click", this._onTogglePlay);
 		if (this.video) this.video.removeEventListener("click", this._onTogglePlay);
+		if (this.hammer) {
+			this.hammer.off("swipeleft");
+			this.hammer.off("swiperight");
+		}
 	}
 
 	_onTogglePlay(e) {
@@ -64,15 +89,7 @@ export class PhoneWrapper extends HTMLElement {
 		if (!this.video) return;
 		if (!this.classList.contains("active")) {
 			// emit a custom event to notify parent components, dont prevent bubbling
-			this.dispatchEvent(
-				new CustomEvent("requestScroll", {
-					bubbles: true,
-					composed: true,
-					detail: {
-						direction: this.classList.contains("left") ? "left" : "right",
-					},
-				}),
-			);
+			this._dispatchRequestScroll(this.classList.contains("left") ? "left" : "right");
 		} else {
 			if (this.video.paused) {
 				this.video.play();
@@ -82,6 +99,16 @@ export class PhoneWrapper extends HTMLElement {
 				this.playBtn.style.display = "flex";
 			}
 		}
+	}
+
+	_dispatchRequestScroll(direction) {
+		this.dispatchEvent(
+			new CustomEvent("requestScroll", {
+				bubbles: true,
+				composed: true,
+				detail: { direction },
+			}),
+		);
 	}
 
 	pause() {
