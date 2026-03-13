@@ -1,11 +1,11 @@
 <div class="portfolioItem" id={{id}}>
     <img class="snipe" src={{snipe}} alt="" />
     {{#if (isDefined img)}}
-    <div
-        class="relative h-[100px] hover:h-[200px] md:hover:h-[300px] transition-all motion-reduce:transition-none ease-in-out duration-500 overflow-hidden">
+    <div class="portfolioItemBanner relative h-[100px] hover:h-[200px] md:hover:h-[300px] transition-all motion-reduce:transition-none ease-in-out duration-500 overflow-hidden"
+        data-modal-content="{{modalContent}}">
         <div class="shade">
         </div>
-        <img src="{{img}}" alt="{{project}}" class="object-cover object-top w-full h-full overflow-hidden ">
+        <img src="{{img}}" alt="{{project}}" class="object-cover object-top w-full h-full overflow-hidden">
     </div>{{/if}}
     <div class="flex flex-row">
         <div class="label">

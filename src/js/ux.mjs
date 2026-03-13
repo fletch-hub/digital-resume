@@ -21,25 +21,26 @@ export class UX {
 
 	init() {
 		this.setupDarkModeToggle();
-		//this.setupAccordions();
+		this.setupAccordions();
 		this.setupNav();
 		this.setupModals();
 		this.setupClipboard();
 		this.setupContactForm();
 		this.setupExternalLinks();
+
 		this.setupFomoModal();
 
 		//open the summary tab on load
-		// const summarySection = document.querySelector("#summary");
-		// const summarySectionCaret = document.querySelector("#summaryCaret");
-		// const isCollapsed = summarySection.getAttribute("data-collapsed");
-		// setTimeout(
-		// 	() =>
-		// 		this.animations.toggleAccordion(summarySection, summarySectionCaret, isCollapsed, {
-		// 			tracking: false,
-		// 		}),
-		// 	100,
-		// );
+		const summarySection = document.querySelector("#summary");
+		const summarySectionCaret = document.querySelector("#summaryCaret");
+		const isCollapsed = summarySection.getAttribute("data-collapsed");
+		setTimeout(
+			() =>
+				this.animations.toggleAccordion(summarySection, summarySectionCaret, isCollapsed, {
+					tracking: false,
+				}),
+			100,
+		);
 	}
 
 	setupDarkModeToggle() {
@@ -186,6 +187,15 @@ export class UX {
 		const githubLinks = infoModal.querySelectorAll(".githubLink");
 
 		const modalWraps = document.querySelectorAll(".modalWrap");
+
+		const portfolioItemBanners = document.querySelectorAll(".portfolioItemBanner");
+		portfolioItemBanners.forEach((banner) => {
+			banner.addEventListener("click", () => {
+				const modalId = banner.getAttribute("data-modal-content");
+				const modal = document.querySelector(`#${modalId}`);
+				this.animations.toggleModal(modal);
+			});
+		});
 
 		modalWraps.forEach((modalWrap) => {
 			// Close modal if clicked outside of the modal

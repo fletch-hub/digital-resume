@@ -9,11 +9,11 @@
 	}
 }
 
-.modalWrap:not(#portfolioModal) {
+.modalWrap:not(.portfolioModal) {
 	@apply bg-transparent;
 }
 
-.modalInner:not(#portfolioModal > .modalInner) {
+.modalInner:not(.portfolioModal > .modalInner) {
 	@apply border border-neutral-400 flex-col items-start justify-start gap-6 bg-neutral-50 p-6 text-neutral-600 dark:border-neutral-600 dark:bg-neutral-900 dark:text-neutral-200;
 }
 
