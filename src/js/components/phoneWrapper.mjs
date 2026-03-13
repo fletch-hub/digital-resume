@@ -63,7 +63,8 @@ export class PhoneWrapper extends HTMLElement {
                 .playBtn { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; cursor: pointer; font-size: 5rem;}
                 button { font-family: "mwf-icons", sans-serif; border: none; background: transparent; color: white; opacity: 0.8; transition: opacity 0.3s; font-size: inherit; }
                 button:hover { opacity: 1; }
-                video { width: 100%; height: auto; display: block; }
+                video { display: block; height: 100%; width: auto; max-width: 100%; }
+				.phoneWrapper { position: relative; display: flex; justify-content: center; align-items: center; transition: all 0.5s; height: 100%; max-height: 100%; }
             </style>
 
             <div class="phoneWrapper">

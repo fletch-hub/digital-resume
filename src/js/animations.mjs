@@ -175,10 +175,8 @@ export class Animations {
 				},
 				"<",
 			);
-			tl.set(inner, { overflow: "visible" });
 			modalEl.setAttribute("data-collapsed", "false");
 		} else {
-			tl.set(inner, { overflow: "hidden" });
 			tl.to(
 				inner,
 				{
@@ -231,13 +229,11 @@ export class Animations {
 				ease: "power2.inOut",
 			});
 			tl.to(caret, { rotate: 180, duration }, "<");
-			tl.set(tray, { overflow: "visible" });
 			tray.setAttribute("data-collapsed", false);
 			if (onTabOpened) {
 				onTabOpened(tray.id.toString());
 			}
 		} else {
-			tl.set(tray, { overflow: "hidden" });
 			tl.to(tray, {
 				height: this.collapsedAccordionHeight,
 				duration,
