@@ -5,7 +5,7 @@
         data-modal-content="{{modalContent}}">
         <div class="shade pointer-events-none">
         </div>
-        <img src="{{img}}" alt="{{project}}" class="object-cover object-top w-full h-full overflow-hidden">
+        <img src="{{img}}" alt="{{project}}" class="object-cover object-center w-full h-full overflow-hidden">
     </div>{{/if}}
     <div class="flex flex-row">
         <div class="label">
@@ -30,9 +30,18 @@
             <p>URL</p>
         </div>
         <div class="content {{#if (isDefined pw)}}flex flex-row flex-wrap justify-start{{/if}}">
-            <a {{#if (isDefined pw)}}class="pr-4" {{/if}} href="{{url}}" data-track="{{project}}" target="_blank">{{#if
-                (isDefined
-                text)}}{{text}}{{else}}{{url}}{{/if}}</a>
+            {{#if (isDefined url)}}
+            <a {{#if (isDefined pw)}}class="pr-4" {{/if}} href="{{url}}" data-track="{{project}}" {{#if (isDefined
+                modalContent)}}data-modal-content="{{modalContent}}" {{/if}} target="_blank">
+                {{#if (isDefined text)}}{{text}}{{else}}{{url}}{{/if}}
+            </a>
+            {{else if (isDefined modalContent)}}
+            <a {{#if (isDefined pw)}}class="pr-4" {{/if}} href="javascript:void(0)"
+                data-modal-content="{{modalContent}}">
+                View
+            </a>
+            {{/if}}
+
             {{#if (isDefined pw)}}
             <div class="pr-4">
                 <p class="opacity-40">PW:</p>

@@ -241,6 +241,18 @@ export class UX {
 				this.analytics.github(link.href);
 			});
 		});
+
+		const modalLinks = document.querySelectorAll("a[data-modal-content]");
+		modalLinks.forEach((link) => {
+			link.addEventListener("click", (event) => {
+				event.preventDefault();
+				const modalId = link.dataset.modalContent;
+				const modalEl = document.getElementById(modalId);
+				if (modalEl) {
+					this.animations.toggleModal(modalEl);
+				}
+			});
+		});
 	}
 
 	showModalMessage(outerModal, innerModal, message, callback) {
