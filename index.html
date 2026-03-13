@@ -1,43 +1,50 @@
 <!doctype html>
 <html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		{{> tags}}
-		<title>{{title}}</title>
-		<link rel="stylesheet" href="./src/css/style.css" />
-		<style>
+
+<head>
+	<meta charset="UTF-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	{{> tags}}
+	<title>{{title}}</title>
+	<link rel="stylesheet" href="./src/css/style.css" />
+	<style>
+		#loadShade {
+			position: fixed;
+			inset: 0;
+			display: grid;
+			place-items: center;
+			z-index: 1000;
+			background-color: white;
+		}
+
+		#loadShade img {
+			width: 30px;
+			height: 30px;
+		}
+
+		@media (prefers-color-scheme: dark) {
 			#loadShade {
-				position: fixed;
-				inset: 0;
-				display: grid;
-				place-items: center;
-				z-index: 1000;
-				background-color: white;
+				background-color: black;
 			}
+		}
+	</style>
+</head>
 
-			#loadShade img {
-				width: 30px;
-				height: 30px;
-			}
+<body class="">
+	<main>
+		<div id="mainWrap">
+			<div id="loadShade" aria-hidden="true"><img src="/icons/loader.gif" alt="loading..." /></div>
+			{{> nav}} {{> header}}
+			<div id="navShade" aria-hidden="true" style="display: none; opacity: 0"></div>
+			{{> shareModal}} {{> contactModal}} {{> infoModal}} {{> portfolioModal}}
 
-			@media (prefers-color-scheme: dark) {
-				#loadShade {
-					background-color: black;
-				}
-			}
-		</style>
-	</head>
-	<body class="">
-		<main>
-			<div id="mainWrap">
-				<div id="loadShade" aria-hidden="true"><img src="/icons/loader.gif" alt="loading..." /></div>
-				{{> nav}} {{> header}}
-				<div id="navShade" aria-hidden="true" style="display: none; opacity: 0"></div>
-				{{> shareModal}} {{> contactModal}} {{> infoModal}} {{> summary}} {{> toolset}} {{>
-				coverLetter}} {{> resume}} {{> portfolio}} {{> infoBtn}}
-			</div>
-		</main>
-		<script type="module" src="./src/main.mjs"></script>
-	</body>
+			{{!-- {{> summary}} {{> featureBanner}} {{> toolset}} {{>
+			coverLetter}} {{> resume}} --}}
+
+			{{> portfolio}} {{> infoBtn}}
+		</div>
+	</main>
+	<script type="module" src="./src/main.mjs"></script>
+</body>
+
 </html>

@@ -1,8 +1,23 @@
 <section id="portfolio" data-collapsed="false" class="overflow-visible">
     <div id="portfolioToggle" class="toggler">
-        <h2>Work Samples <span id="portfolioCaret" class="inline-block font-icons ml-2">&#59758;</span>
-        </h2>
+        <div class="flex gap-3 items-center">
+            <div class="font-icons text-2xl mt-1 text-neutral-600 dark:text-neutral-200;">&#59169;</div>
+            <h2>Work Samples <span id="portfolioCaret" class="inline-block font-icons ml-2">&#59758;</span>
+            </h2>
+        </div>
     </div>
+    {{> portfolio_item
+    snipe="/snipes/anim_l.svg"
+    id="portfolio_fomo"
+    img="/portfolio/thumbs/wintel.jpg"
+    project="Windows Intel Fully-Responsive Banners (2023)"
+    role="Developer, Designer"
+    url="https://ericfletcher.io/raf_9W11dw9"
+    notes="This is one of several banners created for this project. Made for use with an internal localization tool at
+    Microsoft that generates hi-res static versions on demand (so bundle size not important). Responsive to any size or
+    shape, so long as the logo size is brand-compliant. Layouts meticulously matched to provided creative where
+    possible."
+    }}
     {{> portfolio_item
     snipe="/snipes/banner_l.svg"
     id="portfolio_wintel"

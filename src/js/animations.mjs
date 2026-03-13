@@ -15,6 +15,19 @@ export class Animations {
 		window.addEventListener("resize", this.setCollapsedAccordionHeight);
 
 		this.outOfViewElements = new Set();
+
+		this.isMobile = this.detectBreakpoint();
+
+		this.gsap = gsap;
+	}
+
+	resizeHandler() {
+		this.setCollapsedAccordionHeight();
+		this.detectBreakpoint();
+	}
+
+	detectBreakpoint() {
+		return (this.isMobile = window.matchMedia("(max-width: 576px)").matches);
 	}
 
 	setCollapsedAccordionHeight() {
@@ -79,16 +92,22 @@ export class Animations {
 			},
 			"<",
 		);
-		tl.to(
-			headerEl,
-			{
-				borderRadius: "1rem",
-				duration: 1,
-				ease: "power2.out",
-			},
-			"<",
-		);
+		if (!this.isMobile) {
+			this.borderAnimation(tl, headerEl, { duration: 1.5, ease: "power4.inOut" });
+		}
+
 		tl.set("header h1, header h2", { backgroundColor: "transparent" }); // WCAG fix
+	}
+
+	borderAnimation(tl, el, opts = {}) {
+		const duration = opts.duration || 0.5;
+		const ease = opts.ease || "power2.out";
+
+		tl.to(el, {
+			borderRadius: "1rem",
+			duration,
+			ease,
+		});
 	}
 
 	toggleNavMenu(navMenu, navShade, isClosed) {

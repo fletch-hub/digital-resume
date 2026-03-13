@@ -23,9 +23,9 @@ h4 {
 	}
 }
 
-p {
+/* p {
 	@apply font-avenir-regular leading-relaxed;
-}
+} */
 
 a {
 	@apply underline;

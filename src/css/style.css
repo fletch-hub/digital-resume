@@ -13,6 +13,8 @@
 @import "./toggle.css";
 @import "./toolset.css";
 
+@import "./carousel.css";
+
 html {
 	font-size: 18px;
 	@apply font-avenir-regular;

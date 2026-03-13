@@ -1,7 +1,16 @@
+import { PhoneWrapper } from "./components/phoneWrapper.mjs";
+
 export class UX {
 	constructor(analytics, animations) {
 		this.analytics = analytics;
 		this.animations = animations;
+
+		this.gsap = animations.gsap;
+
+		this.tl = null; // GSAP timeline for the FOMO modal carousel
+
+		this.activeCarouselPhoneWrapperEl = null; // DOM element of the currently active phone wrapper in the FOMO modal carousel
+		this.activeCarouselIndex = 0; // index of the currently active video in the FOMO modal carousel
 
 		this.accordionsArr = [
 			{ trayId: "#coverLetter", toggleId: "#coverLetterToggle", caretId: "#coverLetterCaret" },
@@ -14,24 +23,25 @@ export class UX {
 
 	init() {
 		this.setupDarkModeToggle();
-		this.setupAccordions();
+		//this.setupAccordions();
 		this.setupNav();
 		this.setupModals();
 		this.setupClipboard();
 		this.setupContactForm();
 		this.setupExternalLinks();
+		this.setupFomoModal();
 
 		//open the summary tab on load
-		const summarySection = document.querySelector("#summary");
-		const summarySectionCaret = document.querySelector("#summaryCaret");
-		const isCollapsed = summarySection.getAttribute("data-collapsed");
-		setTimeout(
-			() =>
-				this.animations.toggleAccordion(summarySection, summarySectionCaret, isCollapsed, {
-					tracking: false,
-				}),
-			100,
-		);
+		// const summarySection = document.querySelector("#summary");
+		// const summarySectionCaret = document.querySelector("#summaryCaret");
+		// const isCollapsed = summarySection.getAttribute("data-collapsed");
+		// setTimeout(
+		// 	() =>
+		// 		this.animations.toggleAccordion(summarySection, summarySectionCaret, isCollapsed, {
+		// 			tracking: false,
+		// 		}),
+		// 	100,
+		// );
 	}
 
 	setupDarkModeToggle() {
@@ -306,5 +316,176 @@ export class UX {
 				this.analytics.navtag(e);
 			});
 		});
+	}
+
+	// setupFomoCarousel() {
+	// 	const carouselInnerWrapper = document.querySelector("#fomoCarouselInner");
+	// 	const playButtons = carouselInnerWrapper.querySelectorAll(".playBtn");
+	// 	const videos = carouselInnerWrapper.querySelectorAll("video");
+
+	// 	const numberOfPhones = videos.length;
+	// 	let currentIndex = 0;
+
+	// 	const leftArrowBtn = document.querySelector("#fomoLeftArrow");
+	// 	const rightArrowBtn = document.querySelector("#fomoRightArrow");
+
+	// 	const phoneWrappers = Array.from(carouselInnerWrapper.querySelectorAll(".phoneWrapper"));
+	// 	const firstPhoneWrapper = phoneWrappers[0];
+	// 	firstPhoneWrapper.classList.add("active");
+
+	// 	// measurement vars – updated by updateMetrics()
+	// 	let widthOfPhoneWrapper;
+	// 	let phoneWrapperGap;
+	// 	let widthOfMainCarouselWrapper;
+	// 	let centreOffset;
+
+	// 	// recompute anything that can change on resize
+	// 	const updateMetrics = async () => {
+	// 		await new Promise((resolve) => setTimeout(resolve, 250));
+	// 		// use bounding‑rect so we keep sub‑pixel values
+	// 		widthOfPhoneWrapper = parseFloat(getComputedStyle(firstPhoneWrapper).width);
+	// 		phoneWrapperGap = parseFloat(getComputedStyle(carouselInnerWrapper).gap) || 0;
+	// 		widthOfMainCarouselWrapper = parseFloat(
+	// 			getComputedStyle(carouselInnerWrapper.parentElement).width,
+	// 		);
+	// 		centreOffset = (widthOfMainCarouselWrapper - widthOfPhoneWrapper) / 2;
+	// 	};
+
+	// 	const scrollToIndex = async (index) => {
+	// 		await updateMetrics(); // make sure the maths use current dimensions
+	// 		const xForIndex = (index) => centreOffset - index * (widthOfPhoneWrapper + phoneWrapperGap);
+	// 		this.gsap.to(carouselInnerWrapper, {
+	// 			x: xForIndex(index),
+	// 			duration: 1,
+	// 			ease: "power4.inOut",
+	// 		});
+	// 	};
+
+	// 	scrollToIndex(currentIndex); // position on load
+
+	// 	const pauseOtherVideos = () => {
+	// 		videos.forEach((video, idx) => {
+	// 			video.pause();
+	// 			playButtons[idx].style.display = "flex";
+	// 		});
+	// 	};
+
+	// 	const onResize = () => {
+	// 		scrollToIndex(currentIndex);
+	// 	};
+
+	// 	window.addEventListener("resize", onResize);
+
+	// 	const scrollOnClick = (direction) => {
+	// 		currentIndex = direction === "left" ? currentIndex - 1 : currentIndex + 1;
+	// 		if (currentIndex < 0) {
+	// 			currentIndex = numberOfPhones - 1;
+	// 		} else if (currentIndex >= numberOfPhones) {
+	// 			currentIndex = 0;
+	// 		}
+
+	// 		phoneWrappers.forEach((wrapper, idx) => {
+	// 			wrapper.classList.toggle("active", idx === currentIndex);
+	// 		});
+
+	// 		scrollToIndex(currentIndex);
+	// 		pauseOtherVideos();
+	// 	};
+
+	// 	videos.forEach((video, index) => {
+	// 		video.addEventListener("click", () => {
+	// 			const playBtn = playButtons[index];
+	// 			if (video.paused) {
+	// 				video.play();
+	// 				playBtn.style.display = "none";
+	// 			} else {
+	// 				video.pause();
+	// 				playBtn.style.display = "flex";
+	// 			}
+	// 		});
+	// 	});
+
+	// 	leftArrowBtn.addEventListener("click", () => scrollOnClick("left"));
+	// 	rightArrowBtn.addEventListener("click", () => scrollOnClick("right"));
+	// }
+
+	setupFomoModal() {
+		this.tl = this.gsap.timeline({ paused: true });
+
+		const videos = [
+			"/portfolio/social/aurora_10s_1.mp4",
+			"/portfolio/social/clouds_10s_1.mp4",
+			"/portfolio/social/heartbeat_10s_1.mp4",
+			"/portfolio/social/inky_15s_1.mp4",
+			"/portfolio/social/crowd1_13s_1.mp4",
+		];
+		const carouselInnerWrapper = document.querySelector("#fomoCarouselInner");
+		const leftArrowBtn = document.querySelector("#fomoLeftArrow");
+		const rightArrowBtn = document.querySelector("#fomoRightArrow");
+
+		const renderVideo = () => {
+			const wrapper = document.createElement("phone-wrapper");
+			wrapper.gsap = this.gsap;
+			wrapper.setAttribute("src", videos[this.activeCarouselIndex]);
+			carouselInnerWrapper.appendChild(wrapper);
+			return wrapper;
+		};
+
+		const scrollOnClick = (e, direction) => {
+			e.stopPropagation();
+
+			const active = carouselInnerWrapper.querySelector("phone-wrapper");
+			if (active) active.pause();
+
+			this.activeCarouselIndex =
+				direction === "left" ? this.activeCarouselIndex - 1 : this.activeCarouselIndex + 1;
+
+			if (this.activeCarouselIndex < 0) {
+				this.activeCarouselIndex = videos.length - 1;
+			} else if (this.activeCarouselIndex >= videos.length) {
+				this.activeCarouselIndex = 0;
+			}
+			active.classList.add("absolute");
+			const nextEl = renderVideo();
+
+			const startX = direction === "left" ? -100 : 100;
+			const endX = 0;
+			const outX = direction === "left" ? 100 : -100;
+
+			// ensure next element starts offscreen / hidden
+			this.gsap.set(nextEl, { opacity: 0, x: startX });
+
+			this.tl.clear();
+
+			if (active) {
+				this.tl.to(
+					active,
+					{
+						duration: 0.5,
+						opacity: 0,
+						x: outX,
+						onComplete: () => active.remove(),
+					},
+					0,
+				);
+			}
+
+			this.tl.to(
+				nextEl,
+				{
+					duration: 0.5,
+					opacity: 1,
+					x: endX,
+				},
+				0.2,
+			);
+
+			this.tl.play(0);
+		};
+		carouselInnerWrapper.innerHTML = "";
+		renderVideo();
+
+		leftArrowBtn.addEventListener("click", (e) => scrollOnClick(e, "left"));
+		rightArrowBtn.addEventListener("click", (e) => scrollOnClick(e, "right"));
 	}
 }

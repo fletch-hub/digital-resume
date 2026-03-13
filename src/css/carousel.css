@@ -1,0 +1,7 @@
+/* #fomoCarouselWrapper {
+	@apply relative h-[100px] hover:h-[200px] md:hover:h-[300px] transition-all motion-reduce:transition-none ease-in-out duration-500 bg-black p-4 overflow-hidden flex items-center justify-center;
+}*/
+
+.phoneWrapper {
+	@apply h-full relative flex justify-center items-center transition-all duration-500 max-w-[70dvw];
+}
