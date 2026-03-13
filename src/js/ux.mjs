@@ -411,6 +411,14 @@ export class UX {
 			isTransitioning = false;
 		};
 
+		// listen for custom requestScroll events emitted by the phone wrappers to trigger scrolls when a video is clicked
+		document.addEventListener("requestScroll", async (e) => {
+			const direction = e.detail.direction;
+			await scrollOnClick(e, direction);
+			const exitedVideo = carouselInnerWrapper.querySelector(".exiting");
+			if (exitedVideo) exitedVideo.remove();
+		});
+
 		leftArrowBtn.addEventListener("click", async (e) => {
 			await scrollOnClick(e, "left");
 			const exitedVideo = carouselInnerWrapper.querySelector(".exiting");

@@ -62,12 +62,25 @@ export class PhoneWrapper extends HTMLElement {
 	_onTogglePlay(e) {
 		e.stopPropagation();
 		if (!this.video) return;
-		if (this.video.paused) {
-			this.video.play();
-			this.playBtn.style.display = "none";
+		if (!this.classList.contains("active")) {
+			// emit a custom event to notify parent components, dont prevent bubbling
+			this.dispatchEvent(
+				new CustomEvent("requestScroll", {
+					bubbles: true,
+					composed: true,
+					detail: {
+						direction: this.classList.contains("left") ? "left" : "right",
+					},
+				}),
+			);
 		} else {
-			this.video.pause();
-			this.playBtn.style.display = "flex";
+			if (this.video.paused) {
+				this.video.play();
+				this.playBtn.style.display = "none";
+			} else {
+				this.video.pause();
+				this.playBtn.style.display = "flex";
+			}
 		}
 	}
 
