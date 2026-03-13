@@ -3,7 +3,7 @@
     {{#if (isDefined img)}}
     <div class="portfolioItemBanner relative h-[100px] hover:h-[200px] md:hover:h-[300px] transition-all motion-reduce:transition-none ease-in-out duration-500 overflow-hidden"
         data-modal-content="{{modalContent}}">
-        <div class="shade">
+        <div class="shade pointer-events-none">
         </div>
         <img src="{{img}}" alt="{{project}}" class="object-cover object-top w-full h-full overflow-hidden">
     </div>{{/if}}

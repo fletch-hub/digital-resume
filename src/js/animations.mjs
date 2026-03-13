@@ -110,19 +110,57 @@ export class Animations {
 		});
 	}
 
-	toggleNavMenu(navMenu, navShade, isClosed) {
-		const innerMenu = navMenu.querySelector("#navMenu");
+	/**
+	 * Opens/closes a modal-like element using the same animation used by the nav menu.
+	 *
+	 * @param {HTMLElement} modalEl - wrapper element that has data-collapsed attribute
+	 * @param {Object} opts
+	 * @param {HTMLElement} [opts.inner] - element inside the modal to animate height on
+	 * @param {HTMLElement|string} [opts.dimTarget] - element (or selector) to dim/disable while modal is open
+	 */
+	async toggleModal(modalEl, opts = {}) {
+		const navShade = document.querySelector("#navShade");
+		const reducedMotion = window.reducedMotion ?? false;
 		const tl = gsap.timeline();
-		const duration = this.reducedMotion ? 0 : 0.5;
+		const duration = reducedMotion ? 0 : 0.5;
 
-		if (isClosed) {
-			tl.set(navMenu, { display: "grid" });
+		const inner =
+			opts.inner ||
+			modalEl.querySelector(".modalInner") ||
+			modalEl.querySelector("#navMenu") ||
+			modalEl;
+
+		const dimTarget = opts.dimTarget || "nav"; /* default: dim the whole nav bar for non-nav modals */
+
+		const dimEl = typeof dimTarget === "string" ? document.querySelector(dimTarget) : dimTarget;
+
+		// Treat missing/undefined data-collapsed as collapsed (default closed)
+		if (!modalEl.hasAttribute("data-collapsed")) {
+			modalEl.setAttribute("data-collapsed", "true");
+		}
+		const isCollapsed = modalEl.getAttribute("data-collapsed") !== "false";
+
+		if (isCollapsed) {
+			if (dimEl) {
+				tl.set(dimEl, { opacity: 0.5, pointerEvents: "none" });
+			}
+			tl.set(modalEl, { display: "grid" });
 			tl.set(navShade, { display: "block", opacity: 0 }, "<");
-			tl.to("#navBtnWrap", { opacity: 0.5, pointerEvents: "none" }, "<");
+			tl.set(inner, { height: 0, overflow: "hidden" });
+
 			tl.to(
-				innerMenu,
+				inner,
 				{
 					height: "auto",
+					duration,
+					ease: "power4.out",
+				},
+				"<",
+			);
+			tl.to(
+				modalEl,
+				{
+					opacity: 1,
 					duration,
 					ease: "power4.out",
 				},
@@ -137,13 +175,28 @@ export class Animations {
 				},
 				"<",
 			);
-			navMenu.setAttribute("data-collapsed", "false");
+			tl.set(inner, { overflow: "visible" });
+			modalEl.setAttribute("data-collapsed", "false");
 		} else {
-			tl.to(innerMenu, {
-				height: 0,
-				duration,
-				ease: "power4.out",
-			});
+			tl.set(inner, { overflow: "hidden" });
+			tl.to(
+				inner,
+				{
+					height: 0,
+					duration,
+					ease: "power4.out",
+				},
+				"<",
+			);
+			tl.to(
+				modalEl,
+				{
+					opacity: 0,
+					duration,
+					ease: "power4.out",
+				},
+				"<",
+			);
 			tl.to(
 				navShade,
 				{
@@ -153,10 +206,12 @@ export class Animations {
 				},
 				"<",
 			);
-			tl.to("#navBtnWrap", { opacity: 1, pointerEvents: "all" }, "<");
-			tl.set(navMenu, { display: "none", delay: -0.3 });
-			tl.set(navShade, { display: "none" }, "<");
-			navMenu.setAttribute("data-collapsed", "true");
+			tl.set(modalEl, { display: "none", delay: -0.3 });
+			tl.set(navShade, { display: "none", opacity: 0 }, "<");
+			if (dimEl) {
+				tl.set(dimEl, { opacity: 1, pointerEvents: "all" });
+			}
+			modalEl.setAttribute("data-collapsed", "true");
 		}
 	}
 
@@ -190,53 +245,6 @@ export class Animations {
 			});
 			tl.to(caret, { rotate: 0, duration }, "<");
 			tray.setAttribute("data-collapsed", true);
-		}
-	}
-
-	async toggleModal(modalEl) {
-		const navShade = document.querySelector("#navShade");
-		const reducedMotion = window.reducedMotion ?? false;
-		const tl = gsap.timeline();
-		const duration = reducedMotion ? 0 : 0.5;
-
-		if (modalEl.getAttribute("data-collapsed") === "true") {
-			tl.set("nav", { opacity: 0.5, pointerEvents: "none" });
-			tl.set(modalEl, { display: "grid" });
-			tl.set(navShade, { display: "block" }, "<");
-			tl.to(modalEl, {
-				opacity: 1,
-				duration,
-				ease: "power4.out",
-			});
-			tl.to(
-				navShade,
-				{
-					opacity: 0.75,
-					duration,
-					ease: "power4.out",
-				},
-				"<",
-			);
-			return modalEl.setAttribute("data-collapsed", "false");
-		} else {
-			tl.to(modalEl, {
-				opacity: 0,
-				duration,
-				ease: "power4.out",
-			});
-			tl.to(
-				navShade,
-				{
-					opacity: 0,
-					duration,
-					ease: "power4.out",
-				},
-				"<",
-			);
-			tl.to("nav", { opacity: 1, pointerEvents: "all" }, "<");
-			tl.set(modalEl, { display: "none", delay: -0.3 });
-			tl.set(navShade, { display: "none", opacity: 0 }, "<");
-			return modalEl.setAttribute("data-collapsed", "true");
 		}
 	}
 

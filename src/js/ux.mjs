@@ -112,13 +112,15 @@ export class UX {
 	setupNav() {
 		const navMenuToggler = document.querySelector("#hamburgerBtn");
 		const navMenu = document.querySelector("#menuWrap");
-		const navShade = document.querySelector("#navShade");
 		const linkedInBtn = document.querySelector("#linkedInBtn");
+		const navBtnWrap = document.querySelector("#navBtnWrap");
 		const reducedMotion = window.reducedMotion ?? false;
 
 		navMenuToggler.addEventListener("click", () => {
-			const isClosed = navMenu.getAttribute("data-collapsed") === "true";
-			this.animations.toggleNavMenu(navMenu, navShade, isClosed);
+			this.animations.toggleModal(navMenu, {
+				inner: navMenu.querySelector("#navMenu"),
+				dimTarget: navBtnWrap,
+			});
 		});
 
 		linkedInBtn.addEventListener("click", () => {
@@ -127,9 +129,11 @@ export class UX {
 
 		document.addEventListener("click", (e) => {
 			if (e.target !== navMenuToggler) {
-				const isClosed = navMenu.getAttribute("data-collapsed") === "true";
-				if (!isClosed) {
-					this.animations.toggleNavMenu(navMenu, navShade, isClosed);
+				if (navMenu.getAttribute("data-collapsed") === "false") {
+					this.animations.toggleModal(navMenu, {
+						inner: navMenu.querySelector("#navMenu"),
+						dimTarget: navBtnWrap,
+					});
 				}
 			}
 		});
