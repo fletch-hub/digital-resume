@@ -35,15 +35,17 @@ export class PhoneWrapper extends HTMLElement {
                 button:hover { opacity: 1; }
                 video { width: 100%; height: auto; display: block; }
             </style>
-            <div class="phoneWrapper">
-                <div class="playBtn">
-                    <button>&#9658;</button>
-                </div>
-                <video muted playsinline>
-                    <source src="${src}" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
+
+			<div class="phoneWrapper">
+				<div class="playBtn">
+					<button>&#9658;</button>
+				</div>
+				<video muted playsinline>
+					<source src="${src}" type="video/mp4">
+					Your browser does not support the video tag.
+				</video>
+			</div>
+			
         `;
 
 		this.video = this.shadowRoot.querySelector("video");

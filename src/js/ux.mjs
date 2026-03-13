@@ -427,65 +427,83 @@ export class UX {
 			const wrapper = document.createElement("phone-wrapper");
 			wrapper.gsap = this.gsap;
 			wrapper.setAttribute("src", videos[this.activeCarouselIndex]);
+			wrapper.classList.add("active");
 			carouselInnerWrapper.appendChild(wrapper);
 			return wrapper;
 		};
 
-		const scrollOnClick = (e, direction) => {
-			e.stopPropagation();
+		const renderOnDeckVideo = (index, direction = "right") => {
+			const wrapper = document.createElement("phone-wrapper");
+			wrapper.gsap = this.gsap;
+			wrapper.setAttribute("src", videos[index]);
+			wrapper.classList.add(direction);
+			carouselInnerWrapper.appendChild(wrapper);
+			return wrapper;
+		};
 
-			const active = carouselInnerWrapper.querySelector("phone-wrapper");
-			if (active) active.pause();
+		renderVideo();
+		renderOnDeckVideo(
+			this.activeCarouselIndex - 1 < 0 ? videos.length - 1 : this.activeCarouselIndex - 1,
+			"left",
+		);
+		renderOnDeckVideo(
+			this.activeCarouselIndex + 1 >= videos.length ? 0 : this.activeCarouselIndex + 1,
+			"right",
+		);
+
+		const scrollOnClick = async (e, direction) => {
+			e.stopPropagation();
+			const currentlyActiveVideo = carouselInnerWrapper.querySelector(".active");
+			if (currentlyActiveVideo) currentlyActiveVideo.pause();
+			const outgoingVideo =
+				direction === "left"
+					? carouselInnerWrapper.querySelector(".right")
+					: carouselInnerWrapper.querySelector(".left");
+			const nextActiveVideo =
+				direction === "left"
+					? carouselInnerWrapper.querySelector(".left")
+					: carouselInnerWrapper.querySelector(".right");
+
+			outgoingVideo.classList.add("exiting");
+
+			currentlyActiveVideo.classList.remove("active");
+			direction === "left"
+				? currentlyActiveVideo.classList.add("right")
+				: currentlyActiveVideo.classList.add("left");
+
+			nextActiveVideo.classList.remove(direction);
+			nextActiveVideo.classList.add("active");
 
 			this.activeCarouselIndex =
 				direction === "left" ? this.activeCarouselIndex - 1 : this.activeCarouselIndex + 1;
-
 			if (this.activeCarouselIndex < 0) {
 				this.activeCarouselIndex = videos.length - 1;
 			} else if (this.activeCarouselIndex >= videos.length) {
 				this.activeCarouselIndex = 0;
 			}
-			active.classList.add("absolute");
-			const nextEl = renderVideo();
 
-			const startX = direction === "left" ? -100 : 100;
-			const endX = 0;
-			const outX = direction === "left" ? 100 : -100;
-
-			// ensure next element starts offscreen / hidden
-			this.gsap.set(nextEl, { opacity: 0, x: startX });
-
-			this.tl.clear();
-
-			if (active) {
-				this.tl.to(
-					active,
-					{
-						duration: 0.5,
-						opacity: 0,
-						x: outX,
-						onComplete: () => active.remove(),
-					},
-					0,
-				);
-			}
-
-			this.tl.to(
-				nextEl,
-				{
-					duration: 0.5,
-					opacity: 1,
-					x: endX,
-				},
-				0.2,
+			renderOnDeckVideo(
+				direction === "left"
+					? this.activeCarouselIndex - 1 < 0
+						? videos.length - 1
+						: this.activeCarouselIndex - 1
+					: this.activeCarouselIndex + 1 >= videos.length
+						? 0
+						: this.activeCarouselIndex + 1,
+				direction,
 			);
-
-			this.tl.play(0);
+			await new Promise((resolve) => setTimeout(resolve, 500));
 		};
-		carouselInnerWrapper.innerHTML = "";
-		renderVideo();
 
-		leftArrowBtn.addEventListener("click", (e) => scrollOnClick(e, "left"));
-		rightArrowBtn.addEventListener("click", (e) => scrollOnClick(e, "right"));
+		leftArrowBtn.addEventListener("click", async (e) => {
+			await scrollOnClick(e, "left");
+			const exitedVideo = carouselInnerWrapper.querySelector(".exiting");
+			if (exitedVideo) exitedVideo.remove();
+		});
+		rightArrowBtn.addEventListener("click", async (e) => {
+			await scrollOnClick(e, "right");
+			const exitedVideo = carouselInnerWrapper.querySelector(".exiting");
+			if (exitedVideo) exitedVideo.remove();
+		});
 	}
 }
