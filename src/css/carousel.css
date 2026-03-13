@@ -22,6 +22,14 @@ phone-wrapper.right {
 	@apply translate-x-[20dvw] scale-60 opacity-30 z-[100];
 }
 
+phone-wrapper.left.entering {
+	@apply translate-x-[-40dvw] scale-20 opacity-20 z-[50];
+}
+
+phone-wrapper.right.entering {
+	@apply translate-x-[40dvw] scale-20 opacity-20 z-[50];
+}
+
 phone-wrapper.left.exiting {
 	@apply translate-x-[-40dvw] scale-20 opacity-0 z-[50];
 }

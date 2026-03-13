@@ -7,8 +7,6 @@ export class UX {
 
 		this.gsap = animations.gsap;
 
-		this.tl = null; // GSAP timeline for the FOMO modal carousel
-
 		this.activeCarouselPhoneWrapperEl = null; // DOM element of the currently active phone wrapper in the FOMO modal carousel
 		this.activeCarouselIndex = 0; // index of the currently active video in the FOMO modal carousel
 
@@ -410,8 +408,6 @@ export class UX {
 	// }
 
 	setupFomoModal() {
-		this.tl = this.gsap.timeline({ paused: true });
-
 		const videos = [
 			"/portfolio/social/aurora_10s_1.mp4",
 			"/portfolio/social/clouds_10s_1.mp4",
@@ -423,6 +419,8 @@ export class UX {
 		const leftArrowBtn = document.querySelector("#fomoLeftArrow");
 		const rightArrowBtn = document.querySelector("#fomoRightArrow");
 
+		let isTransitioning = false;
+
 		const renderVideo = () => {
 			const wrapper = document.createElement("phone-wrapper");
 			wrapper.gsap = this.gsap;
@@ -432,12 +430,14 @@ export class UX {
 			return wrapper;
 		};
 
-		const renderOnDeckVideo = (index, direction = "right") => {
+		const renderOnDeckVideo = async (index, direction = "right") => {
 			const wrapper = document.createElement("phone-wrapper");
 			wrapper.gsap = this.gsap;
 			wrapper.setAttribute("src", videos[index]);
-			wrapper.classList.add(direction);
+			wrapper.classList.add(direction, "entering");
 			carouselInnerWrapper.appendChild(wrapper);
+			await new Promise((resolve) => setTimeout(resolve, 50));
+			wrapper.classList.remove("entering");
 			return wrapper;
 		};
 
@@ -453,6 +453,9 @@ export class UX {
 
 		const scrollOnClick = async (e, direction) => {
 			e.stopPropagation();
+			if (isTransitioning) return;
+			isTransitioning = true;
+
 			const currentlyActiveVideo = carouselInnerWrapper.querySelector(".active");
 			if (currentlyActiveVideo) currentlyActiveVideo.pause();
 			const outgoingVideo =
@@ -482,7 +485,7 @@ export class UX {
 				this.activeCarouselIndex = 0;
 			}
 
-			renderOnDeckVideo(
+			await renderOnDeckVideo(
 				direction === "left"
 					? this.activeCarouselIndex - 1 < 0
 						? videos.length - 1
@@ -492,7 +495,11 @@ export class UX {
 						: this.activeCarouselIndex + 1,
 				direction,
 			);
+
+			// give time for the exit animation to play before removing the element from the DOM
 			await new Promise((resolve) => setTimeout(resolve, 500));
+
+			isTransitioning = false;
 		};
 
 		leftArrowBtn.addEventListener("click", async (e) => {

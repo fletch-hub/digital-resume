@@ -31,7 +31,7 @@ export class PhoneWrapper extends HTMLElement {
             <style>
                 :host { display: block; position: relative; }
                 .playBtn { position: absolute; inset: 0; display: flex; justify-content: center; align-items: center; cursor: pointer; }
-                button { font-family: inherit; border: none; background: transparent; color: white; opacity: 0.8; transition: opacity 0.3s; }
+                button { font-family: inherit; border: none; background: transparent; color: white; opacity: 0.8; transition: opacity 0.3s; font-size: 5rem; }
                 button:hover { opacity: 1; }
                 video { width: 100%; height: auto; display: block; }
             </style>
