@@ -350,11 +350,26 @@ export class UX {
 
 	setupFomoModal() {
 		const videos = [
-			"/portfolio/social/aurora_10s_1.mp4",
-			"/portfolio/social/clouds_10s_1.mp4",
-			"/portfolio/social/heartbeat_10s_1.mp4",
-			"/portfolio/social/inky_15s_1.mp4",
-			"/portfolio/social/crowd1_13s_1.mp4",
+			{
+				src: "/portfolio/social/aurora_10s_1.mp4",
+				poster: "/portfolio/social/stills/aurora_10s_1000.jpg",
+			},
+			{
+				src: "/portfolio/social/clouds_10s_1.mp4",
+				poster: "/portfolio/social/stills/clouds_10s_1000.jpg",
+			},
+			{
+				src: "/portfolio/social/heartbeat_10s_1.mp4",
+				poster: "/portfolio/social/stills/heartbeat_10s_1000.jpg",
+			},
+			{
+				src: "/portfolio/social/inky_15s_1.mp4",
+				poster: "/portfolio/social/stills/inky_15s_1000.jpg",
+			},
+			{
+				src: "/portfolio/social/crowd1_13s_1.mp4",
+				poster: "/portfolio/social/stills/crowd1_13s_1000.jpg",
+			},
 		];
 		const carouselInnerWrapper = document.querySelector("#fomoCarouselInner");
 		const leftArrowBtn = document.querySelector("#fomoLeftArrow");
@@ -383,9 +398,11 @@ export class UX {
 		});
 
 		const renderVideo = () => {
+			const video = videos[this.activeCarouselIndex];
 			const wrapper = document.createElement("phone-wrapper");
 			wrapper.gsap = this.gsap;
-			wrapper.setAttribute("src", videos[this.activeCarouselIndex]);
+			wrapper.setAttribute("src", video.src);
+			wrapper.setAttribute("poster", video.poster);
 			wrapper.classList.add("active");
 			wrapper.setMuted(this.isMuted);
 			carouselInnerWrapper.appendChild(wrapper);
@@ -393,9 +410,11 @@ export class UX {
 		};
 
 		const renderOnDeckVideo = async (index, direction = "right") => {
+			const video = videos[index];
 			const wrapper = document.createElement("phone-wrapper");
 			wrapper.gsap = this.gsap;
-			wrapper.setAttribute("src", videos[index]);
+			wrapper.setAttribute("src", video.src);
+			wrapper.setAttribute("poster", video.poster);
 			wrapper.classList.add(direction, "entering");
 			wrapper.setMuted(this.isMuted);
 			carouselInnerWrapper.appendChild(wrapper);

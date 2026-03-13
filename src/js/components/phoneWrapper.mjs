@@ -56,6 +56,7 @@ export class PhoneWrapper extends HTMLElement {
 
 	render() {
 		const src = this.getAttribute("src") || "";
+		const poster = this.getAttribute("poster") || "";
 		this.shadowRoot.innerHTML = `
             <style>
                 :host { display: block; position: relative; }
@@ -69,7 +70,7 @@ export class PhoneWrapper extends HTMLElement {
                 <div class="playBtn">
                     <button type="button">&#62896;</button>
                 </div>
-                <video playsinline>
+                <video poster="${poster}" playsinline>
                     <source src="${src}" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -81,6 +82,8 @@ export class PhoneWrapper extends HTMLElement {
 
 		this.playBtn.addEventListener("click", this._onTogglePlay);
 		this.video.addEventListener("click", this._onTogglePlay);
+
+		this.video.volume = 0.5;
 
 		// ensure the rendered video respects current mute state
 		this.setMuted(this.muted);
