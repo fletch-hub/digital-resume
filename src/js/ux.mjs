@@ -202,6 +202,7 @@ export class UX {
 				if (!modalId) return;
 				const modal = document.querySelector(`#${modalId}`);
 				this.animations.toggleModal(modal);
+				this.analytics.portfolioItemOpened(modalId);
 			});
 		});
 
@@ -405,6 +406,7 @@ export class UX {
 			const video = videos[this.activeCarouselIndex];
 			const wrapper = document.createElement("phone-wrapper");
 			wrapper.gsap = this.gsap;
+			wrapper.analytics = this.analytics;
 			wrapper.setAttribute("src", video.src);
 			wrapper.setAttribute("poster", video.poster);
 			wrapper.classList.add("active");
@@ -417,6 +419,7 @@ export class UX {
 			const video = videos[index];
 			const wrapper = document.createElement("phone-wrapper");
 			wrapper.gsap = this.gsap;
+			wrapper.analytics = this.analytics;
 			wrapper.setAttribute("src", video.src);
 			wrapper.setAttribute("poster", video.poster);
 			wrapper.classList.add(direction, "entering");
@@ -527,6 +530,7 @@ export class UX {
 		const renderImage = (index) => {
 			const wrapper = document.createElement("full-wrapper");
 			wrapper.gsap = this.gsap;
+			wrapper.analytics = this.analytics;
 			wrapper.setAttribute("src", magazinePages[index]);
 			wrapper.setAttribute("alt", `Magazine page ${index + 1}`);
 			wrapper.classList.add("magazinePage", "active");
@@ -537,6 +541,7 @@ export class UX {
 		const renderOnDeckImage = async (index, direction = "right") => {
 			const wrapper = document.createElement("full-wrapper");
 			wrapper.gsap = this.gsap;
+			wrapper.analytics = this.analytics;
 			wrapper.setAttribute("src", magazinePages[index]);
 			wrapper.setAttribute("alt", `Magazine page ${index + 1}`);
 			wrapper.classList.add("magazinePage", direction, "entering");
@@ -571,6 +576,10 @@ export class UX {
 			if (nextActivePage) {
 				nextActivePage.classList.remove(direction);
 				nextActivePage.classList.add("active");
+				this.analytics.portfolioInteraction(
+					`magazine_page_${direction === "left" ? activeMagazineIndex - 1 : activeMagazineIndex + 1}`,
+					"viewed",
+				);
 			}
 
 			activeMagazineIndex = direction === "left" ? activeMagazineIndex - 1 : activeMagazineIndex + 1;
@@ -686,6 +695,10 @@ export class UX {
 			if (nextActivePage) {
 				nextActivePage.classList.remove(direction);
 				nextActivePage.classList.add("active");
+				this.analytics.portfolioInteraction(
+					`magazine_page_${(activesurfaceIndex = direction === "left" ? activesurfaceIndex - 1 : activesurfaceIndex + 1)}`,
+					"viewed",
+				);
 			}
 
 			activesurfaceIndex = direction === "left" ? activesurfaceIndex - 1 : activesurfaceIndex + 1;

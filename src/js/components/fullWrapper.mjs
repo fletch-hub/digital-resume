@@ -9,6 +9,7 @@ export class FullWrapper extends HTMLElement {
 		this.gsap = null; // set externally
 		this.hammer = null;
 		this.fullWrapper = null;
+		this.analytics = null; // set externally
 	}
 
 	static get observedAttributes() {

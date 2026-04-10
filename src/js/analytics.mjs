@@ -46,6 +46,20 @@ export class Analytics {
 		});
 	}
 
+	portfolioItemOpened(itemSelector) {
+		gtag("event", `portfolioItemOpened_${itemSelector}`, {
+			event_category: "User Interaction",
+			event_label: "Portfolio Item Opened",
+		});
+	}
+
+	portfolioInteraction(itemSelector, interactionType) {
+		gtag("event", `portfolio_${interactionType}`, {
+			event_category: "User Interaction",
+			event_label: `${itemSelector} ${interactionType}`,
+		});
+	}
+
 	toggledTheme() {
 		if (window.themeToggled === "true") return;
 		window.themeToggled = "true";
@@ -77,14 +91,19 @@ export class Analytics {
 	}
 
 	observeViewport() {
-		const sections = document.querySelectorAll("section");
+		const sections = document.querySelectorAll("section, div[data-collapsed]");
 		if (!sections.length) return;
 
 		const visibleSections = new WeakMap();
+		const viewedSections = new WeakSet();
 
 		const sectionViewed = (target) => {
+			if (viewedSections.has(target)) return;
+
 			const sectionId = target.id || "no-id";
 			if (sectionId !== "no-id" && target.dataset.collapsed === "true") return;
+
+			viewedSections.add(target);
 
 			gtag("event", "section_viewed", {
 				event_category: "Viewport Observation",

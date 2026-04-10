@@ -9,6 +9,7 @@ export class PhoneWrapper extends HTMLElement {
 		this.muted = false;
 		this.gsap = null; // set externally
 		this.hammer = null;
+		this.analytics = null; // set externally
 	}
 
 	static get observedAttributes() {
@@ -108,6 +109,8 @@ export class PhoneWrapper extends HTMLElement {
 			if (this.video.paused) {
 				this.video.play();
 				this.playBtn.style.display = "none";
+				const srcBasename = this.video.currentSrc.split("/").pop() || this.video.currentSrc;
+				this.analytics?.portfolioInteraction(srcBasename, "play");
 			} else {
 				this.video.pause();
 				this.playBtn.style.display = "flex";
