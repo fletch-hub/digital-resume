@@ -76,6 +76,57 @@ export class Analytics {
 		});
 	}
 
+	observeViewport() {
+		const sections = document.querySelectorAll("section");
+		if (!sections.length) return;
+
+		const visibleSections = new WeakMap();
+
+		const sectionViewed = (target) => {
+			const sectionId = target.id || "no-id";
+			if (sectionId !== "no-id" && target.dataset.collapsed === "true") return;
+
+			gtag("event", "section_viewed", {
+				event_category: "Viewport Observation",
+				event_label: sectionId,
+			});
+		};
+
+		const observer = new IntersectionObserver(
+			(entries) => {
+				entries.forEach((entry) => {
+					visibleSections.set(entry.target, entry.isIntersecting);
+
+					if (!entry.isIntersecting) return;
+					sectionViewed(entry.target);
+				});
+			},
+			{
+				threshold: 0.25,
+			},
+		);
+
+		const mutationObserver = new MutationObserver((mutations) => {
+			mutations.forEach((mutation) => {
+				if (mutation.type === "attributes" && mutation.attributeName === "data-collapsed") {
+					const target = mutation.target;
+					const isVisible = visibleSections.get(target);
+					if (isVisible && target.dataset.collapsed !== "true") {
+						sectionViewed(target);
+					}
+				}
+			});
+		});
+
+		sections.forEach((section) => {
+			observer.observe(section);
+			mutationObserver.observe(section, {
+				attributes: true,
+				attributeFilter: ["data-collapsed"],
+			});
+		});
+	}
+
 	urlParams() {
 		const params = new URLSearchParams(window.location.search);
 		const trafficSource = params.get("src");
@@ -98,5 +149,6 @@ export class Analytics {
 		this.detectScheme();
 		this.detectMotion();
 		this.urlParams();
+		this.observeViewport();
 	}
 }

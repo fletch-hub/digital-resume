@@ -3,7 +3,7 @@
 }
 
 .modalInner {
-	@apply relative flex rounded-2xl;
+	@apply relative flex rounded-2xl scrollbar-none;
 	h2 {
 		@apply pointer-events-none;
 	}
@@ -40,3 +40,7 @@ form {
 .fomoMuteBtn {
 	@apply absolute bottom-3 md:bottom-12 right-6 sm:left-1/2 sm:-translate-x-1/2 text-white opacity-90 hover:opacity-100 z-[500];
 }
+
+/* .magazinePage {
+	@apply w-full h-full rounded-2xl object-cover object-center;
+} */

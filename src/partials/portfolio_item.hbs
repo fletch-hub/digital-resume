@@ -5,7 +5,9 @@
         data-modal-content="{{modalContent}}">
         <div class="shade pointer-events-none">
         </div>
-        <img src="{{img}}" alt="{{project}}" class="object-cover object-center w-full h-full overflow-hidden">
+        {{#if (isDefined url)}}<a href="{{url}}" target="_blank">{{/if}}
+            <img src="{{img}}" alt="{{project}}" class="object-cover object-center w-full h-full overflow-hidden">
+            {{#if (isDefined url)}}</a>{{/if}}
     </div>{{/if}}
     <div class="flex flex-row">
         <div class="label">
@@ -27,18 +29,18 @@
 
     <div class="flex flex-row">
         <div class="label">
-            <p>URL</p>
+            <p>Link</p>
         </div>
         <div class="content {{#if (isDefined pw)}}flex flex-row flex-wrap justify-start{{/if}}">
             {{#if (isDefined url)}}
             <a {{#if (isDefined pw)}}class="pr-4" {{/if}} href="{{url}}" data-track="{{project}}" {{#if (isDefined
                 modalContent)}}data-modal-content="{{modalContent}}" {{/if}} target="_blank">
-                {{#if (isDefined text)}}{{text}}{{else}}{{url}}{{/if}}
+                {{#if (isDefined text)}}{{text}}{{else}}View Content in a new tab{{/if}}
             </a>
             {{else if (isDefined modalContent)}}
             <a {{#if (isDefined pw)}}class="pr-4" {{/if}} href="javascript:void(0)"
                 data-modal-content="{{modalContent}}">
-                View
+                View Content
             </a>
             {{/if}}
 

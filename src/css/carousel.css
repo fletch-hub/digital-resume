@@ -2,38 +2,59 @@
 	@apply relative h-[100px] hover:h-[200px] md:hover:h-[300px] transition-all motion-reduce:transition-none ease-in-out duration-500 bg-black p-4 overflow-hidden flex items-center justify-center;
 }*/
 
-phone-wrapper {
+phone-wrapper,
+full-wrapper {
 	@apply absolute w-fit overflow-hidden flex items-center justify-center transition-all duration-500 h-full;
 }
 
-.phoneWrapper {
+.phoneWrapper,
+.fullWrapper {
 	@apply relative flex justify-center items-center transition-all duration-500 h-full max-h-full;
 }
 
-phone-wrapper.active {
-	@apply translate-x-0  opacity-100 z-[200] scale-[1.25] sm:scale-100;
+full-wrapper img {
+	@apply h-full w-auto max-h-full max-w-full object-contain;
 }
 
-phone-wrapper.left {
+phone-wrapper.active {
+	@apply translate-x-0 opacity-100 z-[200] scale-[1.25] sm:scale-100;
+}
+
+full-wrapper.active {
+	@apply translate-x-0 opacity-100 z-[200] scale-100;
+}
+
+phone-wrapper.left,
+full-wrapper.left {
 	@apply translate-x-[-20dvw] scale-60 opacity-30 z-[100];
 }
 
-phone-wrapper.right {
+phone-wrapper.right,
+full-wrapper.right {
 	@apply translate-x-[20dvw] scale-60 opacity-30 z-[100];
 }
 
-phone-wrapper.left.entering {
+phone-wrapper.left.entering,
+full-wrapper.left.entering {
 	@apply translate-x-[-40dvw] scale-10 opacity-20 z-[50];
 }
 
-phone-wrapper.right.entering {
+phone-wrapper.right.entering,
+full-wrapper.right.entering {
 	@apply translate-x-[40dvw] scale-10 opacity-20 z-[50];
 }
 
-phone-wrapper.left.exiting {
+phone-wrapper.left.exiting,
+full-wrapper.left.exiting {
 	@apply translate-x-[-40dvw] scale-10 opacity-0 z-[50];
 }
 
-phone-wrapper.right.exiting {
+phone-wrapper.right.exiting,
+full-wrapper.right.exiting {
 	@apply translate-x-[40dvw] scale-10 opacity-0 z-[50];
+}
+
+[id$="LeftArrow"] span,
+[id$="RightArrow"] span {
+	text-shadow: 0 0 15px rgba(0, 0, 0, 0.7);
 }

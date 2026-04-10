@@ -175,6 +175,7 @@ export class Animations {
 				},
 				"<",
 			);
+			tl.set("#infoModal", { overflowY: "scroll" });
 			modalEl.setAttribute("data-collapsed", "false");
 		} else {
 			tl.to(

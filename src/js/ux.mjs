@@ -1,4 +1,5 @@
-import { PhoneWrapper } from "./components/phoneWrapper.mjs";
+import "./components/phoneWrapper.mjs";
+import "./components/fullWrapper.mjs";
 
 export class UX {
 	constructor(analytics, animations) {
@@ -29,6 +30,8 @@ export class UX {
 		this.setupExternalLinks();
 
 		this.setupFomoModal();
+		this.setupMagazineModal();
+		this.setupSurfaceModal();
 
 		//open the summary tab on load
 		const summarySection = document.querySelector("#summary");
@@ -196,6 +199,7 @@ export class UX {
 		portfolioItemBanners.forEach((banner) => {
 			banner.addEventListener("click", () => {
 				const modalId = banner.getAttribute("data-modal-content");
+				if (!modalId) return;
 				const modal = document.querySelector(`#${modalId}`);
 				this.animations.toggleModal(modal);
 			});
@@ -502,6 +506,234 @@ export class UX {
 			await scrollOnClick(e, "right");
 			const exitedVideo = carouselInnerWrapper.querySelector(".exiting");
 			if (exitedVideo) exitedVideo.remove();
+		});
+	}
+
+	setupMagazineModal() {
+		const magazinePages = [
+			"/portfolio/magazine/1_afm_cover_apr14.webp",
+			"/portfolio/magazine/2_afm_iei_apr14.webp",
+			"/portfolio/magazine/3_afm_fashion_jun14_1.webp",
+			"/portfolio/magazine/4_afm_fashion_jun14_2.webp",
+			"/portfolio/magazine/5_afm_fashion_jun14_4.webp",
+		];
+		const carouselInnerWrapper = document.querySelector("#magazineCarouselInner");
+		const leftArrowBtn = document.querySelector("#magazineLeftArrow");
+		const rightArrowBtn = document.querySelector("#magazineRightArrow");
+
+		let activeMagazineIndex = 0;
+		let isTransitioning = false;
+
+		const renderImage = (index) => {
+			const wrapper = document.createElement("full-wrapper");
+			wrapper.gsap = this.gsap;
+			wrapper.setAttribute("src", magazinePages[index]);
+			wrapper.setAttribute("alt", `Magazine page ${index + 1}`);
+			wrapper.classList.add("magazinePage", "active");
+			carouselInnerWrapper.appendChild(wrapper);
+			return wrapper;
+		};
+
+		const renderOnDeckImage = async (index, direction = "right") => {
+			const wrapper = document.createElement("full-wrapper");
+			wrapper.gsap = this.gsap;
+			wrapper.setAttribute("src", magazinePages[index]);
+			wrapper.setAttribute("alt", `Magazine page ${index + 1}`);
+			wrapper.classList.add("magazinePage", direction, "entering");
+			carouselInnerWrapper.appendChild(wrapper);
+			await new Promise((resolve) => setTimeout(resolve, 20));
+			wrapper.classList.remove("entering");
+			return wrapper;
+		};
+
+		const scrollOnClick = async (e, direction) => {
+			e.stopPropagation();
+			if (isTransitioning) return;
+			isTransitioning = true;
+
+			const currentlyActivePage = carouselInnerWrapper.querySelector(".magazinePage.active");
+			const outgoingPage =
+				direction === "left"
+					? carouselInnerWrapper.querySelector(".magazinePage.right")
+					: carouselInnerWrapper.querySelector(".magazinePage.left");
+			const nextActivePage =
+				direction === "left"
+					? carouselInnerWrapper.querySelector(".magazinePage.left")
+					: carouselInnerWrapper.querySelector(".magazinePage.right");
+
+			if (outgoingPage) outgoingPage.classList.add("exiting");
+
+			if (currentlyActivePage) {
+				currentlyActivePage.classList.remove("active");
+				currentlyActivePage.classList.add(direction === "left" ? "right" : "left");
+			}
+
+			if (nextActivePage) {
+				nextActivePage.classList.remove(direction);
+				nextActivePage.classList.add("active");
+			}
+
+			activeMagazineIndex = direction === "left" ? activeMagazineIndex - 1 : activeMagazineIndex + 1;
+			if (activeMagazineIndex < 0) {
+				activeMagazineIndex = magazinePages.length - 1;
+			} else if (activeMagazineIndex >= magazinePages.length) {
+				activeMagazineIndex = 0;
+			}
+
+			await renderOnDeckImage(
+				direction === "left"
+					? activeMagazineIndex - 1 < 0
+						? magazinePages.length - 1
+						: activeMagazineIndex - 1
+					: activeMagazineIndex + 1 >= magazinePages.length
+						? 0
+						: activeMagazineIndex + 1,
+				direction,
+			);
+
+			await new Promise((resolve) => setTimeout(resolve, 500));
+
+			const exitedPage = carouselInnerWrapper.querySelector(".magazinePage.exiting");
+			if (exitedPage) exitedPage.remove();
+			isTransitioning = false;
+		};
+
+		renderImage(0);
+		renderOnDeckImage(magazinePages.length - 1, "left");
+		renderOnDeckImage(1, "right");
+
+		document.addEventListener("requestScroll", async (e) => {
+			const direction = e.detail.direction;
+			await scrollOnClick(e, direction);
+			const exitedPage = carouselInnerWrapper.querySelector(".magazinePage.exiting");
+			if (exitedPage) exitedPage.remove();
+		});
+
+		leftArrowBtn.addEventListener("click", async (e) => {
+			await scrollOnClick(e, "left");
+			const exitedPage = carouselInnerWrapper.querySelector(".magazinePage.exiting");
+			if (exitedPage) exitedPage.remove();
+		});
+
+		rightArrowBtn.addEventListener("click", async (e) => {
+			await scrollOnClick(e, "right");
+			const exitedPage = carouselInnerWrapper.querySelector(".magazinePage.exiting");
+			if (exitedPage) exitedPage.remove();
+		});
+	}
+
+	setupSurfaceModal() {
+		const surfacePages = [
+			"/portfolio/bd/surf_58.webp",
+			"/portfolio/bd/surf_51.webp",
+			"/portfolio/bd/surf_52.webp",
+			"/portfolio/bd/surf_56.webp",
+			"/portfolio/bd/surf_57.webp",
+			"/portfolio/bd/surf_05.webp",
+		];
+
+		const carouselInnerWrapper = document.querySelector("#surfaceCarouselInner");
+		const leftArrowBtn = document.querySelector("#surfaceLeftArrow");
+		const rightArrowBtn = document.querySelector("#surfaceRightArrow");
+
+		let activesurfaceIndex = 0;
+		let isTransitioning = false;
+
+		const renderImage = (index) => {
+			const wrapper = document.createElement("full-wrapper");
+			wrapper.gsap = this.gsap;
+			wrapper.setAttribute("src", surfacePages[index]);
+			wrapper.setAttribute("alt", `surface page ${index + 1}`);
+			wrapper.classList.add("surfacePage", "active");
+			carouselInnerWrapper.appendChild(wrapper);
+			return wrapper;
+		};
+
+		const renderOnDeckImage = async (index, direction = "right") => {
+			const wrapper = document.createElement("full-wrapper");
+			wrapper.gsap = this.gsap;
+			wrapper.setAttribute("src", surfacePages[index]);
+			wrapper.setAttribute("alt", `surface page ${index + 1}`);
+			wrapper.classList.add("surfacePage", direction, "entering");
+			carouselInnerWrapper.appendChild(wrapper);
+			await new Promise((resolve) => setTimeout(resolve, 20));
+			wrapper.classList.remove("entering");
+			return wrapper;
+		};
+
+		const scrollOnClick = async (e, direction) => {
+			e.stopPropagation();
+			if (isTransitioning) return;
+			isTransitioning = true;
+
+			const currentlyActivePage = carouselInnerWrapper.querySelector(".surfacePage.active");
+			const outgoingPage =
+				direction === "left"
+					? carouselInnerWrapper.querySelector(".surfacePage.right")
+					: carouselInnerWrapper.querySelector(".surfacePage.left");
+			const nextActivePage =
+				direction === "left"
+					? carouselInnerWrapper.querySelector(".surfacePage.left")
+					: carouselInnerWrapper.querySelector(".surfacePage.right");
+
+			if (outgoingPage) outgoingPage.classList.add("exiting");
+
+			if (currentlyActivePage) {
+				currentlyActivePage.classList.remove("active");
+				currentlyActivePage.classList.add(direction === "left" ? "right" : "left");
+			}
+
+			if (nextActivePage) {
+				nextActivePage.classList.remove(direction);
+				nextActivePage.classList.add("active");
+			}
+
+			activesurfaceIndex = direction === "left" ? activesurfaceIndex - 1 : activesurfaceIndex + 1;
+			if (activesurfaceIndex < 0) {
+				activesurfaceIndex = surfacePages.length - 1;
+			} else if (activesurfaceIndex >= surfacePages.length) {
+				activesurfaceIndex = 0;
+			}
+
+			await renderOnDeckImage(
+				direction === "left"
+					? activesurfaceIndex - 1 < 0
+						? surfacePages.length - 1
+						: activesurfaceIndex - 1
+					: activesurfaceIndex + 1 >= surfacePages.length
+						? 0
+						: activesurfaceIndex + 1,
+				direction,
+			);
+
+			await new Promise((resolve) => setTimeout(resolve, 500));
+
+			const exitedPage = carouselInnerWrapper.querySelector(".surfacePage.exiting");
+			if (exitedPage) exitedPage.remove();
+			isTransitioning = false;
+		};
+
+		renderImage(0);
+		renderOnDeckImage(surfacePages.length - 1, "left");
+		renderOnDeckImage(1, "right");
+
+		document.addEventListener("requestScroll", async (e) => {
+			const direction = e.detail.direction;
+			await scrollOnClick(e, direction);
+			const exitedPage = carouselInnerWrapper.querySelector(".surfacePage.exiting");
+			if (exitedPage) exitedPage.remove();
+		});
+
+		leftArrowBtn.addEventListener("click", async (e) => {
+			await scrollOnClick(e, "left");
+			const exitedPage = carouselInnerWrapper.querySelector(".surfacePage.exiting");
+			if (exitedPage) exitedPage.remove();
+		});
+
+		rightArrowBtn.addEventListener("click", async (e) => {
+			await scrollOnClick(e, "right");
+			const exitedPage = carouselInnerWrapper.querySelector(".surfacePage.exiting");
+			if (exitedPage) exitedPage.remove();
 		});
 	}
 }
